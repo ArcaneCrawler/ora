@@ -1,5 +1,6 @@
 package com.math.epidemic.Controller;
 
+import com.math.epidemic.Application;
 import com.math.epidemic.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,7 @@ public class AllModelController implements Initializable {
     Dif dif = new Dif();
     int n = 100;
     private Main main;
+    private Application app;
 
     public void sirClickEnter() {
         float susceptible = Float.parseFloat(susceptibleField.getText());
@@ -327,6 +329,9 @@ public class AllModelController implements Initializable {
         });
 
 
+    }
 
+    public void setApp(Application application) {
+        this.app = application;
     }
 }

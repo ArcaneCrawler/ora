@@ -1,5 +1,6 @@
 package com.math.epidemic.Controller;
 
+import com.math.epidemic.Application;
 import com.math.epidemic.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -72,5 +73,8 @@ public class AboutLayoutController implements Initializable {
         File file4 = new File("src/main/resources/SIRS.PNG");
         Image image4 = new Image(file4.toURI().toString());
         sirsView.setImage(image4);
+    }
+
+    public void setApp(Application application) {
     }
 }
