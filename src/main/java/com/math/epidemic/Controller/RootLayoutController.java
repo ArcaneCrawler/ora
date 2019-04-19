@@ -1,5 +1,6 @@
 package com.math.epidemic.Controller;
 
+import com.math.epidemic.Application;
 import com.math.epidemic.Main;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -7,6 +8,7 @@ import javafx.scene.control.Alert;
 public class RootLayoutController {
 
     private Main main;
+    private Application app = null;
 
     public void clickAbout(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -18,9 +20,9 @@ public class RootLayoutController {
     }
 
     public void clickReadme(ActionEvent actionEvent) {
-        AboutLayoutController readme = new AboutLayoutController();
-        readme.clickAbout(actionEvent);
-
+        /*AboutLayoutController readme = new AboutLayoutController();
+        readme.clickAbout(actionEvent);*/
+        app.showLayoutAbout();
     }
 
     public void initialize() {
@@ -29,5 +31,9 @@ public class RootLayoutController {
 
     public void setMainApp(Main main) {
         this.main = main;
+    }
+
+    public void setApp(Application application) {
+        this.app = application;
     }
 }
