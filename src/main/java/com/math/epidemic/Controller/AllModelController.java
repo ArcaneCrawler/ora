@@ -1,39 +1,36 @@
 package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
-import com.math.epidemic.Main;
+import com.math.epidemic.Services.VirusTypeService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class AllModelController implements Initializable {
+public class AllModelController {
     public TextField susceptibleField;
     public TextField infectedField;
     public TextField recoveredField;
     public TextField contactField;
     public TextField influenceTimeField;
-    public LineChart sirLineChart;
     public TextField modSusceptibleField;
     public TextField modInfectedField;
     public TextField modRecoveredField;
     public TextField modContactField;
     public TextField modInfluenceTimeField;
     public TextField modDeathRation;
-    public LineChart modLineChart;
     public TextField sisSusceptibleField;
     public TextField sisInfectedField;
     public TextField sisContactField;
     public TextField sisInfluenceTimeField;
     public TextField sisDeathRation;
-    public LineChart sisLineChart;
     public TextField sirsSusceptibleField;
     public TextField sirsInfectedField;
     public TextField sirsRecoveredField;
@@ -41,12 +38,31 @@ public class AllModelController implements Initializable {
     public TextField sirsInfluenceTimeField;
     public TextField sirsDeathRation;
     public TextField sirsLossOfImmunity;
-    public LineChart sirsLineChart;
-    public double[][] result;
+
+    public Pane sirPane;
+    public Pane sirModPane;
+    public Pane sisPane;
+    public Pane sirsPane;
+
+    private NumberAxis xAxisSir = new NumberAxis();
+    private NumberAxis yAxisSir = new NumberAxis();
+    private LineChart<Number, Number> sirLineChart = new LineChart<>(xAxisSir, yAxisSir);
+    private NumberAxis xAxisMod = new NumberAxis();
+    private NumberAxis yAxisMod = new NumberAxis();
+    private LineChart<Number, Number> modLineChart = new LineChart<>(xAxisMod, yAxisMod);
+    private NumberAxis xAxisSis = new NumberAxis();
+    private NumberAxis yAxisSis = new NumberAxis();
+    private LineChart<Number, Number> sisLineChart = new LineChart<>(xAxisSis, yAxisSis);
+    private NumberAxis xAxisSirs = new NumberAxis();
+    private NumberAxis yAxisSirs = new NumberAxis();
+    private LineChart<Number, Number> sirsLineChart = new LineChart<>(xAxisSirs, yAxisSirs);
+
     Dif dif = new Dif();
     int n = 100;
-    private Main main;
     private Application app;
+
+    @Autowired
+    private VirusTypeService virusTypeService;
 
     public void sirClickEnter() {
         float susceptible = Float.parseFloat(susceptibleField.getText());
@@ -55,38 +71,47 @@ public class AllModelController implements Initializable {
         float contact = Float.parseFloat(contactField.getText());
         float influenceTime = Float.parseFloat(influenceTimeField.getText());
 
-        float sum =((susceptible + infected + recovered));
-        System.out.println((susceptible + infected + recovered ));
+        float sum = ((susceptible + infected + recovered));
+        System.out.println((susceptible + infected + recovered));
 
-        if (sum != 100.0 )
-        {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning");
-            alert.setHeaderText("Warning");
-            alert.setContentText("The sum of the shares of suspected, infected and recovered should be 100! \n");
-            alert.showAndWait();
-            return;
+        if (sum != 100.0) {
+            getSumAlert();
+        } else {
+            double[][] result = dif.SIR(susceptible, infected, recovered, contact, influenceTime);
+            sirLineChart.getData().clear();
+            sirLineChart.setData(getData(3, result, n));
         }
-        result = dif.SIR(susceptible, infected, recovered, contact, influenceTime);
-        sirLineChart.setData(getSIRData());
-        sirLineChart.setTitle("SIR");
+
+        /*VirusType v = new VirusType();
+        v.setType("test");
+        virusTypeService.add(v);*/
     }
 
-    private ObservableList<XYChart.Series<String, Double>> getSIRData() {
-        ObservableList<XYChart.Series<String, Double>> answer = FXCollections.observableArrayList();
-        XYChart.Series<String, Double> sSeries = new XYChart.Series<String, Double>();
-        XYChart.Series<String, Double> iSeries = new XYChart.Series<String, Double>();
-        XYChart.Series<String, Double> rSeries = new XYChart.Series<String, Double>();
+    private ObservableList<XYChart.Series<Number, Number>> getData(int count, double[][] result, int n) {
+        ObservableList<XYChart.Series<Number, Number>> answer = FXCollections.observableArrayList();
+        XYChart.Series<Number, Number> sSeries = new XYChart.Series<>();
+        XYChart.Series<Number, Number> iSeries = new XYChart.Series<>();
+        XYChart.Series<Number, Number> rSeries = new XYChart.Series<>();
         sSeries.setName("S");
         iSeries.setName("I");
         rSeries.setName("R");
-        for (int i = 0; i < n - 1; i = i + 5) {
-            sSeries.getData().add(new XYChart.Data(Integer.toString(i), result[0][i]));
-            iSeries.getData().add(new XYChart.Data(Integer.toString(i), result[1][i]));
-            rSeries.getData().add(new XYChart.Data(Integer.toString(i), result[2][i]));
+        if (count == 3) {
+            for (int i = 0; i < n - 1; i = i + 5) {
+                sSeries.getData().add(new XYChart.Data(i, result[0][i]));
+                iSeries.getData().add(new XYChart.Data(i, result[1][i]));
+                rSeries.getData().add(new XYChart.Data(i, result[2][i]));
+            }
+            answer.addAll(sSeries, iSeries, rSeries);
+            return answer;
+        } else {
+            for (int i = 0; i < n - 1; i = i + 5) {
+                sSeries.getData().add(new XYChart.Data(i, result[0][i]));
+                iSeries.getData().add(new XYChart.Data(i, result[1][i]));
+
+            }
+            answer.addAll(sSeries, iSeries);
+            return answer;
         }
-        answer.addAll(sSeries, iSeries, rSeries);
-        return answer;
     }
 
 
@@ -97,42 +122,17 @@ public class AllModelController implements Initializable {
         float contact = Float.parseFloat(modContactField.getText());
         float influenceTime = Float.parseFloat(modInfluenceTimeField.getText());
         float deathRation = Float.parseFloat(modDeathRation.getText());
-        float sum =((susceptible + infected + recovered));
-        System.out.println((susceptible + infected + recovered ));
+        float sum = ((susceptible + infected + recovered));
+        System.out.println((susceptible + infected + recovered));
 
-        if (sum != 100.0 )
-        {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning");
-            alert.setHeaderText("Warning");
-            alert.setContentText("The sum of the shares of suspected, infected and recovered should be 100! \n");
-
-            alert.showAndWait();
-            return;
-
+        if (sum != 100.0) {
+            getSumAlert();
+        } else {
+            double[][] result = dif.SIRmod(susceptible, infected, recovered, contact, influenceTime, deathRation);
+            modLineChart.getData().clear();
+            modLineChart.setData(getData(3, result, n));
         }
-        result = dif.SIRmod(susceptible, infected, recovered, contact, influenceTime, deathRation);
-        modLineChart.setData(getModSIRData());
-        modLineChart.setTitle("SIR with modification");
-    }
 
-
-    private ObservableList<XYChart.Series<String, Double>> getModSIRData() {
-        ObservableList<XYChart.Series<String, Double>> answer = FXCollections.observableArrayList();
-        XYChart.Series<String, Double> sSeries = new XYChart.Series<String, Double>();
-        XYChart.Series<String, Double> iSeries = new XYChart.Series<String, Double>();
-        XYChart.Series<String, Double> rSeries = new XYChart.Series<String, Double>();
-        sSeries.setName("S");
-        iSeries.setName("I");
-        rSeries.setName("R");
-        for (int i = 0; i < n - 1; i = i + 5) {
-            sSeries.getData().add(new XYChart.Data(Integer.toString(i), result[0][i]));
-            iSeries.getData().add(new XYChart.Data(Integer.toString(i), result[1][i]));
-            rSeries.getData().add(new XYChart.Data(Integer.toString(i), result[2][i]));
-        }
-        answer.addAll(sSeries, iSeries, rSeries);
-        return answer;
     }
 
 
@@ -142,42 +142,16 @@ public class AllModelController implements Initializable {
         float contact = Float.parseFloat(sisContactField.getText());
         float influenceTime = Float.parseFloat(sisInfluenceTimeField.getText());
         float deathRation = Float.parseFloat(sisDeathRation.getText());
-        float sum =((susceptible + infected ));
-        System.out.println((susceptible + infected  ));
+        float sum = ((susceptible + infected));
+        System.out.println((susceptible + infected));
 
-        if (sum != 100.0 )
-        {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning");
-            alert.setHeaderText("Warning");
-            alert.setContentText("The sum of the shares of suspected, infected and recovered should be 100! \n");
-
-            alert.showAndWait();
-            return;
-
+        if (sum != 100.0) {
+            getSumAlert();
+        } else {
+            double[][] result = dif.SIS(susceptible, infected, contact, influenceTime, deathRation);
+            sisLineChart.getData().clear();
+            sisLineChart.setData(getData(2, result, n));
         }
-        result = dif.SIS(susceptible, infected, contact, influenceTime, deathRation);
-        sisLineChart.setData(sisModSIRData());
-        sisLineChart.setTitle("SIS");
-    }
-
-
-    private ObservableList<XYChart.Series<String, Double>> sisModSIRData() {
-        ObservableList<XYChart.Series<String, Double>> answer = FXCollections.observableArrayList();
-        XYChart.Series<String, Double> sSeries = new XYChart.Series<String, Double>();
-        XYChart.Series<String, Double> iSeries = new XYChart.Series<String, Double>();
-
-        sSeries.setName("S");
-        iSeries.setName("I");
-
-        for (int i = 0; i < n - 1; i = i + 5) {
-            sSeries.getData().add(new XYChart.Data(Integer.toString(i), result[0][i]));
-            iSeries.getData().add(new XYChart.Data(Integer.toString(i), result[1][i]));
-
-        }
-        answer.addAll(sSeries, iSeries);
-        return answer;
     }
 
     public void sirsClickEnter() {
@@ -188,54 +162,37 @@ public class AllModelController implements Initializable {
         float influenceTime = Float.parseFloat(sirsInfluenceTimeField.getText());
         float deathRation = Float.parseFloat(sirsDeathRation.getText());
         float lossOfImmunity = Float.parseFloat(sirsLossOfImmunity.getText());
-        float sum =((susceptible + infected + recovered));
-        System.out.println((susceptible + infected + recovered ));
+        float sum = ((susceptible + infected + recovered));
+        System.out.println((susceptible + infected + recovered));
 
-        if (sum != 100.0 )
-        {
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Warning");
-            alert.setHeaderText("Warning");
-            alert.setContentText("The sum of the shares of suspected, infected and recovered should be 100! \n");
-
-            alert.showAndWait();
-            return;
-
+        if (sum != 100.0) {
+            getSumAlert();
+        } else {
+            double[][] result = dif.SIRS(susceptible, infected, recovered, contact, influenceTime, deathRation, lossOfImmunity);
+            sirsLineChart.getData().clear();
+            sirsLineChart.setData(getData(3, result, n));
         }
-        result = dif.SIRS(susceptible, infected, recovered, contact, influenceTime, deathRation, lossOfImmunity);
-        sirsLineChart.setData(sirsModSIRData());
-        sirsLineChart.setTitle("SIRS");
+
     }
 
-
-    private ObservableList<XYChart.Series<String, Double>> sirsModSIRData() {
-        ObservableList<XYChart.Series<String, Double>> answer = FXCollections.observableArrayList();
-        XYChart.Series<String, Double> sSeries = new XYChart.Series<String, Double>();
-        XYChart.Series<String, Double> iSeries = new XYChart.Series<String, Double>();
-        XYChart.Series<String, Double> rSeries = new XYChart.Series<String, Double>();
-        sSeries.setName("S");
-        iSeries.setName("I");
-        rSeries.setName("R");
-        for (int i = 0; i < n - 1; i = i + 5) {
-            sSeries.getData().add(new XYChart.Data(Integer.toString(i), result[0][i]));
-            iSeries.getData().add(new XYChart.Data(Integer.toString(i), result[1][i]));
-            rSeries.getData().add(new XYChart.Data(Integer.toString(i), result[2][i]));
-        }
-        answer.addAll(sSeries, iSeries, rSeries);
-        return answer;
-    }
 
     public void initialize() {
+        sirLineChart.setTitle("SIR");
+        sirLineChart.setPrefWidth(450.0);
+        sirPane.getChildren().add(sirLineChart);
 
-    }
+        sisLineChart.setTitle("SIS");
+        sisLineChart.setPrefWidth(450.0);
+        sisPane.getChildren().add(sisLineChart);
 
-    public void setMainApp(Main main) {
-        this.main = main;
-    }
+        modLineChart.setTitle("SIR with modification");
+        modLineChart.setPrefWidth(450.0);
+        sirModPane.getChildren().add(modLineChart);
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+        sirsLineChart.setTitle("SIRS");
+        sirsLineChart.setPrefWidth(450.0);
+        sirsPane.getChildren().add(sirsLineChart);
+
         Pattern p = Pattern.compile("(\\d+\\.?\\d*)?");
         susceptibleField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!p.matcher(newValue).matches()) susceptibleField.setText(oldValue);
@@ -327,11 +284,17 @@ public class AllModelController implements Initializable {
         sirsLossOfImmunity.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!p.matcher(newValue).matches()) sirsLossOfImmunity.setText(oldValue);
         });
-
-
     }
 
     public void setApp(Application application) {
         this.app = application;
+    }
+
+    private void getSumAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("Warning");
+        alert.setContentText("The sum of the shares of suspected, infected and recovered should be 100! \n");
+        alert.showAndWait();
     }
 }

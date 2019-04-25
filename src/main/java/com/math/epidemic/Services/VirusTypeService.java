@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class VirusTypeService {
 
+    private final VirusTypeRepository virusTypeRepository;
+
     @Autowired
-    private VirusTypeRepository virusTypeRepository;
+    public VirusTypeService(VirusTypeRepository virusTypeRepository) {
+        this.virusTypeRepository = virusTypeRepository;
+    }
 
     public void add(VirusType virusType) {
         virusTypeRepository.save(virusType);
