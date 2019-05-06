@@ -4,7 +4,7 @@ public class Dif {
     int arrayLenght = 3;
     int n = 100;
     double[][] model = new double[arrayLenght][n];
-    float step = (float) 0.333;
+    float step = (float) 0.25;
     float population;
 
 
@@ -103,14 +103,41 @@ public class Dif {
         return (model);
     }
 
+    public double[][] Ver(float startS, float startI, float startR, float  population,  float born, float death, float deathvirus, float lambda, float p, float ratio, float contact) {
+
+        for (int i = 0; i <= n - 1; i++) {
+            if (i == 0) {
+                model[0][i] = startS;
+                model[1][i] = startI;
+                model[2][i] = startR;
+
+
+            } else {
+                model[0][i] = model[0][i - 1] + step * ((1-p)*lambda* model[2][i - 1]-ratio* model[0][i - 1]-death* model[0][i - 1]);
+                model[1][i] = model[1][i - 1] + step * (ratio* model[0][i - 1]+p*lambda* model[2][i - 1]-(death+deathvirus)* model[1][i - 1]);
+                model[2][i] = model[2][i - 1] + step * (born-lambda* model[2][i - 1]-death* model[2][i - 1]);
+                lambda = lambda*contact;
+
+            }
+        }
+        Round();
+        population = (float) (population * ( model[1][n-1]+ model[0][n-1]+ model[2][n-1])/100);
+        System.out.println("Population: " + population);
+
+    return (model);
+    }
+
+
+
+
     public void Round() {
         System.out.println("start round");
         for (int a = 0; a <= n - 1; a++) {
             for (int b = 0; b <= arrayLenght - 1; b++) {
                 model[b][a] = Math.round(model[b][a] * 100.0) / 100.0;
             }
-           /* System.out.print("a:" + model[0][a] + "; b:" + model[1][a] + "; c:" + model[2][a]);
-            System.out.println();*/
+            System.out.print("a:" + model[0][a] + "; b:" + model[1][a] + "; c:" + model[2][a]);
+            System.out.println();
         }
     }
 }
