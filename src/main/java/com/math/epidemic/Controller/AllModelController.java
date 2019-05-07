@@ -1,7 +1,6 @@
 package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +10,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.regex.Pattern;
 
@@ -57,8 +55,6 @@ public class AllModelController {
     public TextField verContactField;
 
 
-
-
     public Pane sirPane;
     public Pane sirModPane;
     public Pane sisPane;
@@ -86,7 +82,6 @@ public class AllModelController {
     private Application app;
 
 
-
     public void sirClickEnter() {
         xAxisSir.setLabel("Time");
         yAxisSir.setLabel("Population");
@@ -106,10 +101,6 @@ public class AllModelController {
             sirLineChart.getData().clear();
             sirLineChart.setData(getData(3, result, n));
         }
-
-        /*VirusType v = new VirusType();
-        v.setType("test");
-        virusTypeService.add(v);*/
     }
 
     private ObservableList<XYChart.Series<Number, Number>> getData(int count, double[][] result, int n) {
@@ -229,14 +220,14 @@ public class AllModelController {
         if (sum != 100.0) {
             getSumAlert();
         } else {
-            double[][] result = dif.Ver(susceptible, infected, recovered, population, born,death,deathvirus,lambda,p,ratio,contact);
+            double[][] result = dif.Ver(susceptible, infected, recovered, population, born, death, deathvirus, lambda, p, ratio, contact);
             verLineChart.getData().clear();
             verLineChart.setData(getData(3, result, n));
         }
 
-   }
+    }
 
-    public void onBaseClick (ActionEvent actionEvent) {
+    public void onBaseClick(ActionEvent actionEvent) {
         app.showBase();
     }
 

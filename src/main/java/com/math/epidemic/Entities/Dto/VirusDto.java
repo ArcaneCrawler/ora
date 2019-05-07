@@ -1,4 +1,4 @@
-package com.math.epidemic.Entities;
+package com.math.epidemic.Entities.Dto;
 
 import javafx.beans.property.*;
 

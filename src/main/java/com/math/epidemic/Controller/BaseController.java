@@ -1,7 +1,7 @@
 package com.math.epidemic.Controller;
 
+import com.math.epidemic.Entities.Dto.VirusDto;
 import com.math.epidemic.Entities.Virus;
-import com.math.epidemic.Entities.VirusDto;
 import com.math.epidemic.Services.VirusService;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -26,7 +26,6 @@ public class BaseController {
     public TableColumn<VirusDto, Float> enduranceVirusColumn;
     public TableColumn<VirusDto, Float> cureVirusColumn;
 
-
     Application app = null;
 
     private ObservableList<VirusDto> listVirus = FXCollections.observableArrayList();
@@ -40,7 +39,6 @@ public class BaseController {
          * тут магия конечно, но если примерно, setCellValueFactory() - метод, который указывает
          * какие данные будут ОТОБРАЖАТЬСЯ в ячейках определенного столбца в таблице
          */
-        System.out.println(this);
         idVirusColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         nameVirusColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         stainVirusColumn.setCellValueFactory(cellData -> cellData.getValue().strainProperty());
@@ -52,18 +50,24 @@ public class BaseController {
         cureVirusColumn.setCellValueFactory(cellData -> cellData.getValue().enduranceProperty().asObject());
 
         virusTableView.setItems(listVirus);
-
-        /*
-        parser(refractoryService.findAll());
-
-        */
-
-        //parser(refractoryService.findAll(), listRefractory);
-
     }
 
     public void onClickAdd(ActionEvent actionEvent) {
-        // app.showLayoutAdd();
+        Virus v = new Virus();
+        v.setName("Ебола");
+        v.setStrain("ХЗ чо");
+        v.setLethal(1);
+        v.setInfluence(1);
+        v.setChance(1);
+        v.setEvol_rate(1);
+        v.setCure_rate(1);
+        v.setEndurance(1);
+
+        // хуярим в базу
+        virusService.add(v);
+
+
+        init();
 
     }
 
@@ -90,11 +94,11 @@ public class BaseController {
     public void onClickDelete(ActionEvent actionEvent) {
     }
 
-    public void setApp(com.math.epidemic.Application application) {
+    // прикол в том что initialize у тебя вызывается ДО подключения к базе, просто в момент запуска приложения
+    // создаются все лайоуты, и чисто храянтся в памяти
+    // так что при вызове окошка приходится отдельно довызывать метод для подсасывания с базы ,
+    // ибо initialize уже отработал
+    public void init() {
+        parser(virusService.findAll(), listVirus);
     }
-   /* public void setApp(Application app) {
-        this.app = app;
-        System.out.println("test");
-        System.out.println(this);
-    }*/
 }

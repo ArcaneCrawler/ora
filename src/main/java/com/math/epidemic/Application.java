@@ -2,9 +2,9 @@ package com.math.epidemic;
 
 import com.math.epidemic.Controller.AboutLayoutController;
 import com.math.epidemic.Controller.AllModelController;
+import com.math.epidemic.Controller.BaseController;
 import com.math.epidemic.Controller.RootLayoutController;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +68,8 @@ public class Application extends AbstractJavaFxApplicationSupport {
 
     public void showBase() {
        setScene(viewBase, "База");
+        BaseController b = (BaseController) viewBase.getController();
+        b.init();
     }
 
     private void setScene(ConfigurationControllers.View view, String title) {
