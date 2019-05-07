@@ -83,8 +83,6 @@ public class AllModelController {
 
 
     public void sirClickEnter() {
-        xAxisSir.setLabel("Time");
-        yAxisSir.setLabel("Population");
         float susceptible = Float.parseFloat(susceptibleField.getText());
         float infected = Float.parseFloat(infectedField.getText());
         float recovered = Float.parseFloat(recoveredField.getText());
@@ -132,8 +130,6 @@ public class AllModelController {
 
 
     public void modClickEnter() {
-        xAxisMod.setLabel("Time");
-        yAxisMod.setLabel("Population");
         float susceptible = Float.parseFloat(modSusceptibleField.getText());
         float infected = Float.parseFloat(modInfectedField.getText());
         float recovered = Float.parseFloat(modRecoveredField.getText());
@@ -155,8 +151,6 @@ public class AllModelController {
 
 
     public void sisClickEnter() {
-        xAxisSis.setLabel("Time");
-        yAxisSis.setLabel("Population");
         float susceptible = Float.parseFloat(sisSusceptibleField.getText());
         float infected = Float.parseFloat(sisInfectedField.getText());
         float contact = Float.parseFloat(sisContactField.getText());
@@ -175,8 +169,6 @@ public class AllModelController {
     }
 
     public void sirsClickEnter() {
-        xAxisSirs.setLabel("Time");
-        yAxisSirs.setLabel("Population");
         float susceptible = Float.parseFloat(sirsSusceptibleField.getText());
         float infected = Float.parseFloat(sirsInfectedField.getText());
         float recovered = Float.parseFloat(sirsRecoveredField.getText());
@@ -199,8 +191,6 @@ public class AllModelController {
     }
 
     public void verClickEnter() {
-        xAxisVer.setLabel("Time");
-        yAxisVer.setLabel("Population");
         float susceptible = Float.parseFloat(verSusceptibleField.getText());
         float infected = Float.parseFloat(verInfectedField.getText());
         float recovered = Float.parseFloat(verRecoveredField.getText());
@@ -236,22 +226,32 @@ public class AllModelController {
         sirLineChart.setTitle("SIR");
         sirLineChart.setPrefWidth(450.0);
         sirPane.getChildren().add(sirLineChart);
+        xAxisSir.setLabel("Time");
+        yAxisSir.setLabel("Population");
 
         sisLineChart.setTitle("SIS");
         sisLineChart.setPrefWidth(450.0);
         sisPane.getChildren().add(sisLineChart);
+        xAxisSis.setLabel("Time");
+        yAxisSis.setLabel("Population");
 
         modLineChart.setTitle("SIR with modification");
         modLineChart.setPrefWidth(450.0);
         sirModPane.getChildren().add(modLineChart);
+        xAxisMod.setLabel("Time");
+        yAxisMod.setLabel("Population");
 
         sirsLineChart.setTitle("SIRS");
         sirsLineChart.setPrefWidth(450.0);
         sirsPane.getChildren().add(sirsLineChart);
+        xAxisSirs.setLabel("Time");
+        yAxisSirs.setLabel("Population");
 
-        verLineChart.setTitle("Внроятностная модель");
+        verLineChart.setTitle("Вероятностная модель");
         verLineChart.setPrefWidth(450.0);
         verPane.getChildren().add(verLineChart);
+        xAxisVer.setLabel("Time");
+        yAxisVer.setLabel("Population");
 
         Pattern p = Pattern.compile("(\\d+\\.?\\d*)?");
         susceptibleField.textProperty().addListener((observable, oldValue, newValue) -> {
