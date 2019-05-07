@@ -2,9 +2,9 @@ package com.math.epidemic;
 
 import com.math.epidemic.Controller.AboutLayoutController;
 import com.math.epidemic.Controller.AllModelController;
+import com.math.epidemic.Controller.BaseController;
 import com.math.epidemic.Controller.RootLayoutController;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,12 @@ import org.springframework.context.annotation.Lazy;
 @SpringBootApplication
 public class Application extends AbstractJavaFxApplicationSupport {
 
-    AllModelController mainController = null;
-    AboutLayoutController aboutLayoutController = null;
-    RootLayoutController rootLayoutController = null;
+    private AllModelController mainController = null;
+    private AboutLayoutController aboutLayoutController = null;
+    private Scene scene = null;
+    private RootLayoutController rootLayoutController = null;
     private Stage primaryStage;
-    private AnchorPane rootLayout;
+
     @Value("${ui.title:JavaFX приложение}")//
     private String windowTitle;
     @Autowired
@@ -58,40 +59,32 @@ public class Application extends AbstractJavaFxApplicationSupport {
     }
 
     public void showLayoutAbout() {
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("ABOUT");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(primaryStage);
-        Scene scene = new Scene(viewAbout.getView());
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
-        dialogStage.centerOnScreen();
-        dialogStage.showAndWait();
+        setScene(viewAbout, "О программе");
     }
 
     public void showLayoutAddLocacity() {
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Добавить");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(this.primaryStage);
-        Scene scene = new Scene(viewLocacityAdd.getView());
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
-        dialogStage.centerOnScreen();
-        dialogStage.showAndWait();
+        setScene(viewLocacityAdd, "Добавить");
     }
 
     public void showBase() {
+       setScene(viewBase, "База");
+        BaseController b = (BaseController) viewBase.getController();
+        b.init();
+    }
+
+    private void setScene(ConfigurationControllers.View view, String title) {
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("Добавить");
+        dialogStage.setTitle(title);
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(this.primaryStage);
-        Scene scene = new Scene(viewBase.getView());
+        if (scene != null) {
+            scene.setRoot(view.getView());
+        } else {
+            scene = new Scene(view.getView());
+        }
         dialogStage.setScene(scene);
         dialogStage.setResizable(false);
         dialogStage.centerOnScreen();
         dialogStage.showAndWait();
     }
-
-
 }

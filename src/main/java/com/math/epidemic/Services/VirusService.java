@@ -5,6 +5,8 @@ import com.math.epidemic.Repositories.VirusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VirusService {
 
@@ -16,5 +18,9 @@ public class VirusService {
 
     public void add(Virus virus) {
         virusRepository.save(virus);
+    }
+
+    public List<Virus> findAll() {
+        return virusRepository.findAll();
     }
 }
