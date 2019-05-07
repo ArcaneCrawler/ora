@@ -1,7 +1,9 @@
 package com.math.epidemic;
 
 import com.math.epidemic.Controller.AboutLayoutController;
+import com.math.epidemic.Controller.AddLocacityController;
 import com.math.epidemic.Controller.AllModelController;
+import com.math.epidemic.Controller.BaseController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
@@ -40,6 +42,17 @@ class ConfigurationControllers {
         return loadView("View/AboutLayout.fxml");
     }
 
+
+    @Bean(name = "addLocacityView")
+    public View getAddLocacityView() throws IOException {
+        return loadView("View/AddLocacityLayout.fxml");
+    }
+
+    @Bean(name = "baseView")
+    public View getBaseView() throws IOException {
+        return loadView("View/BaseLayout.fxml");
+    }
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -64,6 +77,16 @@ class ConfigurationControllers {
     @Bean
     public AboutLayoutController getAboutController() throws IOException {
         return (AboutLayoutController) getAboutView().getController();
+    }
+
+    @Bean
+    public AddLocacityController getAddLocacityController() throws IOException {
+        return (AddLocacityController) getAddLocacityView().getController();
+    }
+
+    @Bean
+    public BaseController getBaseController() throws IOException {
+        return (BaseController) getBaseView().getController();
     }
 
     /**

@@ -30,6 +30,12 @@ public class Application extends AbstractJavaFxApplicationSupport {
     @Autowired
     @Qualifier("aboutView")
     private ConfigurationControllers.View viewAbout;
+   @Autowired
+    @Qualifier("addLocacityView")
+    private ConfigurationControllers.View viewLocacityAdd;
+    @Autowired
+    @Qualifier("baseView")
+    private ConfigurationControllers.View viewBase;
 
     public static void main(String[] args) {
         launchApp(Application.class, args);
@@ -62,5 +68,30 @@ public class Application extends AbstractJavaFxApplicationSupport {
         dialogStage.centerOnScreen();
         dialogStage.showAndWait();
     }
+
+    public void showLayoutAddLocacity() {
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Добавить");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(this.primaryStage);
+        Scene scene = new Scene(viewLocacityAdd.getView());
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+        dialogStage.centerOnScreen();
+        dialogStage.showAndWait();
+    }
+
+    public void showBase() {
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Добавить");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(this.primaryStage);
+        Scene scene = new Scene(viewBase.getView());
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+        dialogStage.centerOnScreen();
+        dialogStage.showAndWait();
+    }
+
 
 }
