@@ -4,6 +4,7 @@ import com.math.epidemic.Application;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -235,6 +236,9 @@ public class AllModelController {
 
    }
 
+    public void onBaseClick (ActionEvent actionEvent) {
+        app.showBase();
+    }
 
 
     public void initialize() {

@@ -24,6 +24,7 @@
                                 <Label layoutX="16.0" layoutY="251.0" text="Время болезни" />
                                 <Button fx:id="sirButton" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#sirClickEnter" text="Расчёт" />
                                 <Pane fx:id="sirPane" layoutX="143.0" prefHeight="394.0" prefWidth="449.0" />
+                        <Button layoutX="15.0" layoutY="468.0" mnemonicParsing="false" onAction="#onBaseClick" text="Тестим базу" />
                             </children>
                         </AnchorPane>
                     </content>

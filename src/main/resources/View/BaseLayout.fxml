@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="434.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.BaseLayout">
+<AnchorPane prefHeight="434.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.BaseController">
    <children>
       <TabPane layoutY="-1.0" prefHeight="434.0" prefWidth="767.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -27,8 +27,8 @@
                               <TableColumn fx:id="cureVirusColumn" prefWidth="92.0" text="К.С. излечения" />
                           </columns>
                         </TableView>
-                        <Button layoutX="253.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAddVirus" text="Добавить" />
-                        <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDeleteVirus" text="Удалить" />
+                        <Button layoutX="253.0" layoutY="366.0" mnemonicParsing="false"  text="Добавить" />
+                        <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false"  text="Удалить" />
                      </children>
                   </AnchorPane>
             </content>
