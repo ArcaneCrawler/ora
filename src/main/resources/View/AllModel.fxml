@@ -109,7 +109,7 @@
                         <Label layoutX="14.0" layoutY="190.0" text="Рождаемость" />
                         <Label layoutX="14.0" layoutY="235.0" text="Смертность без беолезни " />
                         <Label layoutX="12.0" layoutY="280.0" text="Смертность от болезни" />
-                        <Button fx:id="verButton" layoutX="160.0" layoutY="513.0" mnemonicParsing="false" onAction="#verClickEnter" text="Расчёт" />
+                        <Button fx:id="verButton" layoutX="160.0" layoutY="490.0" mnemonicParsing="false" onAction="#verClickEnter" text="Расчёт" />
                         <Pane fx:id="verPane" layoutX="141.0" layoutY="5.0" prefHeight="410.0" prefWidth="449.0" />
                         <Label layoutX="12.0" layoutY="469.0" text="Частота контактов" />
                         <Label layoutX="14.0" layoutY="424.0" text="Скорость заболевания" />
