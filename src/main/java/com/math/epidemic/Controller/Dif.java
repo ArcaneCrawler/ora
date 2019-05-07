@@ -8,7 +8,6 @@ public class Dif {
     float population;
 
 
-
     public void Null() {
 
         for (int i = 0; i <= n - 1; i++) {
@@ -40,7 +39,7 @@ public class Dif {
                 model[0][i] = model[0][i - 1] + step * (-1 * contact * model[0][i - 1] * model[1][i - 1]);
                 model[1][i] = model[1][i - 1] + step * (contact * model[0][i - 1] * model[1][i - 1] - influenceTime * model[1][i - 1]);
                 model[2][i] = model[2][i - 1] + step * (influenceTime * model[1][i - 1]);
-                }
+            }
 
         }
 
@@ -103,7 +102,7 @@ public class Dif {
         return (model);
     }
 
-    public double[][] Ver(float startS, float startI, float startR, float  population,  float born, float death, float deathvirus, float lambda, float p, float ratio, float contact) {
+    public double[][] Ver(float startS, float startI, float startR, float population, float born, float death, float deathvirus, float lambda, float p, float ratio, float contact) {
 
         for (int i = 0; i <= n - 1; i++) {
             if (i == 0) {
@@ -113,21 +112,19 @@ public class Dif {
 
 
             } else {
-                model[0][i] = model[0][i - 1] + step * ((1-p)*lambda* model[2][i - 1]-ratio* model[0][i - 1]-death* model[0][i - 1]);
-                model[1][i] = model[1][i - 1] + step * (ratio* model[0][i - 1]+p*lambda* model[2][i - 1]-(death+deathvirus)* model[1][i - 1]);
-                model[2][i] = model[2][i - 1] + step * (born-lambda* model[2][i - 1]-death* model[2][i - 1]);
-                lambda = lambda*contact;
+                model[0][i] = model[0][i - 1] + step * ((1 - p) * lambda * model[2][i - 1] - ratio * model[0][i - 1] - death * model[0][i - 1]);
+                model[1][i] = model[1][i - 1] + step * (ratio * model[0][i - 1] + p * lambda * model[2][i - 1] - (death + deathvirus) * model[1][i - 1]);
+                model[2][i] = model[2][i - 1] + step * (born - lambda * model[2][i - 1] - death * model[2][i - 1]);
+                lambda = lambda * contact;
 
             }
         }
         Round();
-        population = (float) (population * ( model[1][n-1]+ model[0][n-1]+ model[2][n-1])/100);
+        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1]) / 100);
         System.out.println("Population: " + population);
 
-    return (model);
+        return (model);
     }
-
-
 
 
     public void Round() {

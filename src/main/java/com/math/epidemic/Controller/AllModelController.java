@@ -1,7 +1,7 @@
 package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
-import com.math.epidemic.Services.VirusTypeService;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.LineChart;
@@ -84,8 +84,7 @@ public class AllModelController {
     int n = 100;
     private Application app;
 
-    @Autowired
-    private VirusTypeService virusTypeService;
+
 
     public void sirClickEnter() {
         xAxisSir.setLabel("Time");
@@ -234,7 +233,7 @@ public class AllModelController {
             verLineChart.setData(getData(3, result, n));
         }
 
-    }
+   }
 
 
 
