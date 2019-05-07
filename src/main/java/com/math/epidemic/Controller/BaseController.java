@@ -9,15 +9,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class BaseController {
-
-
-
 
     public TableView<VirusDto> virusTableView;
     public TableColumn<VirusDto, Long> idVirusColumn;
@@ -39,7 +35,7 @@ public class BaseController {
     private VirusService virusService;
 
 
-    public void initialize(){
+    public void initialize() {
         /**
          * тут магия конечно, но если примерно, setCellValueFactory() - метод, который указывает
          * какие данные будут ОТОБРАЖАТЬСЯ в ячейках определенного столбца в таблице
@@ -67,7 +63,7 @@ public class BaseController {
     }
 
     public void onClickAdd(ActionEvent actionEvent) {
-       // app.showLayoutAdd();
+        // app.showLayoutAdd();
 
     }
 
@@ -89,7 +85,6 @@ public class BaseController {
             obsList.add(element);
         }
     }
-
 
 
     public void onClickDelete(ActionEvent actionEvent) {
