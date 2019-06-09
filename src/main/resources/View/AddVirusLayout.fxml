@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="414.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="birth_rateField" layoutX="156.0" layoutY="150.0" prefHeight="25.0" prefWidth="239.0" text="0.15" />
+      <TextField fx:id="populationField" layoutX="156.0" layoutY="70.0" prefHeight="25.0" prefWidth="239.0" text="Лёгкий" />
+      <TextField fx:id="pop_densityField" layoutX="156.0" layoutY="110.0" prefHeight="25.0" prefWidth="239.0" text="0.014" />
+      <TextField fx:id="nameField" layoutX="156.0" layoutY="30.0" prefHeight="25.0" prefWidth="239.0" text="Туберкулёз" />
+      <Label layoutX="24.0" layoutY="155.0" text="Заразность" />
+      <Label layoutX="24.0" layoutY="115.0" text="Летальность" />
+      <Label layoutX="24.0" layoutY="75.0" text="Штамм" />
+      <Label layoutX="24.0" layoutY="35.0" text="Название" />
+      <Button fx:id="addLocacity" layoutX="363.0" layoutY="367.0" mnemonicParsing="false" text="Добавить" />
+      <Label layoutX="24.0" layoutY="195.0" text="Вероятность (Р)" />
+      <Label layoutX="24.0" layoutY="235.0" text="К.С. развития" />
+      <Label layoutX="24.0" layoutY="275.0" text="Устойчивость" />
+      <Label layoutX="24.0" layoutY="315.0" text="К.С. излечения" />
+      <TextField fx:id="nameField1" layoutX="156.0" layoutY="190.0" prefHeight="25.0" prefWidth="239.0" text="0.4" />
+      <TextField fx:id="pop_densityField1" layoutX="156.0" layoutY="270.0" prefHeight="25.0" prefWidth="239.0" text="1" />
+      <TextField fx:id="populationField1" layoutX="156.0" layoutY="230.0" prefHeight="25.0" prefWidth="239.0" text="0.0075" />
+      <TextField fx:id="birth_rateField1" layoutX="156.0" layoutY="310.0" prefHeight="25.0" prefWidth="239.0" text="1" />
+   </children>
+</AnchorPane>

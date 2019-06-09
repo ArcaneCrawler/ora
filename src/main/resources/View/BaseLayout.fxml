@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="434.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.BaseController">
+   <children>
+      <TabPane layoutY="-1.0" prefHeight="434.0" prefWidth="767.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Вирусы">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="767.0">
+                     <children>
+                        <TableView fx:id="virusTableView" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="670.0">
+                          <columns>
+                            <TableColumn fx:id="idVirusColumn" prefWidth="39.0" text="ID" />
+                            <TableColumn fx:id="nameVirusColumn" prefWidth="71.0" text="Название" />
+                              <TableColumn fx:id="stainVirusColumn" prefWidth="69.0" text="Штамм" />
+                              <TableColumn fx:id="lethalVirusColumn" prefWidth="81.0" text="Летальность" />
+                              <TableColumn fx:id="influenceVirusColumn" prefWidth="82.0" text="Заразность" />
+                              <TableColumn fx:id="chanceVirusColumn" prefWidth="38.0" text="P" />
+                              <TableColumn fx:id="evolVirusColumn" prefWidth="92.0" text="К.С. развития" />
+                              <TableColumn fx:id="enduranceVirusColumn" prefWidth="94.0" text="Уcтойчивость" />
+                              <TableColumn fx:id="cureVirusColumn" prefWidth="92.0" text="К.С. излечения" />
+                          </columns>
+                        </TableView>
+                         <Button layoutX="253.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAdd" text="Добавить" />
+                        <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDelete" text="Удалить" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Населённые пункты">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="locacityTableView" layoutX="16.0" layoutY="4.0" prefHeight="348.0" prefWidth="578.0">
+                          <columns>
+                            <TableColumn fx:id="idLocacityColumn" prefWidth="59.0" text="ID" />
+                            <TableColumn fx:id="nameLocacityColumn" prefWidth="70.0" text="Название" />
+                              <TableColumn fx:id="densityLocacityColumn" prefWidth="105.0" text="Плот. населения" />
+                              <TableColumn fx:id="deathLocacityColumn" prefWidth="85.0" text="Смерность" />
+                              <TableColumn fx:id="birthLocacityColumn" prefWidth="90.0" text="Рождаемость" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="onClickDeleteLocacity" layoutX="375.0" layoutY="366.0" mnemonicParsing="false" text="Удалить" />
+                        <Button fx:id="onClickAddLocacity" layoutX="244.0" layoutY="366.0" mnemonicParsing="false" text="Добавить" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Журнал">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="journalTableView" layoutX="16.0" layoutY="4.0" prefHeight="348.0" prefWidth="741.0">
+                           <columns>
+                              <TableColumn fx:id="idJournalColumn" prefWidth="59.0" text="ID" />
+                              <TableColumn fx:id="dateJournalColumn" prefWidth="54.0" text="Дата" />
+                              <TableColumn fx:id="virusJournalColumn" prefWidth="65.0" text="Вирус" />
+                              <TableColumn fx:id="locacityJournalColumn" prefWidth="82.0" text="Нас. пункт" />
+                              <TableColumn fx:id="popul_leftJournalColumn" prefWidth="78.0" text="Выжило" />
+                              <TableColumn fx:id="popul_deadJournalColumn" prefWidth="75.0" text="Погибло" />
+                              <TableColumn fx:id="latentJournalColumn" prefWidth="84.0" text="Заражённые" />
+                              <TableColumn fx:id="infectedJournalColumn" prefWidth="66.0" text="Больные" />
+                              <TableColumn fx:id="curedJournalColumn" prefWidth="83.0" text="Вылеченные" />
+                              <TableColumn fx:id="suspectedJournalColumn" prefWidth="67.0" text="Здоровые" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
