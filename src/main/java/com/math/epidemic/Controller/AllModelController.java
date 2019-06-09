@@ -1,6 +1,8 @@
 package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
+import com.math.epidemic.Entities.Virus;
+import com.math.epidemic.Services.VirusService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,8 +10,11 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.regex.Pattern;
 
@@ -53,13 +58,43 @@ public class AllModelController {
     public TextField verChanceField;
     public TextField verSpeedField;
     public TextField verContactField;
+    //base Model
+    public TextField baseSusceptibleField;
+    public TextField baseInfectedField;
+    public TextField baseRecoveredField;
+    public TextField basePopulationField;
+    public TextField baseBornField;
+    public TextField baseDeathField;
+    public TextField baseDeathVirField;
+    public TextField baseDeltaField;
+    public TextField baseContactField;
+    public TextField baseSpeedField;
 
+    public Label dead_label;
+    public Label s_label;
+    public Label l_label;
+    public Label e_label;
+
+    public Label dead_label1;
+    public Label s_label1;
+    public Label l_label1;
+    public Label e_label1;
 
     public Pane sirPane;
     public Pane sirModPane;
     public Pane sisPane;
     public Pane sirsPane;
     public Pane verPane;
+    public Pane basePane;
+
+    public ComboBox<Virus> virusBox;
+    public String name;
+    Dif dif = new Dif();
+    int n = 100;
+
+    private ObservableList<Virus> listVirus = FXCollections.observableArrayList();
+    @Autowired
+    private VirusService virusService;
 
     private NumberAxis xAxisSir = new NumberAxis();
     private NumberAxis yAxisSir = new NumberAxis();
@@ -76,11 +111,10 @@ public class AllModelController {
     private NumberAxis xAxisVer = new NumberAxis();
     private NumberAxis yAxisVer = new NumberAxis();
     private LineChart<Number, Number> verLineChart = new LineChart<>(xAxisVer, yAxisVer);
-
-    Dif dif = new Dif();
-    int n = 100;
+    private NumberAxis xAxisBase = new NumberAxis();
+    private NumberAxis yAxisBase = new NumberAxis();
+    private LineChart<Number, Number> baseLineChart = new LineChart<>(xAxisBase, yAxisBase);
     private Application app;
-
 
     public void sirClickEnter() {
         float susceptible = Float.parseFloat(susceptibleField.getText());
@@ -106,9 +140,9 @@ public class AllModelController {
         XYChart.Series<Number, Number> sSeries = new XYChart.Series<>();
         XYChart.Series<Number, Number> iSeries = new XYChart.Series<>();
         XYChart.Series<Number, Number> rSeries = new XYChart.Series<>();
-        sSeries.setName("S");
+        sSeries.setName("L");
         iSeries.setName("I");
-        rSeries.setName("R");
+        rSeries.setName("S");
         if (count == 3) {
             for (int i = 0; i < n - 1; i = i + 5) {
                 sSeries.getData().add(new XYChart.Data(i, result[0][i]));
@@ -126,8 +160,9 @@ public class AllModelController {
             answer.addAll(sSeries, iSeries);
             return answer;
         }
-    }
 
+
+    }
 
     public void modClickEnter() {
         float susceptible = Float.parseFloat(modSusceptibleField.getText());
@@ -213,6 +248,59 @@ public class AllModelController {
             double[][] result = dif.Ver(susceptible, infected, recovered, population, born, death, deathvirus, lambda, p, ratio, contact);
             verLineChart.getData().clear();
             verLineChart.setData(getData(3, result, n));
+
+            float current_population = dif.getPopulation();
+            float dead_label_text = (population - current_population);
+            float s_label_text = (float) ((population) * result[1][n - 1]) / 100;
+            float l_label_text = (float) ((population) * result[2][n - 1] / 100);
+            float e_label_text = (float) ((population) * result[0][n - 1]) / 100;
+            float sumator = s_label_text + l_label_text + e_label_text;
+            System.out.println(sumator);
+
+            dead_label.setText(String.valueOf(dead_label_text));
+            s_label.setText(String.valueOf(s_label_text));
+            l_label.setText(String.valueOf(l_label_text));
+            e_label.setText(String.valueOf(e_label_text));
+        }
+
+    }
+
+    public void baseClickEnter() {
+
+        float susceptible = Float.parseFloat(baseSusceptibleField.getText());
+        float infected = Float.parseFloat(baseInfectedField.getText());
+        float recovered = Float.parseFloat(baseRecoveredField.getText());
+        float population = Float.parseFloat(basePopulationField.getText());
+        float born = Float.parseFloat(baseBornField.getText());
+        float death = Float.parseFloat(baseDeathField.getText());
+        float deathvirus = Float.parseFloat(baseDeathVirField.getText());
+        float delta = Float.parseFloat(baseDeltaField.getText());
+        float ratio = Float.parseFloat(baseSpeedField.getText());
+        float contact = Float.parseFloat(baseContactField.getText());
+
+
+        float sum = ((susceptible + infected + recovered));
+        System.out.println((susceptible + infected + recovered));
+
+        if (sum != 100.0) {
+            getSumAlert();
+        } else {
+            double[][] result = dif.Base(susceptible, infected, recovered, population, born, death, deathvirus, delta, ratio, contact);
+            baseLineChart.getData().clear();
+            baseLineChart.setData(getData(3, result, n));
+
+            float current_population = dif.getPopulation();
+            float dead_label_text = (population - current_population);
+            float s_label_text = (float) ((population) * result[1][n - 1]) / 100;
+            float l_label_text = (float) ((population) * result[2][n - 1] / 100);
+            float e_label_text = (float) ((population) * result[0][n - 1]) / 100;
+            float sumator = s_label_text + l_label_text + e_label_text;
+            System.out.println(sumator);
+
+            dead_label1.setText(String.valueOf(dead_label_text));
+            s_label1.setText(String.valueOf(s_label_text));
+            l_label1.setText(String.valueOf(l_label_text));
+            e_label1.setText(String.valueOf(e_label_text));
         }
 
     }
@@ -221,37 +309,48 @@ public class AllModelController {
         app.showBase();
     }
 
-
     public void initialize() {
+
+
         sirLineChart.setTitle("SIR");
         sirLineChart.setPrefWidth(450.0);
         sirPane.getChildren().add(sirLineChart);
-        xAxisSir.setLabel("Time");
-        yAxisSir.setLabel("Population");
+        xAxisSir.setLabel("Time, 1/4 year");
+        yAxisSir.setLabel("Population, %");
 
         sisLineChart.setTitle("SIS");
         sisLineChart.setPrefWidth(450.0);
         sisPane.getChildren().add(sisLineChart);
-        xAxisSis.setLabel("Time");
-        yAxisSis.setLabel("Population");
+        xAxisSis.setLabel("Time, 1/4 year");
+        yAxisSis.setLabel("Population, %");
+
 
         modLineChart.setTitle("SIR with modification");
         modLineChart.setPrefWidth(450.0);
         sirModPane.getChildren().add(modLineChart);
-        xAxisMod.setLabel("Time");
-        yAxisMod.setLabel("Population");
+        xAxisMod.setLabel("Time, 1/4 year");
+        yAxisMod.setLabel("Population, %");
+
 
         sirsLineChart.setTitle("SIRS");
         sirsLineChart.setPrefWidth(450.0);
         sirsPane.getChildren().add(sirsLineChart);
-        xAxisSirs.setLabel("Time");
-        yAxisSirs.setLabel("Population");
+        xAxisSirs.setLabel("Time, 1/4 year");
+        yAxisSirs.setLabel("Population, %");
 
-        verLineChart.setTitle("Вероятностная модель");
+
+        verLineChart.setTitle("Упрощённая модель");
         verLineChart.setPrefWidth(450.0);
         verPane.getChildren().add(verLineChart);
-        xAxisVer.setLabel("Time");
-        yAxisVer.setLabel("Population");
+        xAxisVer.setLabel("Time, 1/4 year");
+        yAxisVer.setLabel("Population, %");
+
+        baseLineChart.setTitle("Базовая модель");
+        baseLineChart.setPrefWidth(450.0);
+        basePane.getChildren().add(baseLineChart);
+        xAxisBase.setLabel("Time, 1/4 year");
+        yAxisBase.setLabel("Population, %");
+
 
         Pattern p = Pattern.compile("(\\d+\\.?\\d*)?");
         susceptibleField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -357,4 +456,15 @@ public class AllModelController {
         alert.setContentText("The sum of the shares of suspected, infected and recovered should be 100! \n");
         alert.showAndWait();
     }
+
+    public void connect() {
+        System.out.println("Начало процесса");
+        listVirus.clear();
+        listVirus.addAll(virusService.findAll());
+        virusBox.setItems(listVirus);
+    }
 }
+
+
+
+

@@ -11,6 +11,7 @@ import java.util.List;
 public class VirusService {
 
     private final VirusRepository virusRepository;
+
     @Autowired
     public VirusService(VirusRepository virusRepository) {
         this.virusRepository = virusRepository;

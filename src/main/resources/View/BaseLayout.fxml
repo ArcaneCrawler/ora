@@ -23,9 +23,10 @@
                               <TableColumn fx:id="cureVirusColumn" prefWidth="92.0" text="К.С. излечения" />
                           </columns>
                         </TableView>
-                         <Button onAction="#onClickAdd" layoutX="253.0" layoutY="366.0" mnemonicParsing="false"
+                         <Button layoutX="253.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAdd"
                                  text="Добавить"/>
-                        <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false"  text="Удалить" />
+                         <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDelete"
+                                 text="Удалить"/>
                      </children>
                   </AnchorPane>
             </content>

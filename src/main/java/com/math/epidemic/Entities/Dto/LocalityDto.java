@@ -26,72 +26,71 @@ public class LocalityDto {
         return id.get();
     }
 
-    public LongProperty idProperty() {
-        return id;
-    }
-
     public void setId(long id) {
         this.id.set(id);
+    }
+
+    public LongProperty idProperty() {
+        return id;
     }
 
     public String getName() {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name.set(name);
     }
 
+    public StringProperty nameProperty() {
+        return name;
+    }
 
     public int getPopulation() {
         return population.get();
-    }
-
-    public IntegerProperty populationProperty() {
-        return population;
     }
 
     public void setPopulation(int population) {
         this.population.set(population);
     }
 
-    public float getPop_density() {
-        return pop_density.get();
+    public IntegerProperty populationProperty() {
+        return population;
     }
 
-    public FloatProperty pop_densityProperty() {
-        return pop_density;
+    public float getPop_density() {
+        return pop_density.get();
     }
 
     public void setPop_density(float pop_density) {
         this.pop_density.set(pop_density);
     }
 
-    public float getBirth_rate() {
-        return birth_rate.get();
+    public FloatProperty pop_densityProperty() {
+        return pop_density;
     }
 
-    public FloatProperty birth_rateProperty() {
-        return birth_rate;
+    public float getBirth_rate() {
+        return birth_rate.get();
     }
 
     public void setBirth_rate(float birth_rate) {
         this.birth_rate.set(birth_rate);
     }
 
+    public FloatProperty birth_rateProperty() {
+        return birth_rate;
+    }
+
     public float getDeath_rate() {
         return death_rate.get();
     }
 
-    public FloatProperty death_rateProperty() {
-        return death_rate;
-    }
-
     public void setDeath_rate(float death_rate) {
         this.death_rate.set(death_rate);
+    }
+
+    public FloatProperty death_rateProperty() {
+        return death_rate;
     }
 }

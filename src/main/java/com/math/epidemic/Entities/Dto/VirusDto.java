@@ -32,108 +32,107 @@ public class VirusDto {
         return id.get();
     }
 
-    public LongProperty idProperty() {
-        return id;
-    }
-
     public void setId(long id) {
         this.id.set(id);
+    }
+
+    public LongProperty idProperty() {
+        return id;
     }
 
     public String getName() {
         return name.get();
     }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name.set(name);
+    }
+
+    public StringProperty nameProperty() {
+        return name;
     }
 
     public String getStrain() {
         return strain.get();
     }
 
-    public StringProperty strainProperty() {
-        return strain;
-    }
-
     public void setStrain(String strain) {
         this.strain.set(strain);
+    }
+
+    public StringProperty strainProperty() {
+        return strain;
     }
 
     public float getLethal() {
         return lethal.get();
     }
 
-    public FloatProperty lethalProperty() {
-        return lethal;
-    }
-
     public void setLethal(float lethal) {
         this.lethal.set(lethal);
     }
 
+    public FloatProperty lethalProperty() {
+        return lethal;
+    }
 
     public float getInfluence() {
         return influence.get();
-    }
-
-    public FloatProperty influenceProperty() {
-        return influence;
     }
 
     public void setInfluence(float influence) {
         this.influence.set(influence);
     }
 
-    public float getChance() {
-        return chance.get();
+    public FloatProperty influenceProperty() {
+        return influence;
     }
 
-    public FloatProperty chanceProperty() {
-        return chance;
+    public float getChance() {
+        return chance.get();
     }
 
     public void setChance(float chance) {
         this.chance.set(chance);
     }
 
-    public float getEvol_rate() {
-        return evol_rate.get();
+    public FloatProperty chanceProperty() {
+        return chance;
     }
 
-    public FloatProperty evol_rateProperty() {
-        return evol_rate;
+    public float getEvol_rate() {
+        return evol_rate.get();
     }
 
     public void setEvol_rate(float evol_rate) {
         this.evol_rate.set(evol_rate);
     }
 
-    public float getCure_rate() {
-        return cure_rate.get();
+    public FloatProperty evol_rateProperty() {
+        return evol_rate;
     }
 
-    public FloatProperty cure_rateProperty() {
-        return cure_rate;
+    public float getCure_rate() {
+        return cure_rate.get();
     }
 
     public void setCure_rate(float cure_rate) {
         this.cure_rate.set(cure_rate);
     }
 
+    public FloatProperty cure_rateProperty() {
+        return cure_rate;
+    }
+
     public float getEndurance() {
         return endurance.get();
     }
 
-    public FloatProperty enduranceProperty() {
-        return endurance;
-    }
-
     public void setEndurance(float endurance) {
         this.endurance.set(endurance);
+    }
+
+    public FloatProperty enduranceProperty() {
+        return endurance;
     }
 }

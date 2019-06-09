@@ -35,6 +35,7 @@ public class BaseController {
 
 
     public void initialize() {
+
         /**
          * тут магия конечно, но если примерно, setCellValueFactory() - метод, который указывает
          * какие данные будут ОТОБРАЖАТЬСЯ в ячейках определенного столбца в таблице
@@ -53,6 +54,25 @@ public class BaseController {
     }
 
     public void onClickAdd(ActionEvent actionEvent) {
+       /* Virus v = new Virus();
+        v.setName("Ебола");
+        v.setStrain("ХЗ чо");
+        v.setLethal(1);
+        v.setInfluence(1);
+        v.setChance(1);
+        v.setEvol_rate(1);
+        v.setCure_rate(1);
+        v.setEndurance(1);
+
+        // хуярим в базу
+        virusService.add(v);*/
+
+
+        init();
+
+    }
+
+    public void onClickDelete(ActionEvent actionEvent) {
         Virus v = new Virus();
         v.setName("Ебола");
         v.setStrain("ХЗ чо");
@@ -65,11 +85,11 @@ public class BaseController {
 
         // хуярим в базу
         virusService.add(v);
-
-
         init();
 
+
     }
+
 
     private void parser(List<Virus> list, ObservableList<VirusDto> obsList) {
         obsList.clear();
@@ -91,13 +111,11 @@ public class BaseController {
     }
 
 
-    public void onClickDelete(ActionEvent actionEvent) {
-    }
-
     // прикол в том что initialize у тебя вызывается ДО подключения к базе, просто в момент запуска приложения
     // создаются все лайоуты, и чисто храянтся в памяти
     // так что при вызове окошка приходится отдельно довызывать метод для подсасывания с базы ,
     // ибо initialize уже отработал
+
     public void init() {
         parser(virusService.findAll(), listVirus);
     }

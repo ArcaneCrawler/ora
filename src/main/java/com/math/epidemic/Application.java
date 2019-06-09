@@ -31,7 +31,7 @@ public class Application extends AbstractJavaFxApplicationSupport {
     @Autowired
     @Qualifier("aboutView")
     private ConfigurationControllers.View viewAbout;
-   @Autowired
+    @Autowired
     @Qualifier("addLocacityView")
     private ConfigurationControllers.View viewLocacityAdd;
     @Autowired
@@ -53,9 +53,8 @@ public class Application extends AbstractJavaFxApplicationSupport {
         mainController = (AllModelController) viewMain.getController();
         rootLayoutController = (RootLayoutController) viewMain.getRootController();
         rootLayoutController.setApp(this);
-        /*aboutLayoutController = (AboutLayoutController) viewAbout.getController();
-        aboutLayoutController.setApp(this);*/
         mainController.setApp(this);
+        mainController.connect();
     }
 
     public void showLayoutAbout() {
@@ -67,7 +66,7 @@ public class Application extends AbstractJavaFxApplicationSupport {
     }
 
     public void showBase() {
-       setScene(viewBase, "База");
+        setScene(viewBase, "База");
         BaseController b = (BaseController) viewBase.getController();
         b.init();
     }

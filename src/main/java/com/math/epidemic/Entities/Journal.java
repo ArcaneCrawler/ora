@@ -47,7 +47,7 @@ public class Journal implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Locacity locacity;
 
-    public Journal(String date, int popul_left, int popul_daed, float suspected, float latent, float infected, float cured, Virus virus,Locacity locacity) {
+    public Journal(String date, int popul_left, int popul_daed, float suspected, float latent, float infected, float cured, Virus virus, Locacity locacity) {
         this.date = date;
         this.popul_left = popul_left;
         this.popul_daed = popul_daed;

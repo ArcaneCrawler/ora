@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.util.Objects;
 
 @Configuration
-class ConfigurationControllers {
+public class ConfigurationControllers {
 
     @Autowired
     private Environment env;
@@ -84,8 +84,10 @@ class ConfigurationControllers {
         return (AddLocacityController) getAddLocacityView().getController();
     }
 
+
     @Bean
     public BaseController getBaseController() throws IOException {
+
         return (BaseController) getBaseView().getController();
     }
 
