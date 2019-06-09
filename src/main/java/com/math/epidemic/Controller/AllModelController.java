@@ -1,6 +1,7 @@
 package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
+
 import com.math.epidemic.Entities.Virus;
 import com.math.epidemic.Services.VirusService;
 import javafx.collections.FXCollections;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.util.regex.Pattern;
 
@@ -95,6 +97,12 @@ public class AllModelController {
     private ObservableList<Virus> listVirus = FXCollections.observableArrayList();
     @Autowired
     private VirusService virusService;
+    public ComboBox virusBox;
+    public String name;
+    private ObservableList<VirusDto> listVirus = FXCollections.observableArrayList();
+
+    @Autowired
+    private VirusService virusService;
 
     private NumberAxis xAxisSir = new NumberAxis();
     private NumberAxis yAxisSir = new NumberAxis();
@@ -160,8 +168,6 @@ public class AllModelController {
             answer.addAll(sSeries, iSeries);
             return answer;
         }
-
-
     }
 
     public void modClickEnter() {
@@ -266,7 +272,6 @@ public class AllModelController {
     }
 
     public void baseClickEnter() {
-
         float susceptible = Float.parseFloat(baseSusceptibleField.getText());
         float infected = Float.parseFloat(baseInfectedField.getText());
         float recovered = Float.parseFloat(baseRecoveredField.getText());
@@ -310,7 +315,6 @@ public class AllModelController {
     }
 
     public void initialize() {
-
 
         sirLineChart.setTitle("SIR");
         sirLineChart.setPrefWidth(450.0);
@@ -464,7 +468,3 @@ public class AllModelController {
         virusBox.setItems(listVirus);
     }
 }
-
-
-
-

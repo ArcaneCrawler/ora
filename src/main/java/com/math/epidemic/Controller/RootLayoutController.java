@@ -22,9 +22,7 @@ public class RootLayoutController {
     }
 
     public void clickDelete(ActionEvent actionEvent) {
-
         app.showBase();
-
     }
 
     public void initialize() {

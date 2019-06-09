@@ -86,8 +86,6 @@ public class BaseController {
         // хуярим в базу
         virusService.add(v);
         init();
-
-
     }
 
 
@@ -109,7 +107,6 @@ public class BaseController {
             obsList.add(element);
         }
     }
-
 
     // прикол в том что initialize у тебя вызывается ДО подключения к базе, просто в момент запуска приложения
     // создаются все лайоуты, и чисто храянтся в памяти

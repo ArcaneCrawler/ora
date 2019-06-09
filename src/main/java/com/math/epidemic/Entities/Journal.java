@@ -143,6 +143,3 @@ public class Journal implements Serializable {
         this.locacity = locacity;
     }
 }
-
-
-
