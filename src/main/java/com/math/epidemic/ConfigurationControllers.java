@@ -84,11 +84,6 @@ public class ConfigurationControllers {
         return (AddLocacityController) getAddLocacityView().getController();
     }
 
-
-
-
-
-
     @Bean
     public BaseController getBaseController() throws IOException {
 

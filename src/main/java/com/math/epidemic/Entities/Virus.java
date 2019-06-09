@@ -1,10 +1,7 @@
 package com.math.epidemic.Entities;
 
-import org.springframework.data.repository.query.Param;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "Virus")
@@ -39,9 +36,7 @@ public class Virus implements Serializable {
     private float endurance;
 
 
-
-
-    public Virus(String name, String strain, float lethal, float influence,float chance,float evol_rate,float cure_rate,float endurance) {
+    public Virus(String name, String strain, float lethal, float influence, float chance, float evol_rate, float cure_rate, float endurance) {
         this.name = name;
         this.strain = strain;
         this.lethal = lethal;
@@ -59,16 +54,15 @@ public class Virus implements Serializable {
     }
 
 
+    public Virus() {
+    }
+
     @Override
     public String toString() {
         return String.format(
                 "Virus[name=%s']",
                 name);
     }
-
-    public Virus() {
-    }
-
 
     public Long getId() {
         return id;

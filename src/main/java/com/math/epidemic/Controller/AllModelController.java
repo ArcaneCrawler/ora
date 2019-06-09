@@ -2,10 +2,7 @@ package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
 
-import com.math.epidemic.Entities.Dto.VirusDto;
-import com.math.epidemic.Entities.VirDAO;
 import com.math.epidemic.Entities.Virus;
-import com.math.epidemic.Entities.VirusDAOImp;
 import com.math.epidemic.Services.VirusService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,12 +72,10 @@ public class AllModelController {
     public TextField baseContactField;
     public TextField baseSpeedField;
 
-
     public Label dead_label;
     public Label s_label;
     public Label l_label;
     public Label e_label;
-
 
     public Label dead_label1;
     public Label s_label1;
@@ -94,17 +89,20 @@ public class AllModelController {
     public Pane verPane;
     public Pane basePane;
 
+    public ComboBox<Virus> virusBox;
+    public String name;
+    Dif dif = new Dif();
+    int n = 100;
 
+    private ObservableList<Virus> listVirus = FXCollections.observableArrayList();
+    @Autowired
+    private VirusService virusService;
     public ComboBox virusBox;
     public String name;
-
     private ObservableList<VirusDto> listVirus = FXCollections.observableArrayList();
 
     @Autowired
     private VirusService virusService;
-    private VirusDAOImp virusDAOImp;
-    private VirDAO virDAO;
-
 
     private NumberAxis xAxisSir = new NumberAxis();
     private NumberAxis yAxisSir = new NumberAxis();
@@ -124,11 +122,7 @@ public class AllModelController {
     private NumberAxis xAxisBase = new NumberAxis();
     private NumberAxis yAxisBase = new NumberAxis();
     private LineChart<Number, Number> baseLineChart = new LineChart<>(xAxisBase, yAxisBase);
-
-    Dif dif = new Dif();
-    int n = 100;
     private Application app;
-
 
     public void sirClickEnter() {
         float susceptible = Float.parseFloat(susceptibleField.getText());
@@ -174,12 +168,7 @@ public class AllModelController {
             answer.addAll(sSeries, iSeries);
             return answer;
         }
-
-
     }
-
-
-
 
     public void modClickEnter() {
         float susceptible = Float.parseFloat(modSusceptibleField.getText());
@@ -267,11 +256,11 @@ public class AllModelController {
             verLineChart.setData(getData(3, result, n));
 
             float current_population = dif.getPopulation();
-            float dead_label_text = (float) (population-current_population);
-            float s_label_text = (float) ((population)*result[1][n-1])/100;
-            float l_label_text = (float) ((population)*result[2][n-1]/100);
-            float e_label_text = (float) ((population)*result[0][n-1])/100;
-            float sumator = s_label_text+l_label_text+e_label_text;
+            float dead_label_text = (population - current_population);
+            float s_label_text = (float) ((population) * result[1][n - 1]) / 100;
+            float l_label_text = (float) ((population) * result[2][n - 1] / 100);
+            float e_label_text = (float) ((population) * result[0][n - 1]) / 100;
+            float sumator = s_label_text + l_label_text + e_label_text;
             System.out.println(sumator);
 
             dead_label.setText(String.valueOf(dead_label_text));
@@ -282,11 +271,7 @@ public class AllModelController {
 
     }
 
-
     public void baseClickEnter() {
-
-
-
         float susceptible = Float.parseFloat(baseSusceptibleField.getText());
         float infected = Float.parseFloat(baseInfectedField.getText());
         float recovered = Float.parseFloat(baseRecoveredField.getText());
@@ -310,11 +295,11 @@ public class AllModelController {
             baseLineChart.setData(getData(3, result, n));
 
             float current_population = dif.getPopulation();
-            float dead_label_text = (float) (population-current_population);
-            float s_label_text = (float) ((population)*result[1][n-1])/100;
-            float l_label_text = (float) ((population)*result[2][n-1]/100);
-            float e_label_text = (float) ((population)*result[0][n-1])/100;
-            float sumator = s_label_text+l_label_text+e_label_text;
+            float dead_label_text = (population - current_population);
+            float s_label_text = (float) ((population) * result[1][n - 1]) / 100;
+            float l_label_text = (float) ((population) * result[2][n - 1] / 100);
+            float e_label_text = (float) ((population) * result[0][n - 1]) / 100;
+            float sumator = s_label_text + l_label_text + e_label_text;
             System.out.println(sumator);
 
             dead_label1.setText(String.valueOf(dead_label_text));
@@ -325,20 +310,11 @@ public class AllModelController {
 
     }
 
-
     public void onBaseClick(ActionEvent actionEvent) {
         app.showBase();
     }
 
-
-
-
-
-
-
     public void initialize() {
-
-
 
         sirLineChart.setTitle("SIR");
         sirLineChart.setPrefWidth(450.0);
@@ -485,24 +461,10 @@ public class AllModelController {
         alert.showAndWait();
     }
 
-
-        // base test
-
-
-
-
     public void connect() {
         System.out.println("Начало процесса");
-
-
-        Virus virus = virusDAOImp.findById(1);
-        System.out.println(virus);
-       // virusBox.getItems();
+        listVirus.clear();
+        listVirus.addAll(virusService.findAll());
+        virusBox.setItems(listVirus);
     }
-
-
 }
-
-
-
-

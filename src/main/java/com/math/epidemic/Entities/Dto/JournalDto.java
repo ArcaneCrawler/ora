@@ -29,95 +29,95 @@ public class JournalDto {
         return id.get();
     }
 
-    public LongProperty idProperty() {
-        return id;
-    }
-
     public void setId(long id) {
         this.id.set(id);
+    }
+
+    public LongProperty idProperty() {
+        return id;
     }
 
     public String getDate() {
         return date.get();
     }
 
-    public StringProperty dateProperty() {
-        return date;
-    }
-
     public void setDate(String date) {
         this.date.set(date);
+    }
+
+    public StringProperty dateProperty() {
+        return date;
     }
 
     public int getPopul_left() {
         return popul_left.get();
     }
 
-    public IntegerProperty popul_leftProperty() {
-        return popul_left;
-    }
-
     public void setPopul_left(int popul_left) {
         this.popul_left.set(popul_left);
+    }
+
+    public IntegerProperty popul_leftProperty() {
+        return popul_left;
     }
 
     public int getPopul_daed() {
         return popul_daed.get();
     }
 
-    public IntegerProperty popul_daedProperty() {
-        return popul_daed;
-    }
-
     public void setPopul_daed(int popul_daed) {
         this.popul_daed.set(popul_daed);
+    }
+
+    public IntegerProperty popul_daedProperty() {
+        return popul_daed;
     }
 
     public float getSuspected() {
         return suspected.get();
     }
 
-    public FloatProperty suspectedProperty() {
-        return suspected;
-    }
-
     public void setSuspected(float suspected) {
         this.suspected.set(suspected);
+    }
+
+    public FloatProperty suspectedProperty() {
+        return suspected;
     }
 
     public float getLatent() {
         return latent.get();
     }
 
-    public FloatProperty latentProperty() {
-        return latent;
-    }
-
     public void setLatent(float latent) {
         this.latent.set(latent);
+    }
+
+    public FloatProperty latentProperty() {
+        return latent;
     }
 
     public float getInfected() {
         return infected.get();
     }
 
-    public FloatProperty infectedProperty() {
-        return infected;
-    }
-
     public void setInfected(float infected) {
         this.infected.set(infected);
+    }
+
+    public FloatProperty infectedProperty() {
+        return infected;
     }
 
     public float getCured() {
         return cured.get();
     }
 
-    public FloatProperty curedProperty() {
-        return cured;
-    }
-
     public void setCured(float cured) {
         this.cured.set(cured);
+    }
+
+    public FloatProperty curedProperty() {
+        return cured;
     }
 }
