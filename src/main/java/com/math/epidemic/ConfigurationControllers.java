@@ -27,11 +27,6 @@ public class ConfigurationControllers {
     private AnchorPane mainLayout;
     private BorderPane rootLayout;
 
-    /*@Bean(name = "mainView")
-    public View getMainView() throws IOException {
-        return loadView("View/Main.fxml");
-    }*/
-
     @Bean(name = "mainView")
     public View getMainView() throws IOException {
         return loadViewWithRoot("View/RootLayout.fxml", "View/AllModel.fxml");
@@ -43,7 +38,7 @@ public class ConfigurationControllers {
     }
 
 
-    @Bean(name = "addLocacityView")
+   @Bean(name = "addLocacityView")
     public View getAddLocacityView() throws IOException {
         return loadView("View/AddLocacityLayout.fxml");
     }

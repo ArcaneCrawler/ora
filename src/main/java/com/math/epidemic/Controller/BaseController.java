@@ -1,7 +1,10 @@
 package com.math.epidemic.Controller;
 
+import com.math.epidemic.Entities.Dto.LocalityDto;
 import com.math.epidemic.Entities.Dto.VirusDto;
+import com.math.epidemic.Entities.Locacity;
 import com.math.epidemic.Entities.Virus;
+import com.math.epidemic.Services.LocacityService;
 import com.math.epidemic.Services.VirusService;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -26,12 +29,23 @@ public class BaseController {
     public TableColumn<VirusDto, Float> enduranceVirusColumn;
     public TableColumn<VirusDto, Float> cureVirusColumn;
 
-    Application app = null;
+    public TableView<LocalityDto> locacityTableView;
+    public TableColumn<LocalityDto, Long> idLocacityColumn;
+    public TableColumn<LocalityDto, String> nameLocacityColumn;
+    public TableColumn<LocalityDto, Float> densityLocacityColumn;
+    public TableColumn<LocalityDto, Float> deathLocacityColumn;
+    public TableColumn<LocalityDto, Float> birthLocacityColumn;
+    public TableColumn<LocalityDto, Integer> populationLocacityColumn;
+
+    private Application app = null;
 
     private ObservableList<VirusDto> listVirus = FXCollections.observableArrayList();
+    private ObservableList<LocalityDto> listLocacity = FXCollections.observableArrayList();
 
     @Autowired
     private VirusService virusService;
+    @Autowired
+    private LocacityService locacityService;
 
 
     public void initialize() {
@@ -49,53 +63,39 @@ public class BaseController {
         evolVirusColumn.setCellValueFactory(cellData -> cellData.getValue().evol_rateProperty().asObject());
         enduranceVirusColumn.setCellValueFactory(cellData -> cellData.getValue().cure_rateProperty().asObject());
         cureVirusColumn.setCellValueFactory(cellData -> cellData.getValue().enduranceProperty().asObject());
-
         virusTableView.setItems(listVirus);
+
+        idLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        nameLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        populationLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
+        densityLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().contactProperty().asObject());
+        deathLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().death_rateProperty().asObject());
+        birthLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().birth_rateProperty().asObject());
+
+        locacityTableView.setItems(listLocacity);
     }
 
     public void onClickAdd(ActionEvent actionEvent) {
-       /* Virus v = new Virus();
-        v.setName("Ебола");
-        v.setStrain("ХЗ чо");
-        v.setLethal(1);
-        v.setInfluence(1);
-        v.setChance(1);
-        v.setEvol_rate(1);
-        v.setCure_rate(1);
-        v.setEndurance(1);
-
-        // хуярим в базу
-        virusService.add(v);*/
-
+        AddLocacityController add = new AddLocacityController();
 
         init();
 
+    }
+    public void setApp(com.math.epidemic.Application application) {
+        this.app = application;
     }
 
     public void onClickDelete(ActionEvent actionEvent) {
-        Virus v = new Virus();
-        v.setName("Ебола");
-        v.setStrain("ХЗ чо");
-        v.setLethal(1);
-        v.setInfluence(1);
-        v.setChance(1);
-        v.setEvol_rate(1);
-        v.setCure_rate(1);
-        v.setEndurance(1);
 
-        // хуярим в базу
-        virusService.add(v);
         init();
     }
 
-
-    private void parser(List<Virus> list, ObservableList<VirusDto> obsList) {
+    private void parserVirus(List<Virus> list, ObservableList<VirusDto> obsList) {
         obsList.clear();
         for (Virus virus : list) {
             VirusDto element = new VirusDto();
             element.setId(virus.getId());
             element.setName(virus.getName());
-
             element.setStrain(virus.getStrain());
             element.setLethal(virus.getLethal());
             element.setInfluence(virus.getInfluence());
@@ -103,7 +103,20 @@ public class BaseController {
             element.setEvol_rate(virus.getEvol_rate());
             element.setCure_rate(virus.getCure_rate());
             element.setEndurance(virus.getEndurance());
+            obsList.add(element);
+        }
+    }
 
+    private void parser(List<Locacity> list, ObservableList<LocalityDto> obsList) {
+        obsList.clear();
+        for (Locacity locacity : list) {
+            LocalityDto element = new LocalityDto();
+            element.setId(locacity.getId());
+            element.setName(locacity.getName());
+            element.setPopulation(locacity.getPopulation());
+            element.setContact(locacity.getContact());
+            element.setDeath_rate(locacity.getDeath_rate());
+            element.setBirth_rate(locacity.getBirth_rate());
             obsList.add(element);
         }
     }
@@ -114,6 +127,7 @@ public class BaseController {
     // ибо initialize уже отработал
 
     public void init() {
-        parser(virusService.findAll(), listVirus);
+        parserVirus(virusService.findAll(), listVirus);
+        parser(locacityService.findAll(), listLocacity);
     }
 }

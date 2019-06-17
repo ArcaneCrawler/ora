@@ -24,7 +24,6 @@ public class JournalDto {
         this.cured = new SimpleFloatProperty();
     }
 
-
     public long getId() {
         return id.get();
     }

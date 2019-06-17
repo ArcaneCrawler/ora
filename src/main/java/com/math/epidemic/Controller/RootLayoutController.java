@@ -14,7 +14,6 @@ public class RootLayoutController {
         alert.setHeaderText("About program");
         alert.setContentText("Author: Ilya Rodionov\nGroup # 455\nSaint-Petersburg State Institute of Technology\n2018-2019");
         alert.showAndWait();
-
     }
 
     public void clickReadme(ActionEvent actionEvent) {
@@ -26,7 +25,6 @@ public class RootLayoutController {
     }
 
     public void initialize() {
-
     }
 
     public void setApp(Application application) {

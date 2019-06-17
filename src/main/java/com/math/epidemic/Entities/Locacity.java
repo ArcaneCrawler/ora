@@ -19,7 +19,10 @@ public class Locacity implements Serializable {
     private int population;
 
     @Column(nullable = false)
-    private float pop_density;
+    private float contact;
+
+    @Column(nullable = false)
+    private float vaccine;
 
     @Column(nullable = false)
     private float birth_rate;
@@ -27,16 +30,21 @@ public class Locacity implements Serializable {
     @Column(nullable = false)
     private float death_rate;
 
-
     public Locacity() {
     }
 
-    public Locacity(String name, int population, float pop_density, float birth_rate, float death_rate) {
+    @Override
+    public String toString() {
+        return String.format(name);
+    }
+
+    public Locacity(String name, int population, float contact, float birth_rate, float death_rate, float vaccine) {
         this.name = name;
         this.population = population;
-        this.pop_density = pop_density;
+        this.contact = contact;
         this.birth_rate = birth_rate;
         this.death_rate = death_rate;
+        this.death_rate = vaccine;
     }
 
 
@@ -64,12 +72,12 @@ public class Locacity implements Serializable {
         this.population = population;
     }
 
-    public float getPop_density() {
-        return pop_density;
+    public float getContact() {
+        return contact;
     }
 
-    public void setPop_density(float pop_density) {
-        this.pop_density = pop_density;
+    public void setContact(float contact) {
+        this.contact = contact;
     }
 
     public float getBirth_rate() {
@@ -86,5 +94,13 @@ public class Locacity implements Serializable {
 
     public void setDeath_rate(float death_rate) {
         this.death_rate = death_rate;
+    }
+
+    public float getVaccine() {
+        return vaccine;
+    }
+
+    public void setVaccine(float vaccine) {
+        this.vaccine = vaccine;
     }
 }

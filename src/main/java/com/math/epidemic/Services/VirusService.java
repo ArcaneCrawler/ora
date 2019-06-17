@@ -11,7 +11,7 @@ import java.util.List;
 public class VirusService {
 
     private final VirusRepository virusRepository;
-  
+
     @Autowired
     public VirusService(VirusRepository virusRepository) {
         this.virusRepository = virusRepository;
@@ -19,6 +19,10 @@ public class VirusService {
 
     public void add(Virus virus) {
         virusRepository.save(virus);
+    }
+
+    public void delete(Virus virus) {
+        virusRepository.delete(virus);
     }
 
     public List<Virus> findAll() {

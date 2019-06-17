@@ -35,7 +35,6 @@ public class Virus implements Serializable {
     @Column(nullable = false)
     private float endurance;
 
-
     public Virus(String name, String strain, float lethal, float influence, float chance, float evol_rate, float cure_rate, float endurance) {
         this.name = name;
         this.strain = strain;
@@ -45,23 +44,18 @@ public class Virus implements Serializable {
         this.evol_rate = evol_rate;
         this.cure_rate = cure_rate;
         this.endurance = endurance;
-
     }
 
     public Virus(String name) {
         this.name = name;
-
     }
-
 
     public Virus() {
     }
 
     @Override
     public String toString() {
-        return String.format(
-                "Virus[name=%s']",
-                name);
+        return String.format(name + " " + strain);
     }
 
     public Long getId() {

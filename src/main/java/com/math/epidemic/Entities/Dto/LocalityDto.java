@@ -7,20 +7,20 @@ public class LocalityDto {
     private LongProperty id;
     private StringProperty name;
     private IntegerProperty population;
-    private FloatProperty pop_density;
+    private FloatProperty contact;
     private FloatProperty birth_rate;
     private FloatProperty death_rate;
+    private FloatProperty vaccine;
 
     public LocalityDto() {
         this.id = new SimpleLongProperty();
         this.name = new SimpleStringProperty();
         this.population = new SimpleIntegerProperty();
-        this.pop_density = new SimpleFloatProperty();
+        this.contact = new SimpleFloatProperty();
         this.birth_rate = new SimpleFloatProperty();
         this.death_rate = new SimpleFloatProperty();
-
+        this.vaccine = new SimpleFloatProperty();
     }
-
 
     public long getId() {
         return id.get();
@@ -58,16 +58,16 @@ public class LocalityDto {
         return population;
     }
 
-    public float getPop_density() {
-        return pop_density.get();
+    public float getContact() {
+        return contact.get();
     }
 
-    public void setPop_density(float pop_density) {
-        this.pop_density.set(pop_density);
+    public void setContact(float contact) {
+        this.contact.set(contact);
     }
 
-    public FloatProperty pop_densityProperty() {
-        return pop_density;
+    public FloatProperty contactProperty() {
+        return contact;
     }
 
     public float getBirth_rate() {
@@ -92,5 +92,17 @@ public class LocalityDto {
 
     public FloatProperty death_rateProperty() {
         return death_rate;
+    }
+
+    public float getVaccine() {
+        return vaccine.get();
+    }
+
+    public FloatProperty vaccineProperty() {
+        return vaccine;
+    }
+
+    public void setVaccine(float vaccine) {
+        this.vaccine.set(vaccine);
     }
 }

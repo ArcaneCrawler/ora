@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <AnchorPane prefHeight="434.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.BaseController">
    <children>
       <TabPane layoutY="-1.0" prefHeight="434.0" prefWidth="767.0" tabClosingPolicy="UNAVAILABLE">
@@ -10,7 +13,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="767.0">
                      <children>
-                        <TableView fx:id="virusTableView" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="670.0">
+                        <TableView fx:id="virusTableView" editable="true" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="670.0">
                           <columns>
                             <TableColumn fx:id="idVirusColumn" prefWidth="39.0" text="ID" />
                             <TableColumn fx:id="nameVirusColumn" prefWidth="71.0" text="Название" />
@@ -23,10 +26,8 @@
                               <TableColumn fx:id="cureVirusColumn" prefWidth="92.0" text="К.С. излечения" />
                           </columns>
                         </TableView>
-                         <Button layoutX="253.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAdd"
-                                 text="Добавить"/>
-                         <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDelete"
-                                 text="Удалить"/>
+                         <Button layoutX="253.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAdd" text="Отобразить" />
+                         <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDelete" text="Добавить" />
                      </children>
                   </AnchorPane>
             </content>
@@ -39,8 +40,9 @@
                           <columns>
                             <TableColumn fx:id="idLocacityColumn" prefWidth="59.0" text="ID" />
                             <TableColumn fx:id="nameLocacityColumn" prefWidth="70.0" text="Название" />
-                              <TableColumn fx:id="densityLocacityColumn" prefWidth="105.0" text="Плот. населения" />
-                              <TableColumn fx:id="deathLocacityColumn" prefWidth="85.0" text="Смерность" />
+                              <TableColumn fx:id="populationLocacityColumn" prefWidth="83.0" text="Население" />
+                              <TableColumn fx:id="densityLocacityColumn" prefWidth="106.0" text="Плот. населения" />
+                              <TableColumn fx:id="deathLocacityColumn" text="Смерность" />
                               <TableColumn fx:id="birthLocacityColumn" prefWidth="90.0" text="Рождаемость" />
                           </columns>
                         </TableView>

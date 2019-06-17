@@ -36,7 +36,6 @@ public class Journal implements Serializable {
     @Column(nullable = true)
     private float cured;
 
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Virus_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -61,7 +60,6 @@ public class Journal implements Serializable {
 
     public Journal() {
     }
-
 
     public Long getId() {
         return id;

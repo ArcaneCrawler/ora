@@ -1,9 +1,6 @@
 package com.math.epidemic;
 
-import com.math.epidemic.Controller.AboutLayoutController;
-import com.math.epidemic.Controller.AllModelController;
-import com.math.epidemic.Controller.BaseController;
-import com.math.epidemic.Controller.RootLayoutController;
+import com.math.epidemic.Controller.*;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,6 +16,7 @@ public class Application extends AbstractJavaFxApplicationSupport {
 
     private AllModelController mainController = null;
     private AboutLayoutController aboutLayoutController = null;
+    //private BaseController baseController = null;
     private Scene scene = null;
     private RootLayoutController rootLayoutController = null;
     private Stage primaryStage;
@@ -31,7 +29,7 @@ public class Application extends AbstractJavaFxApplicationSupport {
     @Autowired
     @Qualifier("aboutView")
     private ConfigurationControllers.View viewAbout;
-    @Autowired
+   @Autowired
     @Qualifier("addLocacityView")
     private ConfigurationControllers.View viewLocacityAdd;
     @Autowired
@@ -54,15 +52,17 @@ public class Application extends AbstractJavaFxApplicationSupport {
         rootLayoutController = (RootLayoutController) viewMain.getRootController();
         rootLayoutController.setApp(this);
         mainController.setApp(this);
-        mainController.connect();
+        mainController.connectVirus();
+            //mainController.connectLocacity();
     }
 
     public void showLayoutAbout() {
         setScene(viewAbout, "О программе");
     }
 
-    public void showLayoutAddLocacity() {
+    public void showAddL() {
         setScene(viewLocacityAdd, "Добавить");
+
     }
 
     public void showBase() {

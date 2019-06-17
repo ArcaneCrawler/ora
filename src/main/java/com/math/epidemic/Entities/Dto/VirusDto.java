@@ -8,7 +8,6 @@ public class VirusDto {
     private StringProperty name;
     private StringProperty strain;
     private FloatProperty lethal;
-
     private FloatProperty influence;
     private FloatProperty chance;
     private FloatProperty evol_rate;
