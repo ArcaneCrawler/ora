@@ -21,6 +21,10 @@ public class LocacityService {
         locacityRepository.save(locacity);
     }
 
+    public void delete(Locacity locacity) {
+        locacityRepository.delete(locacity);
+    }
+
     public List<Locacity> findAll() {
         return locacityRepository.findAll();
     }

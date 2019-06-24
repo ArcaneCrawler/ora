@@ -21,7 +21,8 @@ public class RootLayoutController {
     }
 
     public void clickDelete(ActionEvent actionEvent) {
-        app.showBase();
+        System.out.println(app);
+        app.showBase(app);
     }
 
     public void initialize() {

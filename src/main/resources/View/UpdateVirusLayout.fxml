@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="420.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.AddVirusController">
+<AnchorPane prefHeight="420.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.UpdateVirusController">
    <children>
       <TextField fx:id="influenceField" layoutX="170.0" layoutY="180.0" prefHeight="25.0" prefWidth="235.0" />
       <TextField fx:id="stainField" layoutX="170.0" layoutY="100.0" prefHeight="25.0" prefWidth="235.0" />
@@ -18,18 +18,18 @@
       <Label layoutX="25.0" layoutY="100.0" prefHeight="0.0" text="Штамм" />
       <Label layoutX="25.0" layoutY="60.0" prefHeight="0.0" text="Название" />
       <TextField fx:id="evol_rateField" layoutX="170.0" layoutY="220.0" prefHeight="25.0" prefWidth="235.0" />
-      <Label layoutX="25.0" layoutY="220.0" prefHeight="34.0" prefWidth="118.0" text="Константа скорости&#10;заболевания" />
-      <Button layoutX="221.0" layoutY="381.0" mnemonicParsing="false" onAction="#onAdd" text="Добавить" />
-      <Label layoutX="25.0" layoutY="260.0" prefHeight="34.0" prefWidth="109.0" text="Константа скорости&#10;потери иммунитета" />
+      <Button layoutX="221.0" layoutY="381.0" mnemonicParsing="false" onAction="#onAdd" text="Изменить" />
       <TextField fx:id="enduranceField" layoutX="170.0" layoutY="260.0" prefHeight="25.0" prefWidth="235.0" />
       <TextField fx:id="chanceField" layoutX="170.0" layoutY="340.0" prefHeight="25.0" prefWidth="235.0" />
       <TextField fx:id="cure_rateField" layoutX="170.0" layoutY="300.0" prefHeight="25.0" prefWidth="235.0" />
-      <Label layoutX="25.0" layoutY="300.0" prefHeight="34.0" prefWidth="109.0" text="Константа скорости&#10;излечения" />
       <Label layoutX="25.0" layoutY="340.0" text="Вероятность быстрого &#10;заражения" />
-      <Label layoutX="93.0" layoutY="14.0" text="Добавление вирусного заболевания">
+      <Label layoutX="93.0" layoutY="14.0" text="Изменение вирусного заболевания">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Label layoutX="25.0" layoutY="220.0" prefHeight="34.0" prefWidth="118.0" text="Константа скорости&#10;заболевания" />
+      <Label layoutX="25.0" layoutY="260.0" prefHeight="34.0" prefWidth="109.0" text="Константа скорости&#10;потери иммунитета" />
+      <Label layoutX="25.0" layoutY="300.0" prefHeight="34.0" prefWidth="109.0" text="Константа скорости&#10;излечения" />
    </children>
 </AnchorPane>

@@ -1,233 +1,307 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="595.0" prefWidth="698.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.AllModelController">
+<AnchorPane prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.AllModelController">
     <children>
-        <TabPane layoutY="24.0" prefHeight="571.0" prefWidth="698.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="650.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
             <Tab text="Ввод коэффициентов">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0">
                      <children>
-                        <TextField fx:id="deathField" layoutX="465.0" layoutY="406.0" prefHeight="25.0" prefWidth="74.0" text="0.014" />
-                        <TextField fx:id="populationField" layoutX="465.0" layoutY="316.0" prefHeight="25.0" prefWidth="74.0" text="100000" />
-                        <TextField fx:id="bornField" layoutX="465.0" layoutY="361.0" prefHeight="25.0" prefWidth="74.0" text="0.027" />
-                        <TextField fx:id="deathVirField" layoutX="141.0" layoutY="237.0" prefHeight="25.0" prefWidth="74.0" text="0.13" />
-                        <Label layoutX="465.0" layoutY="296.0" text="Население, чел." />
-                        <Label layoutX="465.0" layoutY="341.0" text="Рождаемость, год−1" />
-                        <Label layoutX="465.0" layoutY="386.0" text="Естетсвенная убыль , год−1" />
-                        <Label layoutX="141.0" layoutY="217.0" text="Смертность от болезни, год−1" />
-                        <Label layoutX="465.0" layoutY="437.0" text="Частота результирующих контактов" />
-                        <Label layoutX="141.0" layoutY="352.0" text="К.с. заболевания" />
-                        <Label layoutX="141.0" layoutY="307.0" text="Вероятность быстрого заражения" />
-                        <Label layoutX="141.0" layoutY="262.0" text="Начальная заразность, (чел·год)−1" />
-                        <TextField fx:id="contactField" layoutX="465.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="0.9" />
-                        <TextField fx:id="chanceField" layoutX="141.0" layoutY="327.0" prefHeight="25.0" prefWidth="74.0" text="0.3" />
-                        <TextField fx:id="lambdaField" layoutX="141.0" layoutY="282.0" prefHeight="25.0" prefWidth="74.0" text="0.2" />
-                        <TextField fx:id="speedField" layoutX="141.0" layoutY="372.0" prefHeight="25.0" prefWidth="74.0" text="0.0085" />
-                        <ComboBox fx:id="virusBox" layoutX="33.0" layoutY="30.0" onAction="#virusSelect" prefHeight="25.0" prefWidth="161.0" promptText="Выберите вирус" />
-                        <ComboBox fx:id="locacityBox" layoutX="377.0" layoutY="30.0" onAction="#locacitySelect" prefHeight="25.0" prefWidth="162.0" promptText="Выберите местность" />
+                        <TextField fx:id="deathField" layoutX="460.0" layoutY="230.0" prefHeight="25.0" prefWidth="74.0" text="0.014" />
+                        <TextField fx:id="populationField" layoutX="460.0" layoutY="130.0" prefHeight="25.0" prefWidth="74.0" text="100000" />
+                        <TextField fx:id="bornField" layoutX="460.0" layoutY="180.0" prefHeight="25.0" prefWidth="74.0" text="0.027" />
+                        <TextField fx:id="deathVirField" layoutX="100.0" layoutY="110.0" prefHeight="25.0" prefWidth="74.0" text="0.13" />
+                        <Label layoutX="460.0" layoutY="110.0" text="Население, чел." />
+                        <Label layoutX="446.0" layoutY="160.0" text="Рождаемость, год−1" />
+                        <Label layoutX="460.0" layoutY="210.0" text="Естетсвенная убыль , год−1" />
+                        <Label layoutX="100.0" layoutY="90.0" text="Смертность от болезни, год−1" />
+                        <Label layoutX="460.0" layoutY="260.0" text="Частота результирующих контактов" />
+                        <Label layoutX="100.0" layoutY="240.0" text="Константа скорости заболевания" />
+                        <Label layoutX="100.0" layoutY="190.0" text="Вероятность быстрого заражения" />
+                        <Label layoutX="100.0" layoutY="140.0" text="Начальная заразность, (чел·год)−1" />
+                        <TextField fx:id="contactField" layoutX="460.0" layoutY="280.0" prefHeight="25.0" prefWidth="74.0" text="0.9" />
+                        <TextField fx:id="chanceField" layoutX="100.0" layoutY="210.0" prefHeight="25.0" prefWidth="74.0" text="0.3" />
+                        <TextField fx:id="lambdaField" layoutX="100.0" layoutY="160.0" prefHeight="25.0" prefWidth="74.0" text="0.2" />
+                        <TextField fx:id="speedField" layoutX="100.0" layoutY="260.0" prefHeight="25.0" prefWidth="74.0" text="0.0085" />
+                        <ComboBox fx:id="virusBox" layoutX="87.0" layoutY="491.0" onAction="#virusSelect" prefHeight="25.0" prefWidth="161.0" promptText="Выберите вирус" />
+                        <ComboBox fx:id="locacityBox" layoutX="422.0" layoutY="491.0" onAction="#locacitySelect" prefHeight="25.0" prefWidth="162.0" promptText="Выберите местность" />
                         <Separator layoutX="343.0" layoutY="-30.0" orientation="VERTICAL" prefHeight="628.0" prefWidth="5.0" />
-                        <Label layoutX="14.0" layoutY="106.0" text="μ t" />
-                        <Label layoutX="14.0" layoutY="151.0" text="λ" />
-                        <Label layoutX="14.0" layoutY="193.0" text="p" />
-                        <Label layoutX="14.0" layoutY="241.0" text="δ" />
-                        <Label layoutX="397.0" layoutY="208.0" text="μ" />
-                        <Label layoutX="401.0" layoutY="161.0" text="Пи" />
                         <Label layoutX="382.0" layoutY="161.0" />
-                        <Label layoutX="406.0" layoutY="115.0" text="N" />
-                        <Label layoutX="407.0" layoutY="259.0" text="β" />
-                        <TextField fx:id="vaccineField" layoutX="465.0" layoutY="506.0" prefHeight="25.0" prefWidth="74.0" text="0.3" />
-                        <Label layoutX="465.0" layoutY="486.0" text="К.с. вакцинации" />
-                        <TextField fx:id="cureField" layoutX="141.0" layoutY="425.0" prefHeight="25.0" prefWidth="74.0" text="0.2" />
-                        <Label layoutX="141.0" layoutY="405.0" text="К.с. излечения" />
-                        <Label layoutX="18.0" layoutY="284.0" text="γ" />
-                        <Label layoutX="405.0" layoutY="307.0" text="σ" />
-                        <Label layoutX="139.0" layoutY="464.0" text="Потеря иммунитета" />
-                        <TextField fx:id="enduranceField" layoutX="139.0" layoutY="484.0" prefHeight="25.0" prefWidth="74.0" text="0.15" />
+                        <TextField fx:id="vaccineField" layoutX="460.0" layoutY="330.0" prefHeight="25.0" prefWidth="74.0" text="0.3" />
+                        <Label layoutX="460.0" layoutY="310.0" text="Константа скорости вакцинации" />
+                        <TextField fx:id="cureField" layoutX="100.0" layoutY="310.0" prefHeight="25.0" prefWidth="74.0" text="0.2" />
+                        <Label layoutX="100.0" layoutY="290.0" text="Константа скорости излечения" />
+                        <Label layoutX="100.0" layoutY="340.0" text="Константа скорости потери иммунитета" />
+                        <TextField fx:id="enduranceField" layoutX="100.0" layoutY="360.0" prefHeight="25.0" prefWidth="74.0" text="0.15" />
+                        <Label layoutX="45.0" layoutY="29.0" text="Коэффициенты вирусного заболевания">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="388.0" layoutY="29.0" text="Коэффициенты населённого пункта">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-                <Tab text="Модель SLIs">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
-                            <children>
-                                <TextField fx:id="verLatentField" layoutX="260.0" layoutY="415.0" prefHeight="25.0" prefWidth="74.0" text="23.5" />
-                                <TextField fx:id="verInfectedField" layoutX="260.0" layoutY="460.0" prefHeight="25.0" prefWidth="74.0" text="1.5" />
-                                <TextField fx:id="verSusceptibleField" layoutX="260.0" layoutY="505.0" prefHeight="25.0" prefWidth="74.0" text="75" />
-                                <Label layoutX="260.0" layoutY="395.0" text="Латентные больные, %" />
-                                <Label layoutX="260.0" layoutY="440.0" text="Больные, %" />
-                                <Label layoutX="260.0" layoutY="485.0" text="Неинфицированные, %" />
-                                <Button fx:id="verButton" layoutX="160.0" layoutY="490.0" mnemonicParsing="false" onAction="#verClickEnter" text="Расчёт" />
-                                <Pane fx:id="verPane" layoutX="221.0" layoutY="5.0" prefHeight="384.0" prefWidth="449.0" />
-                                <Label layoutX="489.0" layoutY="442.0" text="Погибло:" />
-                                <Label layoutX="489.0" layoutY="462.0" text="Неинфицированные:" />
-                                <Label layoutX="489.0" layoutY="482.0" text="Латентные больные:" />
-                                <Label layoutX="489.0" layoutY="502.0" text="Больные:" />
-                                <Label fx:id="dead_label" layoutX="544.0" layoutY="442.0" text="0" />
-                                <Label fx:id="s_label" layoutX="544.0" layoutY="502.0" text="0" />
-                                <Label fx:id="l_label" layoutX="613.0" layoutY="462.0" text="0" />
-                                <Label fx:id="e_label" layoutX="610.0" layoutY="482.0" text="0" />
-                        <Button layoutX="136.0" layoutY="450.0" mnemonicParsing="false" onAction="#onBaseClick" text="Проверка базы" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Модель SLI">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
-                            <children>
-                                <TextField fx:id="baseLatentField" layoutX="15.0" layoutY="30.0" prefHeight="25.0" prefWidth="74.0" text="23.5" />
-                                <TextField fx:id="baseInfectedField" layoutX="15.0" layoutY="75.0" prefHeight="25.0" prefWidth="74.0" text="1.5" />
-                                <TextField fx:id="baseSusceptibleField" layoutX="15.0" layoutY="120.0" prefHeight="25.0" prefWidth="74.0" text="75" />
-                                <Label layoutX="15.0" layoutY="10.0" text="Латентные больные" />
-                                <Label layoutX="15.0" layoutY="55.0" text="Больные" />
-                                <Label layoutX="15.0" layoutY="100.0" text="Неинфицированные" />
-                                <Button fx:id="baseButton" layoutX="160.0" layoutY="490.0" mnemonicParsing="false" onAction="#baseClickEnter" text="Расчёт" />
-                                <Pane fx:id="basePane" layoutX="141.0" layoutY="5.0" prefHeight="410.0" prefWidth="449.0" />
-                                <Label layoutX="255.0" layoutY="430.0" text="Погибло:" />
-                                <Label layoutX="255.0" layoutY="450.0" text="Неинфицированные:" />
-                                <Label layoutX="255.0" layoutY="470.0" text="Латентные больные:" />
-                                <Label layoutX="255.0" layoutY="490.0" text="Больные:" />
-                                <Label fx:id="dead_label1" layoutX="310.0" layoutY="430.0" text="0" />
-                                <Label fx:id="l_label1" layoutX="375.0" layoutY="450.0" text="0" />
-                                <Label fx:id="e_label1" layoutX="372.0" layoutY="470.0" text="0" />
-                                <Label fx:id="s_label1" layoutX="310.0" layoutY="490.0" text="0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-            <Tab text="Модель SLIPC">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+            <Tab text="Модели туберкулёза">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="slpicLatentField" layoutX="51.0" layoutY="253.0" prefHeight="25.0" prefWidth="74.0" text="23.5" />
-                        <TextField fx:id="slpicInfectedField" layoutX="51.0" layoutY="298.0" prefHeight="25.0" prefWidth="74.0" text="1.5" />
-                        <TextField fx:id="slpicSusceptibleField" layoutX="51.0" layoutY="343.0" prefHeight="25.0" prefWidth="74.0" text="75" />
-                        <Label layoutX="51.0" layoutY="233.0" text="Латентные больные, %" />
-                        <Label layoutX="51.0" layoutY="278.0" text="Больные, %" />
-                        <Label layoutX="51.0" layoutY="323.0" text="Неинфицированные, %" />
-                        <Button fx:id="slpicButton" layoutX="160.0" layoutY="490.0" mnemonicParsing="false" onAction="#slpicClickEnter" text="Расчёт" />
-                        <Pane fx:id="slpicPane" layoutX="221.0" layoutY="30.0" prefHeight="381.0" prefWidth="449.0" />
-                        <Label layoutX="489.0" layoutY="442.0" text="Погибло:" />
-                        <Label layoutX="489.0" layoutY="462.0" text="Неинфицированные:" />
-                        <Label layoutX="489.0" layoutY="482.0" text="Латентные больные:" />
-                        <Label layoutX="489.0" layoutY="502.0" text="Больные:" />
-                        <Label fx:id="dead_label2" layoutX="544.0" layoutY="442.0" text="0" />
-                        <Label fx:id="s_label2" layoutX="544.0" layoutY="502.0" text="0" />
-                        <Label fx:id="l_label2" layoutX="613.0" layoutY="462.0" text="0" />
-                        <Label fx:id="e_label2" layoutX="610.0" layoutY="482.0" text="0" />
-                        <Label fx:id="p_label" layoutX="442.0" layoutY="484.0" text="0" />
-                        <Label fx:id="c_label" layoutX="442.0" layoutY="507.0" text="0" />
-                        <Label layoutX="337.0" layoutY="507.0" text="Излеченные" />
-                        <Label layoutX="337.0" layoutY="484.0" text="Химеотерапия" />
+                        <TabPane layoutX="-1.0" prefHeight="591.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                              <Tab text="Модель SLIPC">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+                                       <children>
+                                          <Pane fx:id="slpicPane" layoutX="21.0" layoutY="5.0" prefHeight="370.0" prefWidth="645.0" />
+                                          <TextField fx:id="slpicLatentField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="23.5" />
+                                          <TextField fx:id="slpicInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="1.5" />
+                                          <TextField fx:id="slpicSusceptibleField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="75" />
+                                          <Label layoutX="50.0" layoutY="392.0" text="Латентные больные, %" />
+                                          <Label layoutX="50.0" layoutY="437.0" text="Больные, %" />
+                                          <Label layoutX="50.0" layoutY="482.0" text="Неинфицированные, %" />
+                                          <Button fx:id="slpicButton" layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#slpicClickEnter" text="Расчёт" />
+                                          <Label layoutX="488.0" layoutY="400.0" text="Погибло:" />
+                                          <Label layoutX="488.0" layoutY="420.0" text="Неинфицированные:" />
+                                          <Label layoutX="488.0" layoutY="440.0" text="Латентные больные:" />
+                                          <Label layoutX="488.0" layoutY="460.0" text="Больные:" />
+                                          <Label fx:id="slpic_dead" layoutX="545.0" layoutY="400.0" text="0" />
+                                          <Label fx:id="slpic_i" layoutX="543.0" layoutY="460.0" text="0" />
+                                          <Label fx:id="slpic_s" layoutX="612.0" layoutY="420.0" text="0" />
+                                          <Label fx:id="slpic_l" layoutX="609.0" layoutY="440.0" text="0" />
+                                          <Label fx:id="slpic_p" layoutX="579.0" layoutY="480.0" text="0" />
+                                          <Label fx:id="slpic_c" layoutX="569.0" layoutY="500.0" text="0" />
+                                          <Label layoutX="488.0" layoutY="500.0" text="Излеченные:" />
+                                          <Label layoutX="488.0" layoutY="480.0" text="Химеотерапия:" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                                  <Tab text="Модель SLI">
+                                      <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+                                              <children>
+                                                  <Pane fx:id="basePane" layoutX="21.0" layoutY="5.0" prefHeight="360.0" prefWidth="645.0" />
+                                                  <TextField fx:id="baseLatentField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="23.5" />
+                                                  <TextField fx:id="baseInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="1.5" />
+                                                  <TextField fx:id="baseSusceptibleField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="75" />
+                                                  <Label layoutX="50.0" layoutY="392.0" text="Латентные больные, %" />
+                                                  <Label layoutX="50.0" layoutY="437.0" text="Больные, %" />
+                                                  <Label layoutX="50.0" layoutY="482.0" text="Неинфицированные, %" />
+                                                  <Button fx:id="baseButton" layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#baseClickEnter" text="Расчёт" />
+                                                  <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                                  <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                                  <Label layoutX="488.0" layoutY="460.0" text="Латентные больные:" />
+                                                  <Label layoutX="488.0" layoutY="480.0" text="Больные:" />
+                                                  <Label fx:id="base_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                                  <Label fx:id="base_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                                  <Label fx:id="base_l" layoutX="609.0" layoutY="460.0" text="0" />
+                                                  <Label fx:id="base_i" layoutX="543.0" layoutY="480.0" text="0" />
+                                              </children>
+                                          </AnchorPane>
+                                      </content>
+                                  </Tab>
+                                  <Tab text="Модель SLIs">
+                                      <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="580.0" prefWidth="698.0">
+                                              <children>
+                                                  <TextField fx:id="verLatentField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="23.5" />
+                                                  <TextField fx:id="verInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="1.5" />
+                                                  <TextField fx:id="verSusceptibleField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="75" />
+                                                  <Label layoutX="50.0" layoutY="392.0" text="Латентные больные, %" />
+                                                  <Label layoutX="50.0" layoutY="437.0" text="Больные, %" />
+                                                  <Label layoutX="50.0" layoutY="482.0" text="Неинфицированные, %" />
+                                                  <Button fx:id="verButton" layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#verClickEnter" text="Расчёт" />
+                                                  <Pane fx:id="verPane" layoutX="21.0" layoutY="5.0" prefHeight="350.0" prefWidth="645.0" />
+                                                  <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                                  <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                                  <Label layoutX="488.0" layoutY="460.0" text="Латентные больные:" />
+                                                  <Label layoutX="488.0" layoutY="480.0" text="Больные:" />
+                                                  <Label fx:id="sli_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                                  <Label fx:id="sli_i" layoutX="543.0" layoutY="480.0" text="0" />
+                                                  <Label fx:id="sli_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                                  <Label fx:id="sli_l" layoutX="609.0" layoutY="460.0" text="0" />
+                                              </children>
+                                          </AnchorPane>
+                                      </content>
+                                  </Tab>
+                          </tabs>
+                        </TabPane>
                      </children>
                   </AnchorPane>
-               </content>
+              </content>
             </Tab>
-                <Tab text="Модель SIR">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="432.0" prefWidth="600.0">
-                            <children>
-                                <TextField fx:id="susceptibleField" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="74.0" text="80" />
-                                <TextField fx:id="infectedField" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="74.0" text="12" />
-                                <TextField fx:id="recoveredField" layoutX="16.0" layoutY="179.0" prefHeight="25.0" prefWidth="74.0" text="8" />
-                                <Label layoutX="9.0" layoutY="58.0" text="Процент здоровых" />
-                                <Label layoutX="12.0" layoutY="100.0" text="Процент больных" />
-                                <Label layoutX="19.0" layoutY="145.0" text="Процент &#10;поправившихся" />
-                                <Button fx:id="sirButton" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#sirClickEnter" text="Расчёт" />
-                                <Pane fx:id="sirPane" layoutX="143.0" prefHeight="394.0" prefWidth="449.0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Модель SIRmod">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TextField fx:id="modSusceptibleField" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="74.0" text="80" />
-                                <TextField fx:id="modInfectedField" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="74.0" text="12" />
-                                <TextField fx:id="modRecoveredField" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="74.0" text="8" />
-                                <Label layoutX="17.0" layoutY="55.0" text="Доля больных" />
-                                <Label layoutX="14.0" layoutY="10.0" text="Доля здоровых" />
-                                <Label layoutX="14.0" layoutY="100.0" text="Доля поправившихся" />
-                                <Button fx:id="modButton" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#modClickEnter" text="Расчёт" />
-                                <Pane fx:id="sirModPane" layoutX="148.0" layoutY="1.0" prefHeight="394.0" prefWidth="449.0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Модель SIS">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TextField fx:id="sisSusceptibleField" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="74.0" text="90" />
-                                <TextField fx:id="sisInfectedField" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="74.0" text="10" />
-                                <Label layoutX="15.0" layoutY="58.0" text="Доля здоровых" />
-                                <Label layoutX="11.0" layoutY="100.0" text="Доля больных" />
-                                <Button fx:id="sisButton" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#sisClickEnter" text="Расчёт" />
-                                <Pane fx:id="sisPane" layoutX="148.0" layoutY="2.0" prefHeight="394.0" prefWidth="449.0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Модель SIRS">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <TextField fx:id="sirsSusceptibleField" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="74.0" text="78" />
-                                <TextField fx:id="sirsInfectedField" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="74.0" text="12" />
-                                <TextField fx:id="sirsRecoveredField" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="74.0" text="10" />
-                                <Label layoutX="14.0" layoutY="14.0" text="Доля здоровых" />
-                                <Label layoutX="14.0" layoutY="55.0" text="Доля больных" />
-                                <Label layoutX="14.0" layoutY="100.0" text="Доля поправившихся" />
-                                <Button fx:id="sirsButton" layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#sirsClickEnter" text="Расчёт" />
-                                <Pane fx:id="sirsPane" layoutX="151.0" layoutY="1.0" prefHeight="394.0" prefWidth="449.0" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-            <Tab text="Модель SEIR">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab text="Универсальные модели">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="650.0" prefWidth="700.0">
                      <children>
-                        <TextField fx:id="seirSusceptibleField" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="74.0" text="78" />
-                        <TextField fx:id="seirExposeddField" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="74.0" text="12" />
-                        <TextField fx:id="seirInfectedField" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="74.0" text="0" />
-                        <Label layoutX="14.0" layoutY="14.0" text="Доля здоровых" />
-                        <Label layoutX="14.0" layoutY="55.0" text="Доля латентно больных" />
-                        <Label layoutX="14.0" layoutY="100.0" text="Доля активно больных" />
-                        <Button layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#seirClickEnter" text="Расчёт" />
-                        <Pane fx:id="seirPane" layoutX="151.0" layoutY="1.0" prefHeight="394.0" prefWidth="449.0" />
-                        <Label layoutX="14.0" layoutY="153.0" text="Доля поправившихся" />
-                        <TextField fx:id="seirRecoveredField" layoutX="14.0" layoutY="173.0" prefHeight="25.0" prefWidth="74.0" text="10" />
+                        <TabPane prefHeight="620.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Модель SIR">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+                                       <children>
+                                          <Pane fx:id="sirPane" layoutX="21.0" layoutY="5.0" prefHeight="360.0" prefWidth="645.0" />
+                                          <TextField fx:id="susceptibleField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="80" />
+                                          <TextField fx:id="infectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="12" />
+                                          <TextField fx:id="recoveredField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="8" />
+                                          <Label layoutX="50.0" layoutY="392.0" text="Неинфицированные, %" />
+                                          <Label layoutX="50.0" layoutY="437.0" text="Больные, %" />
+                                          <Label layoutX="50.0" layoutY="482.0" text="Излечившиеся , %" />
+                                          <Button layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#sirClickEnter" text="Расчёт" />
+                                          <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                          <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                          <Label layoutX="488.0" layoutY="460.0" text="Больные:" />
+                                          <Label layoutX="488.0" layoutY="480.0" text="Излеченные:" />
+                                          <Label fx:id="sir_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                          <Label fx:id="sir_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                          <Label fx:id="sir_i" layoutX="546.0" layoutY="460.0" text="0" />
+                                          <Label fx:id="sir_r" layoutX="565.0" layoutY="480.0" text="0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SIRm">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+                                       <children>
+                                          <Pane fx:id="sirModPane" layoutX="21.0" layoutY="5.0" prefHeight="360.0" prefWidth="645.0" />
+                                          <TextField fx:id="modSusceptibleField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="80" />
+                                          <TextField fx:id="modInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="12" />
+                                          <TextField fx:id="modRecoveredField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="8" />
+                                          <Label layoutX="50.0" layoutY="392.0" text="Неинфицированные, %" />
+                                          <Label layoutX="50.0" layoutY="437.0" text="Больные, %" />
+                                          <Label layoutX="50.0" layoutY="482.0" text="Излечившиеся , %" />
+                                          <Button layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#modClickEnter" text="Расчёт" />
+                                          <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                          <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                          <Label layoutX="488.0" layoutY="460.0" text="Больные:" />
+                                          <Label layoutX="488.0" layoutY="480.0" text="Излеченные:" />
+                                          <Label fx:id="mod_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                          <Label fx:id="mod_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                          <Label fx:id="mod_i" layoutX="546.0" layoutY="460.0" text="0" />
+                                          <Label fx:id="mod_r" layoutX="565.0" layoutY="480.0" text="0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SIS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+                                       <children>
+                                          <Pane fx:id="sisPane" layoutX="21.0" layoutY="5.0" prefHeight="360.0" prefWidth="645.0" />
+                                          <TextField fx:id="sisSusceptibleField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="80" />
+                                          <TextField fx:id="sisInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="20" />
+                                          <Label layoutX="50.0" layoutY="392.0" text="Неинфицированные, %" />
+                                          <Label layoutX="50.0" layoutY="437.0" text="Больные, %" />
+                                          <Button layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#sisClickEnter" text="Расчёт" />
+                                          <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                          <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                          <Label layoutX="488.0" layoutY="460.0" text="Больные:" />
+                                          <Label fx:id="sis_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                          <Label fx:id="sis_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                          <Label fx:id="sis_i" layoutX="545.0" layoutY="460.0" text="0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SIRS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="386.0" prefWidth="600.0">
+                                       <children>
+                                          <Pane fx:id="sirsPane" layoutX="21.0" layoutY="5.0" prefHeight="360.0" prefWidth="645.0" />
+                                          <TextField fx:id="sirsSusceptibleField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="80" />
+                                          <TextField fx:id="sirsInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="12" />
+                                          <TextField fx:id="sirsRecoveredField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="8" />
+                                          <Label layoutX="50.0" layoutY="392.0" text="Неинфицированные, %" />
+                                          <Label layoutX="50.0" layoutY="437.0" text="Больные, %" />
+                                          <Label layoutX="50.0" layoutY="482.0" text="Излечившиеся , %" />
+                                          <Button layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#sirsClickEnter" text="Расчёт" />
+                                          <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                          <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                          <Label layoutX="488.0" layoutY="460.0" text="Больные:" />
+                                          <Label layoutX="488.0" layoutY="480.0" text="Излеченные:" />
+                                          <Label fx:id="sirs_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                          <Label fx:id="sirs_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                          <Label fx:id="sirs_i" layoutX="545.0" layoutY="460.0" text="0" />
+                                          <Label fx:id="sirs_r" layoutX="565.0" layoutY="480.0" text="0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SEIR">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="700.0">
+                                       <children>
+                                          <Pane fx:id="seirPane" layoutX="21.0" layoutY="5.0" prefHeight="360.0" prefWidth="645.0" />
+                                          <TextField fx:id="seirSusceptibleField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="78" />
+                                          <TextField fx:id="seirInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="0" />
+                                          <TextField fx:id="seirRecoveredField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="10" />
+                                          <Label layoutX="50.0" layoutY="392.0" text="Неинфицированные, %" />
+                                          <Label layoutX="50.0" layoutY="437.0" text="Активно больные, %" />
+                                          <Label layoutX="50.0" layoutY="482.0" text="Излечившиеся , %" />
+                                          <Button layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#seirClickEnter" text="Расчёт" />
+                                          <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                          <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                          <Label layoutX="488.0" layoutY="460.0" text="Латентные больные:" />
+                                          <Label layoutX="488.0" layoutY="480.0" text="Больные:" />
+                                          <Label fx:id="seir_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                          <Label fx:id="seir_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                          <Label fx:id="seir_e" layoutX="609.0" layoutY="460.0" text="0" />
+                                          <Label fx:id="seir_i" layoutX="543.0" layoutY="480.0" text="0" />
+                                          <Label layoutX="50.0" layoutY="527.0" text="Латентно больные, %" />
+                                          <TextField fx:id="seirExposeddField" layoutX="50.0" layoutY="547.0" prefHeight="25.0" prefWidth="74.0" text="12" />
+                                          <Label layoutX="488.0" layoutY="500.0" text="Излеченные:" />
+                                          <Label fx:id="seir_r" layoutX="565.0" layoutY="500.0" text="0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SEIRS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="700.0">
+                                       <children>
+                                          <Pane fx:id="seirsPane" layoutX="21.0" layoutY="5.0" prefHeight="360.0" prefWidth="645.0" />
+                                          <TextField fx:id="seirsSusceptibleField" layoutX="50.0" layoutY="412.0" prefHeight="25.0" prefWidth="74.0" text="78" />
+                                          <TextField fx:id="seirsInfectedField" layoutX="50.0" layoutY="457.0" prefHeight="25.0" prefWidth="74.0" text="0" />
+                                          <TextField fx:id="seirsRecoveredField" layoutX="50.0" layoutY="502.0" prefHeight="25.0" prefWidth="74.0" text="10" />
+                                          <Label layoutX="50.0" layoutY="392.0" text="Неинфицированные, %" />
+                                          <Label layoutX="50.0" layoutY="437.0" text="Активно больные, %" />
+                                          <Label layoutX="50.0" layoutY="482.0" text="Излечившиеся , %" />
+                                          <Button layoutX="315.0" layoutY="450.0" mnemonicParsing="false" onAction="#seirsClickEnter" text="Расчёт" />
+                                          <Label layoutX="488.0" layoutY="420.0" text="Погибло:" />
+                                          <Label layoutX="488.0" layoutY="440.0" text="Неинфицированные:" />
+                                          <Label layoutX="488.0" layoutY="460.0" text="Латентные больные:" />
+                                          <Label layoutX="488.0" layoutY="480.0" text="Больные:" />
+                                          <Label fx:id="seirs_dead" layoutX="545.0" layoutY="420.0" text="0" />
+                                          <Label fx:id="seirs_s" layoutX="612.0" layoutY="440.0" text="0" />
+                                          <Label fx:id="seirs_e" layoutX="609.0" layoutY="460.0" text="0" />
+                                          <Label fx:id="seirs_i" layoutX="543.0" layoutY="480.0" text="0" />
+                                          <Label layoutX="50.0" layoutY="527.0" text="Латентно больные, %" />
+                                          <TextField fx:id="seirsExposeddField" layoutX="50.0" layoutY="547.0" prefHeight="25.0" prefWidth="74.0" text="12" />
+                                          <Label layoutX="300.0" layoutY="513.0" text="Инкубационный период" />
+                                          <TextField fx:id="seirsIncubTime" layoutX="300.0" layoutY="533.0" prefHeight="25.0" prefWidth="74.0" text="0.1" />
+                                          <Label layoutX="488.0" layoutY="500.0" text="Излеченные:" />
+                                          <Label fx:id="seirs_r" layoutX="565.0" layoutY="500.0" text="0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
                      </children>
                   </AnchorPane>
-               </content>
-            </Tab>
-            <Tab onSelectionChanged="#seirsClickEnter" text="Модель SEIRS">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TextField fx:id="seirsSusceptibleField" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="74.0" text="78" />
-                        <TextField fx:id="seirsExposeddField" layoutX="14.0" layoutY="75.0" prefHeight="25.0" prefWidth="74.0" text="12" />
-                        <TextField fx:id="seirsInfectedField" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="74.0" text="0" />
-                        <Label layoutX="14.0" layoutY="14.0" text="Доля здоровых" />
-                        <Label layoutX="14.0" layoutY="55.0" text="Доля латентно больных" />
-                        <Label layoutX="14.0" layoutY="100.0" text="Доля активно больных" />
-                        <Button layoutX="14.0" layoutY="345.0" mnemonicParsing="false" onAction="#seirsClickEnter" text="Расчёт" />
-                        <Pane fx:id="seirsPane" layoutX="151.0" layoutY="1.0" prefHeight="394.0" prefWidth="449.0" />
-                        <Label layoutX="14.0" layoutY="153.0" text="Доля поправившихся" />
-                        <TextField fx:id="seirsRecoveredField" layoutX="14.0" layoutY="173.0" prefHeight="25.0" prefWidth="74.0" text="10" />
-                        <TextField fx:id="seirsIncubTime" layoutX="18.0" layoutY="229.0" prefHeight="25.0" prefWidth="74.0" text="0.1" />
-                        <Label layoutX="18.0" layoutY="209.0" text="Инкубационный период" />
-                     </children>
-                  </AnchorPane>
-               </content>
+              </content>
             </Tab>
             </tabs>
         </TabPane>

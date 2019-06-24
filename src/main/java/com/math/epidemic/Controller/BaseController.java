@@ -1,15 +1,16 @@
 package com.math.epidemic.Controller;
 
+import com.math.epidemic.Application;
 import com.math.epidemic.Entities.Dto.LocalityDto;
 import com.math.epidemic.Entities.Dto.VirusDto;
 import com.math.epidemic.Entities.Locacity;
 import com.math.epidemic.Entities.Virus;
 import com.math.epidemic.Services.LocacityService;
 import com.math.epidemic.Services.VirusService;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,13 @@ public class BaseController {
     public TableView<LocalityDto> locacityTableView;
     public TableColumn<LocalityDto, Long> idLocacityColumn;
     public TableColumn<LocalityDto, String> nameLocacityColumn;
-    public TableColumn<LocalityDto, Float> densityLocacityColumn;
+    public TableColumn<LocalityDto, Float> contactLocacityColumn;
     public TableColumn<LocalityDto, Float> deathLocacityColumn;
     public TableColumn<LocalityDto, Float> birthLocacityColumn;
+    public TableColumn<LocalityDto, Float> vaccineLocacityColumn;
     public TableColumn<LocalityDto, Integer> populationLocacityColumn;
 
-    private Application app = null;
+    private Application app;
 
     private ObservableList<VirusDto> listVirus = FXCollections.observableArrayList();
     private ObservableList<LocalityDto> listLocacity = FXCollections.observableArrayList();
@@ -68,26 +70,109 @@ public class BaseController {
         idLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         nameLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         populationLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().populationProperty().asObject());
-        densityLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().contactProperty().asObject());
+        contactLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().contactProperty().asObject());
         deathLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().death_rateProperty().asObject());
         birthLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().birth_rateProperty().asObject());
-
+        vaccineLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().vaccineProperty().asObject());
         locacityTableView.setItems(listLocacity);
     }
 
-    public void onClickAdd(ActionEvent actionEvent) {
-        AddLocacityController add = new AddLocacityController();
+    public void setApp(Application application) {
+        this.app = application;
+        app.connectVirus();
 
+    }
+    public void onClickShow(ActionEvent actionEvent) {
         init();
 
     }
-    public void setApp(com.math.epidemic.Application application) {
-        this.app = application;
+
+    public void onClickAdd(ActionEvent actionEvent) {
+        app.showAddV();
+        app.connectVirus();
+        init();
     }
 
     public void onClickDelete(ActionEvent actionEvent) {
+        try {
+            VirusDto virusDto = virusTableView.getSelectionModel().getSelectedItem();
+            Virus virus = new Virus();
+            virus.setId(virusDto.getId());
+            virusService.delete(virus);
+            app.connectVirus();
+            init();
+        } catch (NullPointerException exception) {
+            alert();
+        }
+    }
 
+
+    public void onClickUpdate(ActionEvent actionEvent) {
+        try {
+            VirusDto virusDto = virusTableView.getSelectionModel().getSelectedItem();
+            Virus virus = new Virus();
+            virus.setId(virusDto.getId());
+            virus.setName(virusDto.getName());
+            virus.setStrain(virusDto.getStrain());
+            virus.setLethal(virusDto.getLethal());
+            virus.setInfluence(virusDto.getInfluence());
+            virus.setEvol_rate(virusDto.getEvol_rate());
+            virus.setEndurance(virusDto.getEndurance());
+            virus.setCure_rate(virusDto.getCure_rate());
+            virus.setChance(virusDto.getChance());
+           app.showUpdV(virus);
+            app.connectVirus();
+            init();
+        } catch (NullPointerException exception) {
+            alert();
+        }
+    }
+
+    public void onClickAddLocacity(ActionEvent actionEvent) {
+        app.showAddL();
         init();
+    }
+
+    public void onClickUpdateLocacity(ActionEvent actionEvent) {
+        try {
+            LocalityDto locacityDTO = locacityTableView.getSelectionModel().getSelectedItem();
+            Locacity locacity = new Locacity();
+            locacity.setId(locacityDTO.getId());
+
+            locacity.setName(locacityDTO.getName());
+            locacity.setPopulation(locacityDTO.getPopulation());
+            locacity.setContact(locacityDTO.getContact());
+            locacity.setVaccine(locacityDTO.getVaccine());
+            locacity.setDeath_rate(locacityDTO.getDeath_rate());
+            locacity.setBirth_rate(locacityDTO.getBirth_rate());
+            app.showUpdL(locacity);
+            app.connectVirus();
+            init();
+                    } catch (NullPointerException exception) {
+            alert();
+        }
+    }
+
+    public void onClickDeleteLocacity(ActionEvent actionEvent) {
+        try {
+            LocalityDto locacityDTO = locacityTableView.getSelectionModel().getSelectedItem();
+            Locacity locacity = new Locacity();
+            locacity.setId(locacityDTO.getId());
+            locacityService.delete(locacity);
+            app.connectVirus();
+            init();
+        } catch (NullPointerException exception) {
+            alert();
+        }
+    }
+
+    private void alert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Warning!");
+        alert.setHeaderText("Ошибка:");
+        alert.setContentText("Для удаления строки требуется выбрать строку");
+        alert.showAndWait();
+        return;
     }
 
     private void parserVirus(List<Virus> list, ObservableList<VirusDto> obsList) {
@@ -117,6 +202,7 @@ public class BaseController {
             element.setContact(locacity.getContact());
             element.setDeath_rate(locacity.getDeath_rate());
             element.setBirth_rate(locacity.getBirth_rate());
+            element.setVaccine(locacity.getVaccine());
             obsList.add(element);
         }
     }
@@ -130,4 +216,6 @@ public class BaseController {
         parserVirus(virusService.findAll(), listVirus);
         parser(locacityService.findAll(), listLocacity);
     }
+
+
 }

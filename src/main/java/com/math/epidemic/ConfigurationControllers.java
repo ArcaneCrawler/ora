@@ -1,9 +1,6 @@
 package com.math.epidemic;
 
-import com.math.epidemic.Controller.AboutLayoutController;
-import com.math.epidemic.Controller.AddLocacityController;
-import com.math.epidemic.Controller.AllModelController;
-import com.math.epidemic.Controller.BaseController;
+import com.math.epidemic.Controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
@@ -37,10 +34,24 @@ public class ConfigurationControllers {
         return loadView("View/AboutLayout.fxml");
     }
 
+      @Bean(name = "updateVirusView")
+    public View getUpdateVirusView() throws IOException {
+        return loadView("View/UpdateVirusLayout.fxml");
+    }
 
-   @Bean(name = "addLocacityView")
+    @Bean(name = "addVirusView")
+    public View getAddVirusView() throws IOException {
+        return loadView("View/AddVirusLayout.fxml");
+    }
+
+    @Bean(name = "addLocacityView")
     public View getAddLocacityView() throws IOException {
         return loadView("View/AddLocacityLayout.fxml");
+    }
+
+    @Bean(name = "updateLocacityView")
+    public View getUpdateLocacityView() throws IOException {
+        return loadView("View/UpdateLocacityLayout.fxml");
     }
 
     @Bean(name = "baseView")
@@ -75,13 +86,26 @@ public class ConfigurationControllers {
     }
 
     @Bean
+    public AddVirusController getAddVirusController() throws IOException {
+        return (AddVirusController) getAddVirusView().getController();
+    }
+    @Bean
+    public UpdateVirusController getUpdateVirusController() throws IOException {
+        return (UpdateVirusController) getUpdateVirusView().getController();
+    }
+
+    @Bean
     public AddLocacityController getAddLocacityController() throws IOException {
         return (AddLocacityController) getAddLocacityView().getController();
     }
 
     @Bean
-    public BaseController getBaseController() throws IOException {
+    public UpdateLocacityController getUpdateLocacityController() throws IOException {
+        return (UpdateLocacityController) getUpdateLocacityView().getController();
+    }
 
+    @Bean
+    public BaseController getBaseController() throws IOException {
         return (BaseController) getBaseView().getController();
     }
 
@@ -133,10 +157,13 @@ public class ConfigurationControllers {
         private Object mainController;
         private Object rootController;
 
+
         public View(Parent view, Object mainController) {
             this.view = view;
             this.mainController = mainController;
         }
+
+
 
         public View(Parent view, Object rootController, Object mainController) {
             this.view = view;
@@ -167,6 +194,8 @@ public class ConfigurationControllers {
         public void setRootController(Object rootController) {
             this.rootController = rootController;
         }
+
+
     }
 
 }

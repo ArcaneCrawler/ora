@@ -40,6 +40,7 @@ public class Dif {
                 model[1][i] = model[1][i - 1] + step * (contact * model[0][i - 1] * model[1][i - 1] / pop - cure * model[1][i - 1] - ratio * model[1][i - 1]);
                 model[2][i] = model[2][i - 1] + step * (cure * model[1][i - 1] - ratio * model[2][i - 1]);
                 pop = (float) (model[0][i] + model[1][i] + model[2][i]);
+                System.out.println("Po[ " + i + " = " + pop);
             }
         }
         Round();
@@ -63,7 +64,7 @@ public class Dif {
         return (model);
     }
 
-    public double[][] SIRS(float startS, float startI, float startR, float contact, float cure, float ratio, float lossOfImmunity) {
+    public double[][] SIRS(float startS, float startI, float startR, float contact, float cure, float ratio, float lossOfImmunity, float population) {
 
         for (int i = 0; i <= n - 1; i++) {
             if (i == 0) {
@@ -78,11 +79,13 @@ public class Dif {
                 pop = (float) (model[0][i] + model[1][i] + model[2][i]);
             }
         }
+        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1]) / 100);
+        pop = population;
         Round();
         return (model);
     }
 
-    public double[][] SEIR(float startS, float startE, float startI, float startR, float contact, float cure, float ratio, float speed) {
+    public double[][] SEIR(float startS, float startE, float startI, float startR, float contact, float cure, float ratio, float speed, float population) {
 
         for (int i = 0; i <= n - 1; i++) {
             if (i == 0) {
@@ -99,11 +102,13 @@ public class Dif {
                 pop = (float) (model[0][i] + model[1][i] + model[2][i] + model[3][i]);
             }
         }
+        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1]+model[3][n - 1]) / 100);
+        pop = population;
         Round();
         return (model);
     }
 
-    public double[][] SEIRS(float startS, float startE, float startI, float startR, float contact, float cure, float ratio, float speed, float lossOfImmunity) {
+    public double[][] SEIRS(float startS, float startE, float startI, float startR, float contact, float cure, float ratio, float speed, float lossOfImmunity, float population) {
 
         for (int i = 0; i <= n - 1; i++) {
             if (i == 0) {
@@ -120,6 +125,8 @@ public class Dif {
                 pop = (float) (model[0][i] + model[1][i] + model[2][i] + model[3][i]);
             }
         }
+        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1]+model[3][n - 1]) / 100);
+        pop = population;
         Round();
         return (model);
     }

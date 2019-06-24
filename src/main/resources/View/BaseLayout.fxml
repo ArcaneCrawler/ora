@@ -11,23 +11,25 @@
         <tabs>
           <Tab text="Вирусы">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="419.0" prefWidth="767.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="809.0">
                      <children>
-                        <TableView fx:id="virusTableView" editable="true" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="670.0">
+                        <TableView fx:id="virusTableView" editable="true" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="746.0">
                           <columns>
                             <TableColumn fx:id="idVirusColumn" prefWidth="39.0" text="ID" />
                             <TableColumn fx:id="nameVirusColumn" prefWidth="71.0" text="Название" />
                               <TableColumn fx:id="stainVirusColumn" prefWidth="69.0" text="Штамм" />
                               <TableColumn fx:id="lethalVirusColumn" prefWidth="81.0" text="Летальность" />
                               <TableColumn fx:id="influenceVirusColumn" prefWidth="82.0" text="Заразность" />
-                              <TableColumn fx:id="chanceVirusColumn" prefWidth="38.0" text="P" />
-                              <TableColumn fx:id="evolVirusColumn" prefWidth="92.0" text="К.С. развития" />
-                              <TableColumn fx:id="enduranceVirusColumn" prefWidth="94.0" text="Уcтойчивость" />
-                              <TableColumn fx:id="cureVirusColumn" prefWidth="92.0" text="К.С. излечения" />
+                              <TableColumn fx:id="chanceVirusColumn" prefWidth="99.0" text="Шанс быстрого&#10;заражения" />
+                              <TableColumn fx:id="evolVirusColumn" prefWidth="94.0" text="К.С. развития" />
+                              <TableColumn fx:id="enduranceVirusColumn" prefWidth="90.0" text="К.С. потери &#10;иммунитета" />
+                              <TableColumn fx:id="cureVirusColumn" prefWidth="98.0" text="К.С. излечения" />
                           </columns>
                         </TableView>
-                         <Button layoutX="253.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAdd" text="Отобразить" />
-                         <Button layoutX="384.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDelete" text="Добавить" />
+                         <Button layoutX="16.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickShow" text="Отобразить" />
+                         <Button layoutX="400.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDelete" prefWidth="70.0" text="Удалить" />
+                        <Button layoutX="300.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickUpdate" text="Изменить" />
+                        <Button layoutX="200.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAdd" prefWidth="70.0" text="Добавить" />
                      </children>
                   </AnchorPane>
             </content>
@@ -36,18 +38,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="locacityTableView" layoutX="16.0" layoutY="4.0" prefHeight="348.0" prefWidth="578.0">
+                        <TableView fx:id="locacityTableView" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="746.0">
                           <columns>
                             <TableColumn fx:id="idLocacityColumn" prefWidth="59.0" text="ID" />
                             <TableColumn fx:id="nameLocacityColumn" prefWidth="70.0" text="Название" />
                               <TableColumn fx:id="populationLocacityColumn" prefWidth="83.0" text="Население" />
-                              <TableColumn fx:id="densityLocacityColumn" prefWidth="106.0" text="Плот. населения" />
+                              <TableColumn fx:id="contactLocacityColumn" prefWidth="106.0" text="Частота контактов" />
                               <TableColumn fx:id="deathLocacityColumn" text="Смерность" />
                               <TableColumn fx:id="birthLocacityColumn" prefWidth="90.0" text="Рождаемость" />
+                              <TableColumn fx:id="vaccineLocacityColumn" prefWidth="110.0" text="К.с. вакцинации" />
                           </columns>
                         </TableView>
-                        <Button fx:id="onClickDeleteLocacity" layoutX="375.0" layoutY="366.0" mnemonicParsing="false" text="Удалить" />
-                        <Button fx:id="onClickAddLocacity" layoutX="244.0" layoutY="366.0" mnemonicParsing="false" text="Добавить" />
+                        <Button layoutX="400.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickDeleteLocacity" prefWidth="70.0" text="Удалить" />
+                        <Button layoutX="300.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickUpdateLocacity" prefWidth="70.0" text="Изменить" />
+                        <Button layoutX="200.0" layoutY="366.0" mnemonicParsing="false" onAction="#onClickAddLocacity" prefWidth="70.0" text="Добавить" />
                      </children>
                   </AnchorPane>
             </content>
