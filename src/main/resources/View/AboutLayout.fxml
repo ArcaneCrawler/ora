@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -8,53 +9,146 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.AboutLayoutController">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="434.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Об эпидемиях">
+            <Tab text="Об эпидемиях">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
+                     <children>
+                        <TextArea layoutX="2.0" layoutY="3.0" prefHeight="395.0" prefWidth="593.0" text="    &#10;    Эпидемический процесс — непрерывное взаимодействие на видовом и популяционном уровнях &#10;возбудителя-паразита и организма человека в необходимых и достаточных социальных и природных&#10; условиях. &#10;&#10;     На протекание эпидемий оказывают влияние как природные процессы (природная очаговость,&#10;особенности местности), так и социальные факторы (экономическое благосостояние, &#10;уровень здравоохранения). Такие процессы принято называть факторами эпидемии. &#10;В качестве факторов, которые рассматриваются в математических моделях, входящих в &#10;состав комплекса, выступают:&#10;&#9;численность населения; &#10;&#9;естественные прирост и убыль населения;&#10;&#9;убыль населения из-за заболевания;&#10;&#9;частота контактов между больными и здоровыми;&#10;&#9;заразность инфекции;&#10;&#9;временные характеристики.&#10;Различные вирусные заболевания имеют различные механизмы передачи:&#10;&#9;аэрогенный (воздушно–капельный);&#10;&#9;контактный (инфекция передаётся через слизистые оболочки организма и кожный покров);&#10;&#9;трансмиссивный (при помощи кровососущих насекомых);&#10;&#9;фекально–оральный (при помощи выделений организма);&#10;&#9;гемоконтактный (при контакте с кровью).&#10;Источниками возбудителя инфекционного заболевания могут быть:&#10;&#9;человек, в организме которого происходит размножение патогена;&#10;&#9;животное, в организме которого происходит размножение патогена;&#10;&#9;внешняя среда (вода и почва).&#10;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Список обозначений">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
                      <children>
-                        <TextArea prefHeight="352.0" prefWidth="586.0" text="    &#10;    Эпидемический процесс — непрерывное взаимодействие на видовом и популяционном уровнях &#10;возбудителя-паразита и организма человека в необходимых и достаточных социальных и природных&#10; условиях. &#10;&#10;     Эпидемический процесс заключается в непрерывной передаче заболевания (в случае инфекционного&#10;заболевания — возбудителя инфекции) в коллективе. Иначе говоря, для возникновения эпидемическ&#10;ого процесса необходимы три фактора (или условия):&#10;&#10;&#9;источник возбудителя инфекционного процесса или причины неинфекционного заболевания;&#10;&#9;механизмы передачи;&#10;&#9;восприимчивые к заболеванию люди, животные, насекомые или растения (живые организмы).&#10;" />
+                        <TextArea layoutX="4.0" prefHeight="398.0" prefWidth="582.0" text="    &#10;   " />
+                        <ImageView fx:id="spView" fitHeight="394.0" fitWidth="582.0" layoutX="12.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Модель SIR">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab text="Универсальные модели">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea layoutX="8.0" layoutY="7.0" prefHeight="355.0" prefWidth="592.0" text="    Традиционной моделью, описывающей процесс развития эпидемии, является модель SIR&#10;(Susceptible-Infected-Recovered). В данной модели исследуемая популяция делится на три подгруппы:&#10;&#9;S(t) — восприимчивые к инфекции, количество неинфицированных к моменту времени t;&#10;&#9;I(t) — инфицированные;&#10;&#9;R(t) — излечившиеся от болезни.&#10;Модель эпидемии описывается с помощью следующих дифференциальных уравнений:&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;где β — частота контактов между представителями,&#10;      1/γ — средняя продолжительность периода заболевания.&#10;Данная модель основана на предположении, что скорости заражения инфекцией и&#10; излечения от нее значительно превосходят темпы рождаемости и смертности, вследствие&#10; чего упомянутые факторы в модели игнорируются." />
-                        <ImageView fx:id="sirView" fitHeight="137.0" fitWidth="577.0" layoutX="14.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
+                        <TabPane prefHeight="407.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Модель SIR">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="8.0" layoutY="7.0" prefHeight="355.0" prefWidth="592.0" text="    Традиционной моделью, описывающей процесс развития эпидемии, является модель SIR&#10;(Susceptible-Infected-Recovered). В данной модели исследуемая популяция делится на три подгруппы:&#10;&#9;S(t) — восприимчивые к инфекции, количество неинфицированных к моменту времени t;&#10;&#9;I(t) — инфицированные;&#10;&#9;R(t) — излечившиеся от болезни.&#10;Модель эпидемии описывается с помощью следующих дифференциальных уравнений:&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;где β — частота контактов между представителями,&#10;      1/γ — средняя продолжительность периода заболевания.&#10;Данная модель основана на предположении, что скорости заражения инфекцией и&#10; излечения от нее значительно превосходят темпы рождаемости и смертности, вследствие&#10; чего упомянутые факторы в модели игнорируются." />
+                                          <ImageView fx:id="sirView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Модель SIR (mod)">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
+                                       <children>
+                                          <TextArea layoutX="3.0" layoutY="3.0" prefHeight="366.0" prefWidth="594.0" text="  &#10;  Данная модель является основополагающей модификацией базовой модели SIR. &#10;Модель SIRm учитывает естественный прирост и убыль населения. В качестве допущения, убыль &#10;населения не разделяется на естественную и убыль от заболевания. Также допускается, что убыль и &#10;прирост населения имеют одинаковый темп." />
+                                          <ImageView fx:id="sirmView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SIS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
+                                       <children>
+                                          <TextArea layoutX="8.0" layoutY="6.0" prefHeight="357.0" prefWidth="584.0" text="  &#10; Модель SIS основывается на идее того, что иммунитет, выработанный для ряда заболеваний, &#10;носит временный характер. Особенностью данной модели является отсутствие группы излечившихся &#10;от болезни, то есть переболевшие сразу же попадают в группу восприимчивых к заболеванию. &#10;" />
+                                          <ImageView fx:id="sisView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SIRS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
+                                       <children>
+                                          <TextArea layoutX="4.0" layoutY="6.0" prefHeight="360.0" prefWidth="590.0" text="&#10;Модель SIRS является доведённой до ума моделью SIS. Она более приближена к реальности, &#10;поскольку между первоначальным и повторным заражением организм успевает выработать &#10;иммунитет. Таким образом, модель SIRS является базовой моделью SIR, в которую добавлена&#10;возможность повторного заражения из–за потери иммунитета     &#10;" />
+                                          <ImageView fx:id="sirsView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SEIR">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
+                                       <children>
+                                          <TextArea layoutX="3.0" layoutY="3.0" prefHeight="366.0" prefWidth="594.0" text="  &#10;  В модели SEIR добавляется новая группа – латентные больные (exposed). Данная группа уже &#10;инфицирована, способна распространять болезнь, но она ещё не начала прогрессировать, то есть нет&#10;видимых симптомов. Наличие этой группы добавляет гибкость модели, позволяя отдельно &#10;устанавливать заразность латентно и активно больных особей. " />
+                                          <ImageView fx:id="seirView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SEIRS">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
+                                       <children>
+                                          <TextArea layoutX="3.0" layoutY="3.0" prefHeight="366.0" prefWidth="594.0" text="  &#10;  Согласно названию, данная группа включает в себя особенности модели SEIR и SIRS, а именно:&#10;&#9;наличие четырёх групп: восприимчивых к заболеванию, латентно больные, активно больные&#10;        и излечившиеся;&#10;&#9;излечившиеся со временем теряют иммунитет, то есть имеют возможность вновь заразиться.&#10;" />
+                                          <ImageView fx:id="seirsView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Модель SIR (mod)">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
-                     <children>
-                        <TextArea layoutX="3.0" layoutY="3.0" prefHeight="366.0" prefWidth="594.0" text="&#10;    Для некоторых заболеваний особенно важно учитывать приток в популяцию новых индивидов,&#10;восприимчивых к вирусу. Поэтому необходимо принять во внимание темпы рождаемости и с&#10;мертности. Сделаем предположение, что эти темпы одинаковы и их можно описать с помощью &#10;постоянного коэффициента μ. Уравнения модели SIR с учетом этих допущений будут выглядеть &#10;следующим образом:" />
-                        <ImageView fx:id="sirmView" fitHeight="167.0" fitWidth="227.0" layoutX="178.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-               </content>
+              </content>
             </Tab>
-            <Tab text="Модель SIS">
+            <Tab text="Туберкулёзные модели">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea layoutX="8.0" layoutY="6.0" prefHeight="357.0" prefWidth="584.0" text="  &#10;&#10;     Модель SIS можно получить из модели SIR в предположении, что излечившиеся индивиды не&#10;приобретают иммунитет к заболеванию, т.е. снова могут перейти в группу восприимчивых. &#10;Это особенно актуально для ОРВИ, характеризующихся большим разнообразием типов вируса. &#10;     Убрав уравнение, описывающее прирост выздоровевшей части населения, получим систему:&#10;" />
-                        <ImageView fx:id="sisView" fitHeight="180.0" fitWidth="506.0" layoutX="40.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Модель SIRS">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="633.0">
-                     <children>
-                        <TextArea layoutX="4.0" layoutY="6.0" prefHeight="360.0" prefWidth="590.0" text="     &#10;&#10;       Данная модель предполагает, что индивиды, которые уже приобрели иммунитет, утрачивают его &#10;через некоторое время и вновь переходят в группу восприимчивых. &#10;      Дифференциальные уравнения имеют вид:&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;&#10;где f — средняя скорость потери иммунитета." />
-                        <ImageView fx:id="sirsView" fitHeight="181.0" fitWidth="273.0" layoutX="163.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+                        <TabPane prefHeight="406.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Особенности туберкуёлза">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea prefHeight="366.0" prefWidth="594.0" text="  &#10; Туберкулёз имеет ряд особенностей, которые необходимо учитывать при составлении модели:&#10;&#9;время пребывание в латентной фазе может иметь продолжительность, которая превышает &#10;среднюю продолжительность жизни носителя;&#10;&#9;большинство эпидемических процессов туберкулёза протекают намного медленнее, &#10;чем у “острых” инфекционных заболеваний (развитие симптомов может занимать от &#10;недели до нескольких лет);&#10;&#9;излечение от активной фазы болезни не избавляет носителя от бактерий и не даёт абсолютной&#10; защиты от рецидива. &#10;" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SLI">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea prefHeight="366.0" prefWidth="594.0" text="  &#10;Первую модель эпидемиологии туберкулёза предложил норвежский учёный Ганс Томас Ваалер&#10; в 60–ых годах XX века. Данная модель опирается на характерные особенности туберкулёза.&#10;" />
+                                          <ImageView fx:id="sliView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SLIs">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea prefHeight="366.0" prefWidth="594.0" text="  &#10;   Модель SLIs - «упрощённая» модель SLI, в основу который вошли идеи Ваалера (разделение популяции&#10;на неинфицированных, латентно и активно больных). Ключевым отличием от SLI является включение &#10;вероятностного члена p. Данный член характеризует вероятность «быстрого» протекания болезни, &#10;то есть переход из группы S в группу I. Соответственно, (1–p) – вероятность перехода из группы S &#10;в группы L.&#10;" />
+                                          <ImageView fx:id="slisView" fitHeight="137.0" fitWidth="577.0" layoutX="12.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Модель SLPIC">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea prefHeight="366.0" prefWidth="594.0" text="  &#10;   Модель SLPIC является модификацией модели SLPIC. Модификация состоит в добавлении членов, &#10;отражающих воздействие химической профилактики и лечения. Латентно инфицированные и больные&#10;индивиды с удельными скоростями σ и γ удаляются из популяции, участвующей в распространении &#10;туберкулезной инфекции, и переносятся в группы P (прошедшие эффективную химическую &#10;профилактику) и C (эффективно излеченные). В группах P и C индивиды пребывают до конца своей &#10;жизни, что подразумевает пожизненный защитный эффект как химической профилактики, так и &#10;лечения. " />
+                                          <ImageView fx:id="slpicView" fitHeight="220.0" layoutX="12.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
                      </children>
                   </AnchorPane>
                </content>

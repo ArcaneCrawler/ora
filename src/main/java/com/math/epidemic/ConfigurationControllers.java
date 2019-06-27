@@ -29,6 +29,11 @@ public class ConfigurationControllers {
         return loadViewWithRoot("View/RootLayout.fxml", "View/AllModel.fxml");
     }
 
+    @Bean(name = "loginView")
+    public View getLoginView() throws IOException {
+        return loadView("View/Login.fxml");
+    }
+
     @Bean(name = "aboutView")
     public View getAboutView() throws IOException {
         return loadView("View/AboutLayout.fxml");
@@ -89,6 +94,12 @@ public class ConfigurationControllers {
     public AddVirusController getAddVirusController() throws IOException {
         return (AddVirusController) getAddVirusView().getController();
     }
+
+    @Bean
+    public LoginController getLoginController() throws IOException {
+        return (LoginController) getLoginView().getController();
+    }
+
     @Bean
     public UpdateVirusController getUpdateVirusController() throws IOException {
         return (UpdateVirusController) getUpdateVirusView().getController();
@@ -136,7 +147,6 @@ public class ConfigurationControllers {
             InputStream fxmlStream = null;
             fxmlStream = getClass().getClassLoader().getResourceAsStream(urlRoot);
             rootLayout = rootLoader.load(fxmlStream);
-
             fxmlStream = getClass().getClassLoader().getResourceAsStream(urlSecondary);
             mainLayout = mainLoader.load(fxmlStream);
             rootLayout.setCenter(mainLayout);

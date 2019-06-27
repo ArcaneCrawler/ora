@@ -1,10 +1,13 @@
 package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
+import com.math.epidemic.Entities.Dto.JournalDto;
 import com.math.epidemic.Entities.Dto.LocalityDto;
 import com.math.epidemic.Entities.Dto.VirusDto;
+import com.math.epidemic.Entities.Journal;
 import com.math.epidemic.Entities.Locacity;
 import com.math.epidemic.Entities.Virus;
+import com.math.epidemic.Services.JournalService;
 import com.math.epidemic.Services.LocacityService;
 import com.math.epidemic.Services.VirusService;
 import javafx.collections.FXCollections;
@@ -15,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 public class BaseController {
@@ -39,15 +43,33 @@ public class BaseController {
     public TableColumn<LocalityDto, Float> vaccineLocacityColumn;
     public TableColumn<LocalityDto, Integer> populationLocacityColumn;
 
+    public TableView<JournalDto> journalTableView;
+    public TableColumn<JournalDto, Long> idJournalColumn;
+    public TableColumn<JournalDto, String> model_typeColumn;
+    public TableColumn<JournalDto, String> virusJournalColumn;
+    public TableColumn<JournalDto, String> locacityJournalColumn;
+    public TableColumn<JournalDto, Float> popul_leftJournalColumn;
+    public TableColumn<JournalDto, Float> popul_deadJournalColumn;
+    public TableColumn<JournalDto, Float> suspectedJournalColumn;
+    public TableColumn<JournalDto, Float> infectedJournalColumn;
+    public TableColumn<JournalDto, Float> curedJournalColumn;
+    public TableColumn<JournalDto, Float> latentJournalColumn;
+    public TableColumn<JournalDto, Float> chemJournalColumn;
+    public TableColumn<JournalDto, String> dateJournalColumn;
+
     private Application app;
 
     private ObservableList<VirusDto> listVirus = FXCollections.observableArrayList();
     private ObservableList<LocalityDto> listLocacity = FXCollections.observableArrayList();
+    private ObservableList<JournalDto> listJournal = FXCollections.observableArrayList();
+    private ObservableList<Virus> list1 = FXCollections.observableArrayList();
 
     @Autowired
     private VirusService virusService;
     @Autowired
     private LocacityService locacityService;
+    @Autowired
+    private JournalService journalService;
 
 
     public void initialize() {
@@ -75,6 +97,21 @@ public class BaseController {
         birthLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().birth_rateProperty().asObject());
         vaccineLocacityColumn.setCellValueFactory(cellData -> cellData.getValue().vaccineProperty().asObject());
         locacityTableView.setItems(listLocacity);
+
+        idJournalColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        model_typeColumn.setCellValueFactory(cellData -> cellData.getValue().model_lypeProperty());
+        virusJournalColumn.setCellValueFactory(cellData -> cellData.getValue().virusProperty());
+        locacityJournalColumn.setCellValueFactory(cellData -> cellData.getValue().locacityProperty());
+        popul_leftJournalColumn.setCellValueFactory(cellData -> cellData.getValue().popul_leftProperty().asObject());
+        popul_deadJournalColumn.setCellValueFactory(cellData -> cellData.getValue().popul_daedProperty().asObject());
+        suspectedJournalColumn.setCellValueFactory(cellData -> cellData.getValue().suspectedProperty().asObject());
+        infectedJournalColumn.setCellValueFactory(cellData -> cellData.getValue().infectedProperty().asObject());
+        curedJournalColumn.setCellValueFactory(cellData -> cellData.getValue().curedProperty().asObject());
+        latentJournalColumn.setCellValueFactory(cellData -> cellData.getValue().latentProperty().asObject());
+        chemJournalColumn.setCellValueFactory(cellData -> cellData.getValue().chemProperty().asObject());
+        dateJournalColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        journalTableView.setItems(listJournal);
+
     }
 
     public void setApp(Application application) {
@@ -82,6 +119,7 @@ public class BaseController {
         app.connectVirus();
 
     }
+
     public void onClickShow(ActionEvent actionEvent) {
         init();
 
@@ -89,8 +127,8 @@ public class BaseController {
 
     public void onClickAdd(ActionEvent actionEvent) {
         app.showAddV();
-        app.connectVirus();
         init();
+
     }
 
     public void onClickDelete(ActionEvent actionEvent) {
@@ -100,6 +138,7 @@ public class BaseController {
             virus.setId(virusDto.getId());
             virusService.delete(virus);
             app.connectVirus();
+            deleteAlert();
             init();
         } catch (NullPointerException exception) {
             alert();
@@ -120,7 +159,7 @@ public class BaseController {
             virus.setEndurance(virusDto.getEndurance());
             virus.setCure_rate(virusDto.getCure_rate());
             virus.setChance(virusDto.getChance());
-           app.showUpdV(virus);
+            app.showUpdV(virus);
             app.connectVirus();
             init();
         } catch (NullPointerException exception) {
@@ -148,7 +187,7 @@ public class BaseController {
             app.showUpdL(locacity);
             app.connectVirus();
             init();
-                    } catch (NullPointerException exception) {
+        } catch (NullPointerException exception) {
             alert();
         }
     }
@@ -160,6 +199,7 @@ public class BaseController {
             locacity.setId(locacityDTO.getId());
             locacityService.delete(locacity);
             app.connectVirus();
+            deleteAlert();
             init();
         } catch (NullPointerException exception) {
             alert();
@@ -170,7 +210,16 @@ public class BaseController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Warning!");
         alert.setHeaderText("Ошибка:");
-        alert.setContentText("Для удаления строки требуется выбрать строку");
+        alert.setContentText("Для удаления или изменения записи требуется выбрать запись");
+        alert.showAndWait();
+        return;
+    }
+
+    private void deleteAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success!");
+        alert.setHeaderText("Сообщение:");
+        alert.setContentText("Запись успешно удалена!");
         alert.showAndWait();
         return;
     }
@@ -188,6 +237,29 @@ public class BaseController {
             element.setEvol_rate(virus.getEvol_rate());
             element.setCure_rate(virus.getCure_rate());
             element.setEndurance(virus.getEndurance());
+            obsList.add(element);
+        }
+    }
+
+    private void parserJournal(List<Journal> list, ObservableList<JournalDto> obsList) {
+        obsList.clear();
+        for (Journal journal : list) {
+            JournalDto element = new JournalDto();
+            element.setId(journal.getId());
+            element.setModel_lype(journal.getModel_type());
+            element.setPopul_daed(journal.getPopul_daed());
+            element.setPopul_left(journal.getPopul_left());
+            element.setInfected(journal.getInfected());
+            element.setSuspected(journal.getSuspected());
+            element.setCured(journal.getCured());
+            element.setLatent(journal.getLatent());
+            element.setChem(journal.getChem());
+            element.setDate(journal.getDate());
+            element.setVirus(journal.getVirus());
+            element.setLocacity(journal.getLocacity());
+           //Locacity locacity = journal.getLocacity();
+            //element.setVirus(virus.getName());
+           // element.setVirus(locacity.getName());
             obsList.add(element);
         }
     }
@@ -213,8 +285,10 @@ public class BaseController {
     // ибо initialize уже отработал
 
     public void init() {
+        list1.addAll(virusService.findAll());
         parserVirus(virusService.findAll(), listVirus);
         parser(locacityService.findAll(), listLocacity);
+        parserJournal(journalService.findAll(), listJournal);
     }
 
 

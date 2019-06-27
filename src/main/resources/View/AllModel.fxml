@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -29,9 +30,9 @@
                         <TextField fx:id="chanceField" layoutX="100.0" layoutY="210.0" prefHeight="25.0" prefWidth="74.0" text="0.3" />
                         <TextField fx:id="lambdaField" layoutX="100.0" layoutY="160.0" prefHeight="25.0" prefWidth="74.0" text="0.2" />
                         <TextField fx:id="speedField" layoutX="100.0" layoutY="260.0" prefHeight="25.0" prefWidth="74.0" text="0.0085" />
-                        <ComboBox fx:id="virusBox" layoutX="87.0" layoutY="491.0" onAction="#virusSelect" prefHeight="25.0" prefWidth="161.0" promptText="Выберите вирус" />
-                        <ComboBox fx:id="locacityBox" layoutX="422.0" layoutY="491.0" onAction="#locacitySelect" prefHeight="25.0" prefWidth="162.0" promptText="Выберите местность" />
-                        <Separator layoutX="343.0" layoutY="-30.0" orientation="VERTICAL" prefHeight="628.0" prefWidth="5.0" />
+                        <ComboBox fx:id="virusBox" layoutX="94.0" layoutY="582.0" onAction="#virusSelect" prefHeight="25.0" prefWidth="161.0" promptText="Выберите вирус" />
+                        <ComboBox fx:id="locacityBox" layoutX="453.0" layoutY="582.0" onAction="#locacitySelect" prefHeight="25.0" prefWidth="162.0" promptText="Выберите местность" />
+                        <Separator layoutX="343.0" layoutY="-30.0" orientation="VERTICAL" prefHeight="650.0" prefWidth="4.0" />
                         <Label layoutX="382.0" layoutY="161.0" />
                         <TextField fx:id="vaccineField" layoutX="460.0" layoutY="330.0" prefHeight="25.0" prefWidth="74.0" text="0.3" />
                         <Label layoutX="460.0" layoutY="310.0" text="Константа скорости вакцинации" />
@@ -49,6 +50,8 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
+                        <ImageView fx:id="virusView" fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="locacityView" fitHeight="150.0" fitWidth="200.0" layoutX="434.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
                </content>
@@ -83,6 +86,7 @@
                                           <Label fx:id="slpic_c" layoutX="569.0" layoutY="500.0" text="0" />
                                           <Label layoutX="488.0" layoutY="500.0" text="Излеченные:" />
                                           <Label layoutX="488.0" layoutY="480.0" text="Химеотерапия:" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#slpicSave" text="Сохрнаить" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -107,6 +111,7 @@
                                                   <Label fx:id="base_s" layoutX="612.0" layoutY="440.0" text="0" />
                                                   <Label fx:id="base_l" layoutX="609.0" layoutY="460.0" text="0" />
                                                   <Label fx:id="base_i" layoutX="543.0" layoutY="480.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#sliSave" text="Сохрнаить" />
                                               </children>
                                           </AnchorPane>
                                       </content>
@@ -131,6 +136,7 @@
                                                   <Label fx:id="sli_i" layoutX="543.0" layoutY="480.0" text="0" />
                                                   <Label fx:id="sli_s" layoutX="612.0" layoutY="440.0" text="0" />
                                                   <Label fx:id="sli_l" layoutX="609.0" layoutY="460.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#slisSave" text="Сохрнаить" />
                                               </children>
                                           </AnchorPane>
                                       </content>
@@ -167,6 +173,7 @@
                                           <Label fx:id="sir_s" layoutX="612.0" layoutY="440.0" text="0" />
                                           <Label fx:id="sir_i" layoutX="546.0" layoutY="460.0" text="0" />
                                           <Label fx:id="sir_r" layoutX="565.0" layoutY="480.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#sirSave" text="Сохрнаить" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -191,6 +198,7 @@
                                           <Label fx:id="mod_s" layoutX="612.0" layoutY="440.0" text="0" />
                                           <Label fx:id="mod_i" layoutX="546.0" layoutY="460.0" text="0" />
                                           <Label fx:id="mod_r" layoutX="565.0" layoutY="480.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#sirmSave" text="Сохрнаить" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -211,6 +219,7 @@
                                           <Label fx:id="sis_dead" layoutX="545.0" layoutY="420.0" text="0" />
                                           <Label fx:id="sis_s" layoutX="612.0" layoutY="440.0" text="0" />
                                           <Label fx:id="sis_i" layoutX="545.0" layoutY="460.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#sisSave" text="Сохрнаить" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -235,6 +244,7 @@
                                           <Label fx:id="sirs_s" layoutX="612.0" layoutY="440.0" text="0" />
                                           <Label fx:id="sirs_i" layoutX="545.0" layoutY="460.0" text="0" />
                                           <Label fx:id="sirs_r" layoutX="565.0" layoutY="480.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#sirsSave" text="Сохрнаить" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -263,6 +273,7 @@
                                           <TextField fx:id="seirExposeddField" layoutX="50.0" layoutY="547.0" prefHeight="25.0" prefWidth="74.0" text="12" />
                                           <Label layoutX="488.0" layoutY="500.0" text="Излеченные:" />
                                           <Label fx:id="seir_r" layoutX="565.0" layoutY="500.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="505.0" mnemonicParsing="false" onAction="#seirSave" text="Сохрнаить" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -293,6 +304,7 @@
                                           <TextField fx:id="seirsIncubTime" layoutX="300.0" layoutY="533.0" prefHeight="25.0" prefWidth="74.0" text="0.1" />
                                           <Label layoutX="488.0" layoutY="500.0" text="Излеченные:" />
                                           <Label fx:id="seirs_r" layoutX="565.0" layoutY="500.0" text="0" />
+                                          <Button layoutX="307.0" layoutY="480.0" mnemonicParsing="false" onAction="#seirsSave" text="Сохрнаить" />
                                        </children>
                                     </AnchorPane>
                                  </content>

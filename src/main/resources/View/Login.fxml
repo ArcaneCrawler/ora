@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="206.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="206.0" prefWidth="306.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.LoginController">
 <children>
     <Label layoutX="43.0" layoutY="25.0" text="Авторизация">
         <font>
@@ -25,8 +25,8 @@
             <Font name="Georgia" size="17.0" />
         </font>
     </Label>
-    <TextField fx:id="loginField" layoutX="115.0" layoutY="94.0" text="Admin" />
-    <PasswordField fx:id="passField" layoutX="115.0" layoutY="129.0" text="Admin" />
-      <Button layoutX="127.0" layoutY="167.0" mnemonicParsing="false" text="Вход" />
+    <TextField fx:id="loginField" layoutX="115.0" layoutY="94.0" text="User" />
+    <PasswordField fx:id="passField" layoutX="115.0" layoutY="129.0" text="User" />
+      <Button layoutX="127.0" layoutY="167.0" mnemonicParsing="false" onAction="#authorization" text="Вход" />
 </children>
 </AnchorPane>

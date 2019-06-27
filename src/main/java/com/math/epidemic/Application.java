@@ -17,13 +17,14 @@ import org.springframework.context.annotation.Lazy;
 public class Application extends AbstractJavaFxApplicationSupport {
 
     private AllModelController mainController = null;
+    private LoginController loginController = null;
     private AboutLayoutController aboutLayoutController = null;
     private BaseController baseController = null;
     private Scene scene = null;
     private RootLayoutController rootLayoutController = null;
     private Stage primaryStage;
 
-    @Value("${ui.title:JavaFX приложение}")//
+    @Value("${ui.title:Epidemic}")//
     private String windowTitle;
     @Autowired
     @Qualifier("mainView")
@@ -46,6 +47,9 @@ public class Application extends AbstractJavaFxApplicationSupport {
     @Autowired
     @Qualifier("baseView")
     private ConfigurationControllers.View viewBase;
+    @Autowired
+    @Qualifier("loginView")
+    private ConfigurationControllers.View viewLogin;
 
     public static void main(String[] args) {
         launchApp(Application.class, args);
@@ -55,19 +59,26 @@ public class Application extends AbstractJavaFxApplicationSupport {
     public void start(Stage stage) throws Exception {
         this.primaryStage = stage;
         this.primaryStage.setTitle(windowTitle);
-        this.primaryStage.setScene(new Scene(viewMain.getView()));
+        this.primaryStage.setScene(new Scene(viewLogin.getView()));
         this.primaryStage.setResizable(false);
         this.primaryStage.centerOnScreen();
         this.primaryStage.show();
-        mainController = (AllModelController) viewMain.getController();
+        loginController = (LoginController) viewLogin.getController();
+        loginController.setApp(this);
+    }
 
+
+    public void showMain(){
+        this.primaryStage.setScene(new Scene(viewMain.getView()));
+        this.primaryStage.setTitle(windowTitle);
+
+        this.primaryStage.setResizable(false);
+        this.primaryStage.centerOnScreen();
+        mainController = (AllModelController) viewMain.getController();
         rootLayoutController = (RootLayoutController) viewMain.getRootController();
         rootLayoutController.setApp(this);
         mainController.setApp(this);
-
-
         mainController.connectVirus();
-        //mainController.connectLocacity();
     }
 
     public void showLayoutAbout() {
@@ -76,7 +87,8 @@ public class Application extends AbstractJavaFxApplicationSupport {
 
 
     public void showAddV() {
-        setScene(viewVirusAdd, "Добавить заболевание");
+       setScene(viewVirusAdd, "Добавить заболевание");
+
     }
 
     public void showUpdV(Virus virus) {
@@ -101,17 +113,25 @@ public class Application extends AbstractJavaFxApplicationSupport {
     public void connectVirus(){
        AllModelController a = (AllModelController) viewMain.getController();
        a.connectVirus();
-
     }
 
     public void showBase(Application app) {
-
         BaseController b = (BaseController) viewBase.getController();
         b.setApp(app);
         b.init();
-
         setScene(viewBase, "База");
     }
+
+    public void showNewBase(Application app) {
+        BaseController b = (BaseController) viewBase.getController();
+        b.setApp(app);
+        b.init();
+        this.primaryStage.setScene(new Scene(viewBase.getView()));
+        this.primaryStage.setResizable(false);
+        this.primaryStage.centerOnScreen();
+
+    }
+
 
     private void setScene(ConfigurationControllers.View view, String title) {
         Stage dialogStage = new Stage();

@@ -15,10 +15,7 @@
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem fx:id="Delete" mnemonicParsing="false" onAction="#clickDelete" text="Delete" />
-                    </items>
-                </Menu>
+                     </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem fx:id="about" mnemonicParsing="false" onAction="#clickAbout" text="About" />

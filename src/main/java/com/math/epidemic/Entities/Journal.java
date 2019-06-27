@@ -36,17 +36,29 @@ public class Journal implements Serializable {
     @Column(nullable = true)
     private float cured;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @Column(nullable = true)
+    private float chem;
+
+    @Column(nullable = true)
+    private String model_type;
+
+    @Column(nullable = true)
+    private String virus;
+
+    @Column(nullable = true)
+    private String locacity;
+
+    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Virus_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Virus virus;
+    private Virus virus1;*/
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    /*@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Locacity_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Locacity locacity;
+    private Locacity locacity1;*/
 
-    public Journal(String date, int popul_left, int popul_daed, float suspected, float latent, float infected, float cured, Virus virus, Locacity locacity) {
+    public Journal(String date, int popul_left, int popul_daed, float suspected, float latent, float infected, float cured, float chem, String virus, String locacity, String model_type) {
         this.date = date;
         this.popul_left = popul_left;
         this.popul_daed = popul_daed;
@@ -54,8 +66,10 @@ public class Journal implements Serializable {
         this.latent = latent;
         this.infected = infected;
         this.cured = cured;
+        this.chem = chem;
         this.virus = virus;
         this.locacity = locacity;
+        this.model_type = model_type;
     }
 
     public Journal() {
@@ -125,19 +139,37 @@ public class Journal implements Serializable {
         this.cured = cured;
     }
 
-    public Virus getVirus() {
-        return virus;
+
+
+    public float getChem() {
+        return chem;
     }
 
-    public void setVirus(Virus virus) {
-        this.virus = virus;
+    public void setChem(float chem) {
+        this.chem = chem;
     }
 
-    public Locacity getLocacity() {
+    public String getModel_type() {
+        return model_type;
+    }
+
+    public void setModel_type(String model_type) {
+        this.model_type = model_type;
+    }
+
+    public String getLocacity() {
         return locacity;
     }
 
-    public void setLocacity(Locacity locacity) {
+    public void setLocacity(String locacity) {
         this.locacity = locacity;
+    }
+
+    public String getVirus() {
+        return virus;
+    }
+
+    public void setVirus(String virus) {
+        this.virus = virus;
     }
 }

@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="434.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.BaseController">
+<AnchorPane prefHeight="434.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.math.epidemic.Controller.BaseController">
    <children>
-      <TabPane layoutY="-1.0" prefHeight="434.0" prefWidth="767.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="-1.0" prefHeight="434.0" prefWidth="926.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Вирусы">
             <content>
@@ -38,7 +38,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="locacityTableView" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="746.0">
+                        <TableView fx:id="locacityTableView" layoutX="16.0" layoutY="4.0" prefHeight="350.0" prefWidth="604.0">
                           <columns>
                             <TableColumn fx:id="idLocacityColumn" prefWidth="59.0" text="ID" />
                             <TableColumn fx:id="nameLocacityColumn" prefWidth="70.0" text="Название" />
@@ -58,20 +58,22 @@
           </Tab>
             <Tab text="Журнал">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="405.0" prefWidth="794.0">
                      <children>
-                        <TableView fx:id="journalTableView" layoutX="16.0" layoutY="4.0" prefHeight="348.0" prefWidth="741.0">
+                        <TableView fx:id="journalTableView" layoutX="16.0" layoutY="4.0" prefHeight="348.0" prefWidth="903.0">
                            <columns>
-                              <TableColumn fx:id="idJournalColumn" prefWidth="59.0" text="ID" />
-                              <TableColumn fx:id="dateJournalColumn" prefWidth="54.0" text="Дата" />
-                              <TableColumn fx:id="virusJournalColumn" prefWidth="65.0" text="Вирус" />
-                              <TableColumn fx:id="locacityJournalColumn" prefWidth="82.0" text="Нас. пункт" />
-                              <TableColumn fx:id="popul_leftJournalColumn" prefWidth="78.0" text="Выжило" />
-                              <TableColumn fx:id="popul_deadJournalColumn" prefWidth="75.0" text="Погибло" />
-                              <TableColumn fx:id="latentJournalColumn" prefWidth="84.0" text="Заражённые" />
-                              <TableColumn fx:id="infectedJournalColumn" prefWidth="66.0" text="Больные" />
-                              <TableColumn fx:id="curedJournalColumn" prefWidth="83.0" text="Вылеченные" />
-                              <TableColumn fx:id="suspectedJournalColumn" prefWidth="67.0" text="Здоровые" />
+                              <TableColumn fx:id="idJournalColumn" prefWidth="40.0" text="ID" />
+                              <TableColumn fx:id="model_typeColumn" prefWidth="79.0" text="Тип модели" />
+                              <TableColumn fx:id="virusJournalColumn" prefWidth="52.0" text="Вирус" />
+                              <TableColumn fx:id="locacityJournalColumn" prefWidth="77.0" text="Нас. пункт" />
+                              <TableColumn fx:id="popul_leftJournalColumn" prefWidth="72.0" text="Выжило" />
+                              <TableColumn fx:id="popul_deadJournalColumn" prefWidth="69.0" text="Погибло" />
+                              <TableColumn fx:id="suspectedJournalColumn" prefWidth="87.0" text="Неифциро-&#10;ванные" />
+                              <TableColumn fx:id="infectedJournalColumn" prefWidth="68.0" text="Больные" />
+                              <TableColumn fx:id="curedJournalColumn" text="Вылеченные" />
+                              <TableColumn fx:id="latentJournalColumn" prefWidth="73.0" text="Латентные" />
+                              <TableColumn fx:id="chemJournalColumn" prefWidth="84.0" text="Химео-&#10;терапия" />
+                              <TableColumn fx:id="dateJournalColumn" prefWidth="119.0" text="Дата" />
                            </columns>
                         </TableView>
                      </children>

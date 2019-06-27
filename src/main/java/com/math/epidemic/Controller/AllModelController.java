@@ -1,13 +1,16 @@
 package com.math.epidemic.Controller;
 
 import com.math.epidemic.Application;
+import com.math.epidemic.Entities.Journal;
 import com.math.epidemic.Entities.Locacity;
 import com.math.epidemic.Entities.Virus;
+import com.math.epidemic.Services.JournalService;
 import com.math.epidemic.Services.LocacityService;
 import com.math.epidemic.Services.VirusService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -15,12 +18,22 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class AllModelController {
+
+    @FXML
+    public ImageView virusView;
+    @FXML
+    public ImageView locacityView;
 
     //Locality Fields
     public TextField populationField;
@@ -166,16 +179,46 @@ public class AllModelController {
     public Label slpic_p;
     public Label slpic_c;
 
+    //Journal label
+    Date date;
+    int popul_left;
+    int popul_daed;
+    int suspected;
+    int latent;
+    int infected;
+    int cured;
+    int chem;
+    String model_type;
+    Virus virus;
+    Locacity locacity;
+
+    //Lables
+    int dead_label_text = 0;
+    int i_label_text = 0;
+    int s_label_text = 0;
+    int r_label_text = 0;
+    int e_label_text = 0;
+    int l_label_text = 0;
+    int p_label_text = 0;
+    int c_label_text = 0;
+    int current_population = 0;
+
 
     Dif dif = new Dif();
     int n = 100;
     private int percent = 100;
     int q = 0;
 
+    double[] test1 = new double[]{0.0, 1.9, 3.87, 5.9, 7.98, 10.1, 12.24, 14.41, 16.58, 18.75, 20.9, 23.03, 25.13, 27.2, 29.21, 31.18, 33.08, 34.93, 36.71, 38.42, 40.07, 41.64, 43.14, 44.57, 45.92, 47.21, 48.42, 49.57, 50.64, 51.66, 52.6, 53.49, 54.32, 55.09, 55.81, 56.47, 57.08, 57.65, 58.17, 58.65, 59.09, 59.49, 59.85, 60.17, 60.47, 60.73, 60.96, 61.17, 61.35, 61.5, 62.77, 62.89, 62.98, 63.05, 63.11, 63.14, 63.16, 63.17, 63.16, 63.14, 63.11, 63.06, 63.01, 62.94, 62.87, 62.78, 62.69, 62.59, 62.49, 62.37, 62.26, 62.13, 62.0, 61.87, 61.73, 61.59, 61.44, 61.29, 61.13, 60.98, 60.82, 60.66, 60.49, 60.33, 60.16, 59.99, 59.82, 59.64, 59.47, 59.29, 59.11, 58.94, 58.76, 58.58, 58.4, 58.22, 58.03, 57.85, 57.67, 57.49};
+    double[] test2 = new double[]{0.0, 2.71, 5.32, 7.83, 10.25, 12.58, 14.83, 16.99, 19.06, 21.05, 22.96, 24.79, 26.54, 28.21, 29.8, 31.31, 32.75, 34.11, 35.41, 36.63, 37.79, 38.88, 39.91, 40.87, 41.78, 42.63, 43.43, 44.17, 44.87, 45.52, 46.12, 46.68, 47.2, 47.68, 48.12, 48.53, 48.9, 49.24, 49.56, 49.84, 50.1, 50.33, 50.54, 50.72, 50.89, 51.03, 51.16, 51.26, 51.35, 51.43, 50.25, 50.29, 50.32, 50.35, 50.35, 50.35, 50.34, 50.32, 50.29, 50.25, 50.21, 50.15, 50.09, 50.03, 49.96, 49.88, 49.8, 49.71, 49.62, 49.52, 49.42, 49.32, 49.21, 49.1, 48.98, 48.87, 48.75, 48.63, 48.5, 48.38, 48.25, 48.12, 47.99, 47.86, 47.72, 47.59, 47.45, 47.32, 47.18, 47.04, 46.9, 46.76, 46.62, 46.48, 46.33, 46.19, 46.05, 45.9, 45.76, 45.62};
+    double[] test3 = new double[]{7.0, 10.29, 13.23, 15.83, 18.1, 20.08, 21.78, 23.23, 24.45, 25.48, 26.33, 27.03, 27.58, 28.03, 28.36, 28.61, 28.78, 28.89, 28.93, 28.93, 30.53, 29.62, 30.32, 30.17, 29.99, 29.79, 29.58, 29.35, 29.1, 28.85, 28.58, 28.31, 28.03, 27.75, 27.46, 27.17, 26.88, 26.58, 27.0, 27.04, 27.08, 27.11, 27.14, 27.15, 26.83, 26.51, 26.19, 25.88, 25.56, 25.25, 24.94, 24.64, 24.33, 24.03, 23.74, 23.44, 23.15, 22.86, 22.57, 22.19, 21.85, 21.48, 21.16, 20.89, 20.62, 20.35, 20.09, 19.83, 19.58, 19.32, 19.07, 18.83, 18.58, 18.34, 18.1, 17.87, 17.64, 17.41, 17.18, 17.31, 17.14, 16.97, 16.8, 16.59, 16.38, 16.17, 15.97, 15.77, 15.57, 15.37, 15.17, 14.98, 14.79, 14.61, 14.42, 14.24, 14.06, 13.88, 13.71};
+    double[] test4 = new double[]{10, 12.91, 16.56, 19.77, 22.55, 24.94, 26.96, 28.65, 30.06, 31.21, 32.14, 32.87, 33.43, 33.86, 34.16, 34.36, 34.46, 34.5, 34.47, 34.38, 35.96, 34.93, 35.57, 35.33, 35.07, 34.79, 34.49, 34.17, 33.85, 33.51, 33.17, 32.82, 32.47, 32.11, 31.75, 31.39, 31.03, 30.67, 31.03, 31.38, 32.06, 32.72, 33.35, 33.62, 33.88, 33.46, 33.05, 32.64, 32.23, 31.83, 31.43, 31.03, 30.64, 30.25, 29.87, 29.49, 29.11, 28.74, 28.38, 27.01, 26.33, 25.34, 24.48, 24.13, 23.78, 23.44, 23.1, 22.76, 22.43, 22.1, 21.78, 21.46, 21.14, 20.83, 20.52, 20.22, 19.92, 19.62, 19.33, 22.54, 22.54, 22.56, 22.78, 22.52, 22.25, 21.99, 21.73, 21.47, 21.22, 20.97, 20.73, 20.48, 20.24, 20.01, 19.77, 19.54, 19.32, 19.09, 18.87};
     @Autowired
     private VirusService virusService;
     @Autowired
     private LocacityService locacityService;
+    @Autowired
+    private JournalService journalService;
 
     private Application app;
 
@@ -209,9 +252,101 @@ public class AllModelController {
         vaccineField.setText(String.valueOf(locacity.getVaccine()));
     }
 
+    public void sirSave(ActionEvent actionEvent) {
+        safeToJournal("SIR");
+    }
+
+    public void sirmSave(ActionEvent actionEvent) {
+        safeToJournal("SIRm");
+    }
+
+    public void sisSave(ActionEvent actionEvent) {
+        safeToJournal("SIS");
+    }
+
+    public void sirsSave(ActionEvent actionEvent) {
+        safeToJournal("SIRS");
+    }
+
+    public void seirSave(ActionEvent actionEvent) {
+        safeToJournal("SEIR");
+    }
+
+    public void seirsSave(ActionEvent actionEvent) {
+        safeToJournal("SEIRS");
+    }
+
+    public void sliSave(ActionEvent actionEvent) {
+        safeToJournal("SLI");
+    }
+
+    public void slisSave(ActionEvent actionEvent) {
+        safeToJournal("SLIs");
+    }
+
+    public void slpicSave(ActionEvent actionEvent) {
+        safeToJournal("SLPIC");
+    }
+
+
+    public void safeToJournal(String model_type) {
+         try {
+        if (s_label_text == 0 && i_label_text == 0 && p_label_text == 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Ошибка!");
+            alert.setContentText("Перед сохранением требуется произвести расчёт!");
+            alert.showAndWait();
+            return;
+        }
+        Date date = new Date();
+        Journal journal = new Journal();
+        if (model_type.matches("SLPIC|SLI|SLIs")) {
+            journal.setLatent(l_label_text);
+            journal.setCured(c_label_text);
+        } else {
+            journal.setLatent(e_label_text);
+            journal.setCured(r_label_text);
+        }
+        journal.setDate(date.toString());
+        journal.setPopul_left(current_population);
+        journal.setPopul_daed(dead_label_text);
+
+        journal.setSuspected(s_label_text);
+        journal.setInfected(i_label_text);
+        journal.setChem(p_label_text);
+
+        Virus virus = virusBox.getSelectionModel().getSelectedItem();
+        String nameForJournal = virus.getName() + " " + virus.getStrain();
+        journal.setVirus(nameForJournal);
+        Locacity locacity = locacityBox.getSelectionModel().getSelectedItem();
+        journal.setLocacity(locacity.getName());
+
+        journal.setModel_type(model_type);
+        journalService.add(journal);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Success!");
+        alert.setHeaderText("Выполнено!");
+        alert.setContentText("Результат для модели " + model_type + " успешно сохранён!");
+        alert.showAndWait();
+
+        l_label_text = c_label_text = e_label_text = r_label_text = current_population = dead_label_text = s_label_text = i_label_text = p_label_text = 0;
+    }
+       catch (DataIntegrityViolationException exception){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+           alert.setTitle("Warning!");
+           alert.setHeaderText("Ошибка!");
+           alert.setContentText("Требуется выбрать заболевание и населённый пункт");
+           alert.showAndWait();
+           return;
+       }
+    }
+//PropertyValueException
+
     public void setApp(Application application) {
         this.app = application;
     }
+
 
     private ObservableList<XYChart.Series<Number, Number>> getData(int count, double[][] result, int n) {
         ObservableList<XYChart.Series<Number, Number>> answer = FXCollections.observableArrayList();
@@ -311,10 +446,10 @@ public class AllModelController {
                 sirLineChart.setData(getData(3, result, n));
 
 
-                float dead_label_text = (population - population);
-                float s_label_text = (float) ((population) * result[0][n - 1]) / percent;
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                float r_label_text = (float) ((population) * result[2][n - 1] / percent);
+                dead_label_text = (int) (population - population);
+                s_label_text = (int) ((population) * result[0][n - 1]) / percent;
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+                r_label_text = (int) ((population) * result[2][n - 1] / percent);
 
                 sir_dead.setText(String.valueOf(dead_label_text));
                 sir_s.setText(String.valueOf(s_label_text));
@@ -348,10 +483,10 @@ public class AllModelController {
                 modLineChart.setData(getData(3, result, n));
 
 
-                float dead_label_text = (population - population);
-                float s_label_text = (float) ((population) * result[0][n - 1]) / percent;
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                float r_label_text = (float) ((population) * result[2][n - 1] / percent);
+                dead_label_text = (int) (population - population);
+                s_label_text = (int) ((population) * result[0][n - 1]) / percent;
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+                r_label_text = (int) ((population) * result[2][n - 1] / percent);
 
                 mod_dead.setText(String.valueOf(dead_label_text));
                 mod_s.setText(String.valueOf(s_label_text));
@@ -383,9 +518,9 @@ public class AllModelController {
                 sisLineChart.getData().clear();
                 sisLineChart.setData(getData(2, result, n));
 
-                float dead_label_text = (population - population);
-                float s_label_text = (float) ((population) * result[0][n - 1]) / percent;
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
+                dead_label_text = (int) (population - population);
+                s_label_text = (int) ((population) * result[0][n - 1]) / percent;
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
 
                 sis_dead.setText(String.valueOf(dead_label_text));
                 sis_s.setText(String.valueOf(s_label_text));
@@ -417,11 +552,11 @@ public class AllModelController {
                 double[][] result = dif.SIRS(susceptible, infected, recovered, contact, cure, ratio, lossOfImmunity, population);
                 sirsLineChart.getData().clear();
                 sirsLineChart.setData(getData(3, result, n));
-                float current_population = dif.getPopulation();
-                float dead_label_text = (population - current_population);
-                float s_label_text = (float) ((population) * result[0][n - 1]) / percent;
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                float r_label_text = (float) ((population) * result[2][n - 1] / percent);
+                current_population = (int) dif.getPopulation();
+                dead_label_text = (int) (population - current_population);
+                s_label_text = (int) ((population) * result[0][n - 1]) / percent;
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+                r_label_text = (int) ((population) * result[2][n - 1] / percent);
 
                 sirs_dead.setText(String.valueOf(dead_label_text));
                 sirs_s.setText(String.valueOf(s_label_text));
@@ -456,12 +591,12 @@ public class AllModelController {
                 seirLineChart.getData().clear();
                 seirLineChart.setData(getData(4, result, n));
 
-                float current_population = dif.getPopulation();
-                float dead_label_text = (population - current_population);
-                float s_label_text = (float) ((population) * result[0][n - 1]) / percent;
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                float r_label_text = (float) ((population) * result[2][n - 1] / percent);
-                float e_label_text = (float) ((population) * result[3][n - 1] / percent);
+                current_population = (int) dif.getPopulation();
+                dead_label_text = (int) (population - current_population);
+                s_label_text = (int) ((population) * result[0][n - 1]) / percent;
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+                r_label_text = (int) ((population) * result[2][n - 1] / percent);
+                e_label_text = (int) ((population) * result[3][n - 1] / percent);
 
                 seir_dead.setText(String.valueOf(dead_label_text));
                 seir_s.setText(String.valueOf(s_label_text));
@@ -498,14 +633,12 @@ public class AllModelController {
                 seirsLineChart.getData().clear();
                 seirsLineChart.setData(getData(4, result, n));
 
-                float current_population = dif.getPopulation();
-                float dead_label_text = Math.round(population - current_population);
-                System.out.println(dead_label_text);
-                float s_label_text = (float) ((population) * result[0][n - 1]) / percent;
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                System.out.println(i_label_text);
-                float r_label_text = (float) ((population) * result[2][n - 1] / percent);
-                float e_label_text = (float) ((population) * result[3][n - 1] / percent);
+                current_population = (int) dif.getPopulation();
+                dead_label_text = Math.round(population - current_population);
+                s_label_text = (int) ((population) * result[0][n - 1]) / percent;
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+                r_label_text = (int) ((population) * result[2][n - 1] / percent);
+                e_label_text = (int) ((population) * result[3][n - 1] / percent);
 
                 seirs_dead.setText(String.valueOf(dead_label_text));
                 seirs_s.setText(String.valueOf(s_label_text));
@@ -540,11 +673,11 @@ public class AllModelController {
                 verLineChart.getData().clear();
                 verLineChart.setData(getData(0, result, n));
 
-                float current_population = dif.getPopulation();
-                float dead_label_text = (population - current_population);
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                float s_label_text = (float) ((population) * result[2][n - 1] / percent);
-                float l_label_text = (float) ((population) * result[0][n - 1]) / percent;
+                current_population = (int) dif.getPopulation();
+                dead_label_text = (int) (population - current_population);
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+                s_label_text = (int) ((population) * result[2][n - 1] / percent);
+                l_label_text = (int) ((population) * result[0][n - 1]) / percent;
 
                 sli_dead.setText(String.valueOf(dead_label_text));
                 sli_s.setText(String.valueOf(s_label_text));
@@ -577,11 +710,11 @@ public class AllModelController {
                 baseLineChart.getData().clear();
                 baseLineChart.setData(getData(0, result, n));
 
-                float current_population = dif.getPopulation();
-                float dead_label_text = (population - current_population);
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                float s_label_text = (float) ((population) * result[2][n - 1] / percent);
-                float l_label_text = (float) ((population) * result[0][n - 1]) / percent;
+                current_population = (int) dif.getPopulation();
+                dead_label_text = (int) (population - current_population);
+                i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+                s_label_text = (int) ((population) * result[2][n - 1] / percent);
+                l_label_text = (int) ((population) * result[0][n - 1]) / percent;
 
                 base_dead.setText(String.valueOf(dead_label_text));
                 base_s.setText(String.valueOf(s_label_text));
@@ -594,51 +727,48 @@ public class AllModelController {
     }
 
     public void slpicClickEnter() {
-        try {
-            float latent = Float.parseFloat(slpicLatentField.getText());
-            float infected = Float.parseFloat(slpicInfectedField.getText());
-            float susceptible = Float.parseFloat(slpicSusceptibleField.getText());
-            float population = Float.parseFloat(populationField.getText());
-            float born = Float.parseFloat(bornField.getText());
-            float death = Float.parseFloat(deathField.getText());
-            float deathvirus = Float.parseFloat(deathVirField.getText());
-            float lambda = Float.parseFloat(lambdaField.getText());
-            float p = Float.parseFloat(chanceField.getText());
-            float ratio = Float.parseFloat(speedField.getText());
-            float contact = Float.parseFloat(contactField.getText());
-            float cure = Float.parseFloat(cureField.getText());
-            float vaccine = Float.parseFloat(vaccineField.getText());
-            float sum = ((susceptible + infected + latent));
+        // try {
+        float latent = Float.parseFloat(slpicLatentField.getText());
+        float infected = Float.parseFloat(slpicInfectedField.getText());
+        float susceptible = Float.parseFloat(slpicSusceptibleField.getText());
+        float population = Float.parseFloat(populationField.getText());
+        float born = Float.parseFloat(bornField.getText());
+        float death = Float.parseFloat(deathField.getText());
+        float deathvirus = Float.parseFloat(deathVirField.getText());
+        float lambda = Float.parseFloat(lambdaField.getText());
+        float p = Float.parseFloat(chanceField.getText());
+        float ratio = Float.parseFloat(speedField.getText());
+        float contact = Float.parseFloat(contactField.getText());
+        float cure = Float.parseFloat(cureField.getText());
+        float vaccine = Float.parseFloat(vaccineField.getText());
+        float sum = ((susceptible + infected + latent));
 
 
-            if (sum != 100.0) {
-                getSumAlert();
-            } else {
-                double[][] result = dif.SLPIC(latent, infected, susceptible, population, born, death, deathvirus, lambda, p, ratio, contact, cure, vaccine);
-                slpicLineChart.getData().clear();
-                slpicLineChart.setData(getData(5, result, n));
+        if (sum != 100.0) {
+            getSumAlert();
+        } else {
+            double[][] result = dif.SLPIC(latent, infected, susceptible, population, born, death, deathvirus, lambda, p, ratio, contact, cure, vaccine);
+            slpicLineChart.getData().clear();
+            slpicLineChart.setData(getData(5, result, n));
 
-                float current_population = dif.getPopulation();
-                float dead_label_text = (population - current_population);
-                float i_label_text = (float) ((population) * result[1][n - 1]) / percent;
-                System.out.println(i_label_text);
-                float s_label_text = (float) ((population) * result[2][n - 1] / percent);
-                System.out.println(s_label_text);
-                float l_label_text = (float) ((population) * result[0][n - 1]) / percent;
-                System.out.println(l_label_text);
-                float p_label_text = (float) ((population) * result[3][n - 1]) / percent;
-                float c_label_text = (float) ((population) * result[4][n - 1]) / percent;
+            current_population = (int) dif.getPopulation();
+            dead_label_text = (int) (population - current_population);
+            i_label_text = (int) ((population) * result[1][n - 1]) / percent;
+            s_label_text = (int) ((population) * result[2][n - 1] / percent);
+            l_label_text = (int) ((population) * result[0][n - 1]) / percent;
+            p_label_text = (int) ((population) * result[3][n - 1]) / percent;
+            c_label_text = (int) ((population) * result[4][n - 1]) / percent;
 
-                slpic_dead.setText(String.valueOf(dead_label_text));
-                slpic_s.setText(String.valueOf(s_label_text));
-                slpic_l.setText(String.valueOf(l_label_text));
-                slpic_i.setText(String.valueOf(i_label_text));
-                slpic_p.setText(String.valueOf(p_label_text));
-                slpic_c.setText(String.valueOf(c_label_text));
-            }
-        } catch (NullPointerException e) {
-            nullPointAlert();
+            slpic_dead.setText(String.valueOf(dead_label_text));
+            slpic_s.setText(String.valueOf(s_label_text));
+            slpic_l.setText(String.valueOf(l_label_text));
+            slpic_i.setText(String.valueOf(i_label_text));
+            slpic_p.setText(String.valueOf(p_label_text));
+            slpic_c.setText(String.valueOf(c_label_text));
         }
+       /* } catch (NullPointerException e) {
+            nullPointAlert();
+        }*/
     }
 
     void nullPointAlert() {
@@ -659,6 +789,12 @@ public class AllModelController {
     }
 
     public void initialize() {
+
+        Image image1 = new Image("https://images11.popmeh.ru/upload/img_cache/ee2/ee2f260cae78083fb97ce3ae05d14444_ce_700x400x0x0_cropped_800x427.jpg");
+        virusView.setImage(image1);
+
+        Image image2 = new Image("http://karty-mira.ru/maps/1.jpg");
+        locacityView.setImage(image2);
 
         sirLineChart.setTitle("Модель SIR");
         sirLineChart.setPrefWidth(645.0);

@@ -2,6 +2,7 @@ package com.math.epidemic.Entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Locacity")
@@ -27,8 +28,12 @@ public class Locacity implements Serializable {
     @Column(nullable = false)
     private float birth_rate;
 
+    /*@OneToMany(fetch=FetchType.LAZY, mappedBy = "locacity")
+    private List <Journal> journals;*/
+
     @Column(nullable = false)
     private float death_rate;
+
 
     public Locacity() {
     }
@@ -103,4 +108,6 @@ public class Locacity implements Serializable {
     public void setVaccine(float vaccine) {
         this.vaccine = vaccine;
     }
+
+
 }

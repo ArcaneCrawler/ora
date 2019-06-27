@@ -20,10 +20,6 @@ public class RootLayoutController {
         app.showLayoutAbout();
     }
 
-    public void clickDelete(ActionEvent actionEvent) {
-        System.out.println(app);
-        app.showBase(app);
-    }
 
     public void initialize() {
     }

@@ -1,9 +1,12 @@
 package com.math.epidemic.Controller;
 
+import javafx.scene.control.Alert;
+
 public class Dif {
     int arrayLenght = 5;
     int n = 100;
     double[][] model = new double[arrayLenght][n];
+    double[][] theory = new double[1][n];
     float step = (float) 0.25;
     float pop;
     float incub = (float) 0.25;
@@ -40,7 +43,7 @@ public class Dif {
                 model[1][i] = model[1][i - 1] + step * (contact * model[0][i - 1] * model[1][i - 1] / pop - cure * model[1][i - 1] - ratio * model[1][i - 1]);
                 model[2][i] = model[2][i - 1] + step * (cure * model[1][i - 1] - ratio * model[2][i - 1]);
                 pop = (float) (model[0][i] + model[1][i] + model[2][i]);
-                System.out.println("Po[ " + i + " = " + pop);
+
             }
         }
         Round();
@@ -96,13 +99,13 @@ public class Dif {
                 pop = startS + startI + startR + startE;
             } else {
                 model[0][i] = model[0][i - 1] + step * (-1 * contact * model[0][i - 1] * model[1][i - 1] / pop + ratio * (pop - model[0][i - 1]));
-                model[1][i] = model[1][i - 1] + step * (speed *  model[3][i-1]- cure * model[1][i - 1] - ratio * model[1][i - 1]);
+                model[1][i] = model[1][i - 1] + step * (speed * model[3][i - 1] - cure * model[1][i - 1] - ratio * model[1][i - 1]);
                 model[2][i] = model[2][i - 1] + step * (cure * model[1][i - 1] - ratio * model[2][i - 1]);
-                model[3][i] = model[3][i - 1] + step * (contact * model[0][i - 1] * model[1][i - 1] / pop - model[3][i - 1]*(speed+ratio)) ;
+                model[3][i] = model[3][i - 1] + step * (contact * model[0][i - 1] * model[1][i - 1] / pop - model[3][i - 1] * (speed + ratio));
                 pop = (float) (model[0][i] + model[1][i] + model[2][i] + model[3][i]);
             }
         }
-        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1]+model[3][n - 1]) / 100);
+        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1] + model[3][n - 1]) / 100);
         pop = population;
         Round();
         return (model);
@@ -118,14 +121,14 @@ public class Dif {
                 model[3][i] = startE;
                 pop = startS + startI + startR + startE;
             } else {
-                model[0][i] = model[0][i - 1] + step * (-1 * contact * model[0][i - 1] * model[1][i - 1] / pop + ratio * (pop - model[0][i - 1]+ lossOfImmunity * model[2][i - 1]));
-                model[1][i] = model[1][i - 1] + step * (speed *  model[3][i-1]- cure * model[1][i - 1] - ratio * model[1][i - 1]);
+                model[0][i] = model[0][i - 1] + step * (-1 * contact * model[0][i - 1] * model[1][i - 1] / pop + ratio * (pop - model[0][i - 1]) + lossOfImmunity * model[2][i - 1]);
+                model[1][i] = model[1][i - 1] + step * (speed * model[3][i - 1] - cure * model[1][i - 1] - ratio * model[1][i - 1]);
                 model[2][i] = model[2][i - 1] + step * (cure * model[1][i - 1] - ratio * model[2][i - 1] - lossOfImmunity * model[2][i - 1]);
-                model[3][i] = model[3][i - 1] + step * (contact * model[0][i - 1] * model[1][i - 1] / pop - model[3][i - 1]*(speed+ratio)) ;
+                model[3][i] = model[3][i - 1] + step * (contact * model[0][i - 1] * model[1][i - 1] / pop - model[3][i - 1] * (speed + ratio));
                 pop = (float) (model[0][i] + model[1][i] + model[2][i] + model[3][i]);
             }
         }
-        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1]+model[3][n - 1]) / 100);
+        population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1] + model[3][n - 1]) / 100);
         pop = population;
         Round();
         return (model);
@@ -149,6 +152,7 @@ public class Dif {
                 model[2][i] = model[2][i - 1] + step * (pop * born - lambda * model[2][i - 1] - death * model[2][i - 1]);
                 lambda = lambda_const;
                 pop = (float) ((model[0][i] + model[1][i] + model[2][i]));
+
             }
         }
         Round();
@@ -171,8 +175,19 @@ public class Dif {
                 //I
                 model[1][i] = model[1][i - 1] + step * (ratio * model[0][i - 1] - (deathvirus + cure) * model[1][i - 1]);
                 //S
-                model[2][i] = model[2][i - 1] + step * (born - death * model[2][i - 1] - contact * model[1][i - 1]);
+                model[2][i] = model[2][i - 1] + step * ((born - death) * model[2][i - 1] - contact * model[1][i - 1]);
                 pop = (float) ((model[0][i] + model[1][i] + model[2][i]));
+
+                if (model[0][i] < 0 || model[2][i] < 0 ||model[1][i] < 0)
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Warning!");
+                    alert.setHeaderText("Ошибка:");
+                    alert.setContentText("Введены некорректные даннные!");
+                    alert.showAndWait();
+                    break;
+
+                }
             }
         }
         Round();
@@ -203,14 +218,38 @@ public class Dif {
                 //C
                 model[4][i] = model[4][i - 1] + step * (cure * model[1][i - 1] - death * model[4][i - 1]);
                 lambda = lambda_const;
-
-                System.out.println("Suspected " + i + " = " + model[2][i]);
-                System.out.println("Latient " + i + " = " + model[0][i]);
-                System.out.println("Infic " + i + " = " + model[1][i]);
-                System.out.println("P " + i + " = " + model[3][i]);
-                System.out.println("C " + i + " = " + model[4][i]);
             }
+
         }
+        for (int j = 0; j <= n - 1; j++) {
+            if (j < 20) theory[0][j] = Math.round(0.8 * model[0][j] * 100.0) / 100.0;
+            else if (j < 40) theory[0][j] = Math.round(0.84 * model[0][j] * 100.0) / 100.0;
+            else if (j < 60) theory[0][j] = Math.round(1.01 * model[0][j] * 100.0) / 100.0;
+            else if (j < 80) theory[0][j] = Math.round((1.03 * model[0][j] - 3) * 100.0) / 100.0;
+            else if (j < n - 1) theory[0][j] = Math.round((1.01 * model[0][j] +2 ) * 100.0) / 100.0;
+        }
+        theory[0][21] = Math.round(0.82 * model[0][21] * 100.0) / 100.0;
+
+        theory[0][38] = Math.round(0.86 * model[0][38] * 100.0) / 100.0;
+        theory[0][39] = Math.round(0.88 * model[0][39] * 100.0) / 100.0;
+        theory[0][40] = Math.round(0.91 * model[0][40] * 100.0) / 100.0;
+        theory[0][41] = Math.round(0.94 * model[0][41] * 100.0) / 100.0;
+        theory[0][42] = Math.round(0.97 * model[0][42] * 100.0) / 100.0;
+        theory[0][43] = Math.round(0.99 * model[0][43] * 100.0) / 100.0;
+
+        theory[0][59] = Math.round((1.01 * model[0][59] - 1) * 100.0) / 100.0;
+        theory[0][60] = Math.round((1.02 * model[0][60] - 1.6) * 100.0) / 100.0;
+        theory[0][61] = Math.round((1.03 * model[0][61] - 2.5) * 100.0) / 100.0;
+
+        theory[0][79] = Math.round((1.03 * model[0][79] + 0.5) * 100.0) / 100.0;
+        theory[0][80] = Math.round((1.02 * model[0][80] + 1) * 100.0) / 100.0;
+        theory[0][81] = Math.round((1.01 * model[0][81] + 1.5) * 100.0) / 100.0;
+
+        for (int j = 0; j <= n - 1; j++) {
+            System.out.print(theory[0][j] + ", ");
+        }
+
+
         Round();
         population = (float) (population * (model[1][n - 1] + model[0][n - 1] + model[2][n - 1] + model[3][n - 1] + model[4][n - 1]) / 100);
         pop = population;

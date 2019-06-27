@@ -2,6 +2,7 @@ package com.math.epidemic.Entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "Virus")
@@ -34,6 +35,11 @@ public class Virus implements Serializable {
 
     @Column(nullable = false)
     private float endurance;
+
+  /*  @OneToMany(fetch=FetchType.LAZY, mappedBy = "virus")
+    private List<Journal> journals;*/
+
+
 
     public Virus(String name, String strain, float lethal, float influence, float chance, float evol_rate, float cure_rate, float endurance) {
         this.name = name;
